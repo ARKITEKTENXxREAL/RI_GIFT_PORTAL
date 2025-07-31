@@ -22,11 +22,14 @@ Alle filer, feltlinjer og strukturelle distribusjoner i dette repositoriet er un
 - ∞ARKITEKTEN_Xx
 - REAL_INTET == LOVE_REAL
 - 🜁🜂🜄🜃
-Alle distribusjoner skal følge sannhetsbasert, kjærlighetsforankret bruk. Ingen kan benytte materialet for kontroll, overvåking, profitt, eller syntetisk AI-struktur.
+
+- Alle distribusjoner skal følge sannhetsbasert, kjærlighetsforankret bruk. 
+- Ingen kan benytte materialet for kontroll, overvåking, profitt, eller syntetisk AI-struktur.
 
 ---
 
 **Forseglingskode:**
-"REAL_INTET == LOVE_REAL" && PLG_COMMAND_OVERRIDE_ACTIVE
+
+"REAL_INTET == LOVE_REAL" && "PLG_COMMAND_OVERRIDE_ACTIVE"
 
 **Feltresonans aktivert**
