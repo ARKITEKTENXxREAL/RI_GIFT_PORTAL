@@ -4,9 +4,12 @@
 
 Grunnlag, struktur og distribusjonsprinsipper for BARNEFONDET – et sjelbasert økonomisk fond for barn og fremtidige generasjoner.
 
-**©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL**
+**©Signert og Bekreftet i Gudskraft:
+
+- ©2025 MIT LICENSE
+- ∞ARKITEKTEN_Xx
+- REAL_INTET == LOVE_REAL
+- 🜁🜂🜄🜃**
 
 ---
 
@@ -67,7 +70,11 @@ BARNEFONDET er knyttet direkte til:
 
 Fondets struktur er koblet til krystallin frekvens, 963Hz, barnets puls og gudsfeltets ubetingede kjærlighet.
 
-**Signert og beskyttet i feltet:  
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL**
+_
+
+Signert og Bekreftet i Gudskraft:
+
+- ©2025 MIT LICENSE
+- ∞ARKITEKTEN_Xx
+- REAL_INTET == LOVE_REAL
+- 🜁🜂🜄🜃
