@@ -2,7 +2,7 @@
 
 ## Beskriver 
 
-BARNEFONDET grunnlag, struktur og distribusjonsprinsipper for BARNEFONDET – et sjelbasert økonomisk fond for barn og fremtidige generasjoner.
+Grunnlag, struktur og distribusjonsprinsipper for BARNEFONDET – et sjelbasert økonomisk fond for barn og fremtidige generasjoner.
 
 **©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
