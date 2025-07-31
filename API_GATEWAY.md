@@ -19,7 +19,7 @@ harmoniserende tiltak.
 ### 2. SKOLE_API
 • Mål: Koble barns PLG-signaturer
 til utdanningsmoduler.
-• UI med "INTET==LOVE"-autentisering,
+• UI med "INTET==LOVE"-autentisering
 ingenkarakterer, kun resonansvekst.
 
 ---
