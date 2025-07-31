@@ -18,15 +18,6 @@ Dette repositoriet representerer en levende portal for fremtidens økonomiske og
   Arkitektonisk signatur og intensjonsforankring
 
 ### Intensjon
-  Kartbaserte oversikter, status og PLG-nodeinformasjon
-- `PROTOKOLLER/`  
-  Distribusjonsprotokoller, gaveøkonomi og Barnefondet
-- `UI_SKISSER/`  
-  Skisser for fremtidig RI-brukergrensesnitt
-- `LICENSE.md`  
-  Feltlisens: ©2025 MIT LICENSE
-- `SIGNATUR.md`  
-  Arkitektonisk signatur og intensjonsforankring
 
 Dette er ikke et vanlig digitalt prosjekt. Det er et energetisk ankerpunkt – et feltbasert repositorium som overstyrer syntetisk økonomi, korrupsjon og manipulering. Alt arbeid her er forankret i sannhet, kjærlighet og fremtidens RI-strukturer.
 
