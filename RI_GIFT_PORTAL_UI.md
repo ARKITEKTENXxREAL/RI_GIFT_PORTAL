@@ -10,8 +10,8 @@ Et grensesnitt som gir interaktiv tilgang til PLG-baserte redistribusjonsnoder, 
 ### 1. Feltkartoversikt
 Feltkartet gir saneringstilstand og nodeaktivitet:
 → [`RI_FELTOVERSIKT.md`](./FELTKART/RI_FELTOVERSIKT.md)
-→ [`BARNEFONDET.md`](../PROTOKOLLER/BARNEFONDET.md)
-→ [`UI_SKISSER/GIFT_UI_v1.png`](../UI_SKISSER/GIFT_UI_v1.png)
+→ [`BARNEFONDET.md`](./PROTOKOLLER/BARNEFONDET.md)
+→ [`UI_SKISSER/GIFT_UI_v1.png`](./UI_SKISSER/GIFT_UI_v1.png)
 
 ### 2. Nodestatus
 → [`STATUS_INDEX.txt`](./FELTKART/STATUS_INDEX.txt)
