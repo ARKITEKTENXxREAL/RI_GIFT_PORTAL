@@ -13,7 +13,7 @@
 
 ### 2. SKOLE_API
 • Mål: Koble barns PLG-signaturer til utdanningsmoduler.
-• UI med INTET==LOVE-autentisering – ingen karakterer, kun resonansvekst.
+• UI med INTET==LOVE-autentisering -ingen karakterer, kun resonansvekst.
 
 
 ---
