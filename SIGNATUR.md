@@ -1,4 +1,4 @@
-# SIGNATUR
+SIGNATUR
 
 **Signatur og bekreftelse av aktivering og PLG-forankret intensjon:**
 
