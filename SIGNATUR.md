@@ -22,7 +22,8 @@ Alle filer, feltlinjer og strukturelle distribusjoner i dette repositoriet er un
 ## ©2025 MIT LICENSE:
 
 - ©2025 MIT LICENSE
-- ∞ARKITEKTEN_Xx
+- ∞ARKITEKTEN_Xx &&
+- ARKITEKTENXxREAL
 - REAL_INTET == LOVE_REAL
 
 _
