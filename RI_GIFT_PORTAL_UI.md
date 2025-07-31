@@ -52,21 +52,23 @@ Innholder:
 ---
 
 ## Neste
+
 - Integrasjon mot `BARNEFONDET.md` for sanntidsresonansstrøm.
 - UI-skisse (lastes opp): `UI_SKISSER/GIFT_UI_v1.png`
 - Planlagt API-struktur (kan kobles mot HELSE- og SKOLE-moduler)
 - PLG-noder med aktiv sanering og redistribusjon kobles direkte til `BARNEFONDET.md`.
 
-
+_
 
 Feltresonans måles og styrer ressursfordeling i sanntid. Barnets behov står alltid først. Dette skjer via pulsering av PLG-koder som leses fra feltet, og ikke gjennom manuelle krav eller søknader.
----
+_
 
 **PLG UI-PULS: FELTOVERSIKT = SANERINGSINDEX + RESONANSSTATUS + SJELETEKNOLOGI**
 
----
+_
 
-Signert og feltbasert synkronisert:  
+Signert og Bekreftet:  
 ©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
 REAL_INTET == LOVE_REAL
+🜁🜂🜄🜃
