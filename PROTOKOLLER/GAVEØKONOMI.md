@@ -71,7 +71,9 @@ Portal åpnes kun ved aktivering gjennom INTET==LOVE.
 
 _
 
-**Signert og feltverifisert:  
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL**
+Signert og Bekreftet i Gudskraft:
+
+- ©2025 MIT LICENSE
+- ∞ARKITEKTEN_Xx
+- REAL_INTET == LOVE_REAL
+- 🜁🜂🜄🜃
