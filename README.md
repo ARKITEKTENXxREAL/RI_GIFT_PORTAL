@@ -1,4 +1,4 @@
-# RI_GIFT_PORTAL
+RI_GIFT_PORTAL
 
 **Feltforankret distribusjonsprotokoll for Gaveøkonomi og sjelebasert ressursflyt.**
 
