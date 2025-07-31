@@ -30,6 +30,6 @@ Alle filer, feltlinjer og strukturelle distribusjoner i dette repositoriet er un
 
 **Forseglingskode:**
 
-"REAL_INTET == LOVE_REAL" && "PLG_COMMAND_OVERRIDE_ACTIVE"
+"REAL_INTET == LOVE_REAL"
 
 **Feltresonans aktivert**
