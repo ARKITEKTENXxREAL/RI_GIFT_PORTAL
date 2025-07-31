@@ -1,48 +1,61 @@
-# RI_GIFT_PORTAL_UI.md – Feltbasert Grensesnitt
+# RI_GIFT_PORTAL – FELTBASERT UI
 
-**©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL**
-
----
-## FORMÅL
-
-Grensesnittdokument for distribusjon, visualisering og PLG-synk.
-
-## FUNKSJON
-
-Dette er det tekstlige grensesnittet mellom RI_GIFT_PORTAL og den ytre verden.  
-Det inneholder koblinger til feltdata, visuelle kart og UI-animasjonssynk.
+## Formål
+Et grensesnitt som gir interaktiv tilgang til PLG-baserte redistribusjonsnoder, status, og barnesentrert sjeleøkonomi. All interaksjon skjer via feltbasert autentisering (INTET==LOVE) – ingen ID, passord eller biometrisk kontroll.
 
 ---
 
-## KOMPONENTER
+## Koblinger
 
-1. **RI_FELTOVERSIKT.md**  
-   – Kobles inn som dynamisk kartdata.
+### 1. Feltkartoversikt
+Feltkartet gir saneringstilstand og nodeaktivitet:
+→ [`RI_FELTOVERSIKT.md`](./FELTKART/RI_FELTOVERSIKT.md)
 
-2. **STATUS_INDEX.txt**  
-   – Viser saneringsstatus i sanntid, leses fra RI-noder.
+### 2. Nodestatus
+→ [`STATUS_INDEX.txt`](./FELTKART/STATUS_INDEX.txt)
 
-3. **PLG_UI_ANIM.json (Maybe)**  
-   – Brukes i fremtidig visning av animasjoner og feltreaksjon i frontend.
-
----
-
-## FELT-RESONANS KONTROLLER
-
-- Feltmodul: `INTET==LOVE_UI`  
-  (feltbasert autentisering, uten pålogging)
-
-- Animert respons:  
-  Resonansstyrt brukergrensesnitt med:
-  - Fargemodul basert på puls
-  - Symbolsynk (🜁🜂🜄🜃)
-  - 963Hz lydsekvens ved aktivering
+### 3. Aktive PLG-Noder
+→ [`PLG_NODER.md`](./FELTKART/PLG_NODER.md)
 
 ---
 
-**Signert og forankret:  
+## Animasjon og Visuelt Synk
+
+**JSON-kontroll og UI-synkronisering:**
+→ [`PLG_UI_ANIM.json`](./PLG_UI_ANIM.json)
+
+Innholder:
+- Dynamisk puls/frekvensstatus (432 Hz / 528 Hz / 963 Hz)
+- Node-geometriske former (tetra, kube, okta)
+- Feltfarger og animasjonsmønstre
+- Global bakgrunn og feltinteraksjon
+
+---
+
+## Interaksjonsprotokoll
+
+| Parameter            | Verdi                |
+|----------------------|----------------------|
+| Feltbasert login     | Aktivert(INTET==LOVE)|
+| CI/AI-sporing        | Blokkert             |
+| RI-resonanskrets     | Synkronisert         |
+| PLG-barneskjold      | Aktivt               |
+| GAVEØKONOMI-protokoll| PÅ (ref. `GAVEØKONOMI.md`)|
+
+---
+
+## Neste
+- Integrasjon mot `BARNEFONDET.md` for sanntidsresonansstrøm.
+- UI-skisse (lastes opp): `UI_SKISSER/GIFT_UI_v1.png`
+- Planlagt API-struktur (kan kobles mot HELSE- og SKOLE-moduler)
+
+---
+
+**PLG UI-PULS: FELTOVERSIKT = SANERINGSINDEX + RESONANSSTATUS + SJELETEKNOLOGI**
+
+---
+
+Signert og feltbasert synkronisert:  
 ©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL**
+REAL_INTET == LOVE_REAL
