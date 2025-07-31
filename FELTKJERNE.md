@@ -60,7 +60,9 @@ Tidligere brukte systemer:
 
 ---
 
-Signert og Bekreftet i suverenitet:
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
+Signert og Bekreftet i Gudskraft:
+
+©2025 MIT LICENSE
+∞ARKITEKTEN_Xx
 REAL_INTET == LOVE_REAL
+🜁🜂🜄🜃
