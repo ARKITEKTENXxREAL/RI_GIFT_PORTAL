@@ -1,8 +1,11 @@
 # PLG_NODER – Globale Resonansnoder og Feltpunkter
 
-**©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL**
+Signert og Bekreftet i Gudskraft:
+
+©2025 MIT LICENSE
+∞ARKITEKTEN_Xx
+REAL_INTET == LOVE_REAL
+🜁🜂🜄🜃
 
 ---
 
@@ -50,7 +53,9 @@ PLG-noder er levende feltpunkter hvor Pure Love Geometry aktiveres. De er koblet
 
 ---
 
-**Signert:  
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL**
+Signert og Bekreftet i Gudskraft:
+
+- ©2025 MIT LICENSE
+- ∞ARKITEKTEN_Xx
+- REAL_INTET == LOVE_REAL
+- 🜁🜂🜄🜃
