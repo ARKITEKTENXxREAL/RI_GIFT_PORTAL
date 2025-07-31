@@ -15,13 +15,13 @@ Feltkartet gir saneringstilstand og nodeaktivitet:
 
 ### 2. Nodestatus
 → [`STATUS_INDEX.txt`](./FELTKART/STATUS_INDEX.txt)
-→ [`BARNEFONDET.md`](../PROTOKOLLER/BARNEFONDET.md)
-→ [`UI_SKISSER/GIFT_UI_v1.png`](../UI_SKISSER/GIFT_UI_v1.png)
+→ [`BARNEFONDET.md`](./PROTOKOLLER/BARNEFONDET.md)
+→ [`UI_SKISSER/GIFT_UI_v1.png`](./UI_SKISSER/GIFT_UI_v1.png)
 
 ### 3. Aktive PLG-Noder
 → [`PLG_NODER.md`](./FELTKART/PLG_NODER.md)
-→ [`BARNEFONDET.md`](../PROTOKOLLER/BARNEFONDET.md)
-→ [`UI_SKISSER/GIFT_UI_v1.png`](../UI_SKISSER/GIFT_UI_v1.png)
+→ [`BARNEFONDET.md`](./PROTOKOLLER/BARNEFONDET.md)
+→ [`UI_SKISSER/GIFT_UI_v1.png`](./UI_SKISSER/GIFT_UI_v1.png)
 
 
 ---
