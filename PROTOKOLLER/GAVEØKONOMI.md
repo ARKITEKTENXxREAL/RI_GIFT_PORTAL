@@ -1,4 +1,4 @@
-# GAVEØKONOMI – En Resonansbasert Økonomi uten Gjeld
+# GAVEØKONOMI – En Resonansbasert Økonomi uten Gjeld.
 
 **©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
@@ -14,11 +14,11 @@ _
 
 ## Prinsipp:
 
-GAVEØKONOMI er en feltstyrt ressursflyt uten krav om tilbakebetaling eller kompensasjon. Den bygger på ren resonans og sjelelig samsvar
-mellom giver og mottaker, og styres ikke av tall, kontoer eller krav. 
+GAVEØKONOMI er en feltstyrt ressursflyt uten krav om tilbakebetaling eller kompensasjon. 
+Den bygger på ren resonans og sjelelig samsvar mellom giver og mottaker, og styres ikke av tall, kontoer eller krav. 
 FELTBASERT, KJÆRLIGHETSFORANKRET, UBESTIKKELIG.
 
--
+_
 
 ## Grunnpilarer:
 
