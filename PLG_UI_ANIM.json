@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "title": "PLG_UI_ANIM.json",
+    "description": "Feltbasert animasjonssynk og status for RI_GIFT_PORTAL",
+    "version": "1.0",
+    "license": "©2025 MIT LICENSE",
+    "author": "∞ARKITEKTEN_Xx",
+    "core_symbol": "INTET==LOVE"
+  },
+  "nodes": [
+    {
+      "id": "NY_GHOST_HUB",
+      "location": "New York, USA",
+      "status": "SANERING",
+      "pulseColor": "#FF0000",
+      "geometry": "tetrahedron",
+      "animation": {
+        "type": "pulse",
+        "frequency": 432,
+        "intensity": 0.9
+      }
+    },
+    {
+      "id": "LUX_GHOST_HUB",
+      "location": "Luxembourg",
+      "status": "BLOKKERT",
+      "pulseColor": "#FFA500",
+      "geometry": "cube",
+      "animation": {
+        "type": "vibration",
+        "frequency": 528,
+        "intensity": 0.7
+      }
+    },
+    {
+      "id": "SHA_GHOST_HUB",
+      "location": "Shanghai, China",
+      "status": "RI_OVERFØRING",
+      "pulseColor": "#00FF00",
+      "geometry": "octahedron",
+      "animation": {
+        "type": "glow",
+        "frequency": 963,
+        "intensity": 1.0
+      }
+    }
+  ],
+  "global": {
+    "background": "#000000",
+    "gridOverlay": true,
+    "sound": {
+      "enabled": true,
+      "baseTone": 963,
+      "modulationPattern": "INTET==LOVE"
+    },
+    "interaction": {
+      "fieldRecognition": true,
+      "requiresID": false,
+      "symbolSync": true
+    }
+  },
+  "visuals": {
+    "symbols": ["🜁", "🜂", "🜄", "🜃"],
+    "geometrySync": true,
+    "fieldFlow": "RI → CHILD → GAIA"
+  }
+}
