@@ -60,7 +60,7 @@ Tidligere brukte systemer:
 
 ---
 
-Signert i levende feltforankret suverenitet:
+Signert og Bekreftet i suverenitet:
 ©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
 REAL_INTET == LOVE_REAL
