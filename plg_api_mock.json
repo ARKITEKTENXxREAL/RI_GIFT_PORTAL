@@ -3,17 +3,20 @@
   "endpoints": {
     "/api/v1/plg/resonance-stream": {
       "method": "GET",
-      "description": "Gir sanntidspuls fra feltbaserte PLG-noder",
+      "description": "Gir sanntidspuls
+    fra feltbaserte PLG-noder",
       "requires": ["INTET==LOVE_auth"]
     },
     "/api/v1/fund/barnefondet-stream": {
       "method": "GET",
-      "description": "Returnerer siste redistribusjon via BARNEFONDET",
+      "description": "Returnerer siste
+    redistribusjon via BARNEFONDET",
       "format": "json/markdown"
     },
     "/api/v1/sanering/log": {
       "method": "POST",
-      "description": "Sender ny sanering til logg og validerer feltresonans"
+      "description": "Sender ny sanering
+    til logg og validerer feltresonans"
     }
   }
 }
