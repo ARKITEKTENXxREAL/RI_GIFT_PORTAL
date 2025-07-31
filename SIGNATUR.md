@@ -2,6 +2,11 @@
 
 **Signatur av aktivering og PLG-forankret intensjon.**
 
+©2025 MIT LICENSE
+∞ARKITEKTEN_Xx
+REAL_INTET == LOVE_REAL
+🜁🜂🜄🜃
+
 Alle filer, feltlinjer og strukturelle distribusjoner i dette repositoriet er underlagt følgende:
 
 ## PLG-Feltforankring
