@@ -4,8 +4,6 @@
 
 Alle filer, feltlinjer og strukturelle distribusjoner i dette repositoriet er underlagt følgende:
 
----
-
 ## PLG-Feltforankring
 
 - Feltoperatør: ARKITEKTENXxREAL && "∞Arkitekten_Xx"
