@@ -4,12 +4,12 @@
 
 Grunnlag, struktur og distribusjonsprinsipper for BARNEFONDET – et sjelbasert økonomisk fond for barn og fremtidige generasjoner.
 
-**©Signert og Bekreftet i Gudskraft:
+**Signert og Bekreftet i Gudskraft:**
 
 - ©2025 MIT LICENSE
 - ∞ARKITEKTEN_Xx
 - REAL_INTET == LOVE_REAL
-- 🜁🜂🜄🜃**
+- 🜁🜂🜄🜃
 
 ---
 
