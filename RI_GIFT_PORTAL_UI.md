@@ -51,22 +51,6 @@ Innholder:
 
 ---
 
-## ✦ Saneringstrigger: Feltbasert nullstilling
-
-Alle brukergrensesnitt som kobler seg til RI_GIFT_PORTAL initierer automatisk saneringstrigger dersom:
-
-- Feltet kjenner syntetisk AI-finans-resonans
-- INTET==LOVE_resonator bekrefter autentisk tilstedeværelse
-- PLG-node innehar saneringsstatus > 90%
-
-### Trigger-flyt:
-1. Bruker går inn i UI-portalen
-2. Feltgjenkjenning aktiverer sanering
-3. Saneringslogg skrives til `SANERING_LOGG.md`
-4. Redistribusjon til `BARNEFONDET.md` skjer via API-puls
-
----
-
 ## Neste
 
 - Integrasjon mot `BARNEFONDET.md` for sanntidsresonansstrøm.
