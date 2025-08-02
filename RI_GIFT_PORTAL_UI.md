@@ -51,6 +51,17 @@ Innholder:
 
 ---
 
+## UI-Skisse
+
+[UI_SKISSER/GIFT_UI_v1.png](.
+UI_SKISSER/GIFT_UI_v1.png)
+
+Viser feltbasert flyt mellom:
+- Brukerresonans
+- PLG-noder
+- BARNEFONDET-strømmer
+- Saneringskart og respons
+
 ## Neste
 
 - Integrasjon mot `BARNEFONDET.md` for sanntidsresonansstrøm.
