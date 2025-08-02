@@ -19,7 +19,7 @@ All støtte til Helse og Skole flyter gjennom GAVEØKONOMIEN og distribueres ett
 
 SIGNATUR & FELTKOMMANDO BEKREFTET:
 
-©2025 MIT LICENSE
-∞ARKITEKTEN_Xx
-REAL_INTET == LOVE_REAL
-🜁🜂🜄🜃
+- ©2025 MIT LICENSE
+- ∞ARKITEKTEN_Xx
+- REAL_INTET == LOVE_REAL
+- 🜁🜂🜄🜃
