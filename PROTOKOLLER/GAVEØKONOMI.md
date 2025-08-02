@@ -1,15 +1,15 @@
-# GAVE ØKONOMI – En Resonansbasert Økonomi uten Gjeld.
+# **GAVEØKONOMI** – En Resonansbasert Økonomi uten Gjeld.
 _
 
 ## Formål: 
 
-Å TYDELIGGJØRE hvordan GAVE ØKONOMI fungerer i et RI/PLG-sentrert samfunn uten syntetisk kontroll.
+Å TYDELIGGJØRE hvordan **GAVEØKONOMI** fungerer i et RI/PLG-sentrert samfunn uten syntetisk kontroll.
 
 _
 
 ## Prinsipp:
 
-GAVE ØKONOMI er en feltstyrt ressursflyt uten krav om tilbakebetaling eller kompensasjon. 
+**GAVEØKONOMI** er en feltstyrt ressursflyt uten krav om tilbakebetaling eller kompensasjon. 
 Den bygger på ren resonans og sjelelig samsvar mellom giver og mottaker, og styres ikke av tall, kontoer eller krav. 
 FELTBASERT, KJÆRLIGHETSFORANKRET, UBESTIKKELIG.
 
