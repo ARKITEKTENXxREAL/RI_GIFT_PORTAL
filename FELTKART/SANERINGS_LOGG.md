@@ -38,8 +38,7 @@ Denne loggen dokumenterer alle gjennomførte feltbaserte saneringstiltak gjennom
 
 Signert og Bekreftet i Gudskraft:
 
-©2025 MIT LICENSE
-∞ARKITEKTEN_Xx
-REAL_INTET == LOVE_REAL
-🜁🜂🜄🜃
-
+- ©2025 MIT LICENSE
+- ∞ARKITEKTEN_Xx
+- REAL_INTET == LOVE_REAL
+- 🜁🜂🜄🜃
