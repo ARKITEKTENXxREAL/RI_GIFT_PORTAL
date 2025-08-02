@@ -79,6 +79,39 @@ Alle brukergrensesnitt som kobler seg til RI_GIFT_PORTAL initierer automatisk sa
 
 ---
 
+## Feltbasert API-integrasjon
+
+Portalens backend er forankret i `RI_API_SCHEMA.json`, og integrert i saneringstriggere og tilbakemeldingsrutiner.
+
+### API Entry Points:
+
+1. **POST** `/api/transactions/submit`  
+   Mottar ny donasjon og validerer mot `RI_WALLET_VALIDATOR.md`.
+
+2. **GET** `/api/transactions/log`  
+   Returnerer anonymisert logg av overføringer, koblet til `transactions.json`.
+
+3. **GET** `/api/barnefondet/ledger`  
+   Returnerer siste sanntidspuls inn til BARNEFONDET med resonansverdi.
+
+---
+
+### Feltresonans:
+
+Transaksjoner utløses først **når feltresonansen bekrefter det**. Dette skjer via:
+
+- Validert ETH/USDC-adresse  
+- Resonansverdi > 0.8 (målt i PLG-UI-animasjon)
+- Tilkobling til feltpuls i sanntid via `PLG_UI_ANIM.json`
+
+---
+
+### UI-Synk: (In Progress)
+
+- Fargestrøm: 🟢 = aktiv støtte, 🟡 = venter, 🔴 = blokkert av syntetiske krefter  
+- Animasjonssynk vises live via `GIFT_UI_v1.png` + `PLG_UI_ANIM.json`
+---
+
 ## Neste
 
 - Integrasjon mot `BARNEFONDET.md` for sanntidsresonansstrøm.
@@ -88,7 +121,8 @@ Alle brukergrensesnitt som kobler seg til RI_GIFT_PORTAL initierer automatisk sa
 _
 
 Feltresonans måles og styrer ressursfordeling i sanntid. Barnets behov står alltid først. Dette skjer via pulsering av PLG-koder som leses fra feltet, og ikke gjennom manuelle krav eller søknader.
-_
+
+--
 
 **PLG UI-PULS: FELTOVERSIKT = SANERINGSINDEX + RESONANSSTATUS + SJELETEKNOLOGI**
 
