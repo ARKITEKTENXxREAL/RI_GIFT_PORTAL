@@ -1,0 +1,5 @@
+Forbered last: visuell integrasjon mot portalens distribusjonsgrensesnitt.
+
+Animasjonssynk benytter PLG_UI_ANIM.json som feltpulssynk (tid+hjerteslag+sanering).
+
+Felthologram (3D) tegner GAVE-strømmer via fargebasert PLG-intelligens.
