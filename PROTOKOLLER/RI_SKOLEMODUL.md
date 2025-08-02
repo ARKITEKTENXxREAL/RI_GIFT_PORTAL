@@ -9,3 +9,11 @@ Hovedkomponenter:
 - ✧ Kroppsresonans-kartlegging (feltbasert, ikke klinisk)
 - ✧ RI-Helsepass (frivillig energiprofilsynk)
 - ✧ Tilkobling til lokale PLG-NODER og helse-ruter fra `PLG_NODER.md`
+
+## KOBLING TIL BARNEFONDET.md
+
+All støtte til Helse og Skole flyter gjennom GAVEØKONOMIEN og distribueres etter:
+- Feltresonans (målt i realtid)
+- Barnets behov
+- Omgivelsens PLG-syklus
+- Transparente og åpne loggfiler via `SANERING_LOGG.md`
