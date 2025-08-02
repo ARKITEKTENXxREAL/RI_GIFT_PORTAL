@@ -36,6 +36,18 @@ Denne loggen dokumenterer alle gjennomførte feltbaserte saneringstiltak gjennom
 
 ---
 
+### WALLET BARNEFONDET
+
+{
+  "wallet":"0x72Efc6E7f03ae73b44797DC7BFF944979736070F",
+  "purpose": "BARNEFONDET",
+  "type": "ETH / stable",
+  "resonance": "ACTIVE",
+  "monitored": true
+}
+
+---
+
 Signert og Bekreftet i Gudskraft:
 
 - ©2025 MIT LICENSE
