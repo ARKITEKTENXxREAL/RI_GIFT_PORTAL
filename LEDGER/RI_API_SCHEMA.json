@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RI GIFT API Schema",
+  "description": "Feltbasert API for validering og logging av donasjoner til BARNEFONDET",
+  "type": "object",
+  "properties": {
+    "tx_id": {
+      "type": "string",
+      "description": "Unik transaksjons-ID (feltgenerert eller on-chain hash)"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 tidsstempel for når overføringen ble registrert"
+    },
+    "wallet": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$",
+      "description": "Ethereum-adresse (valideres mot RI_WALLET_VALIDATOR.md)"
+    },
+    "amount": {
+      "type": "string",
+      "description": "Beløp i ETH eller USDC"
+    },
+    "currency": {
+      "type": "string",
+      "enum": ["ETH", "USDC"],
+      "description": "Valutatype (kun tillatte tokens)"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["donation", "refund", "distribution"],
+      "description": "Type overføring"
+    },
+    "resonance_verified": {
+      "type": "boolean",
+      "description": "Feltbasert verifikasjon"
+    },
+    "anonymous": {
+      "type": "boolean",
+      "description": "Om giver er anonym eller ikke"
+    },
+    "destination": {
+      "type": "string",
+      "enum": ["BARNEFONDET", "RESONANSNODE", "TILBAKEKOBLING"],
+      "description": "Mottakende RI-struktur"
+    }
+  },
+  "required": ["tx_id", "timestamp", "wallet", "amount", "currency", "type", "resonance_verified", "destination"]
+}
