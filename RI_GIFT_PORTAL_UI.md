@@ -53,19 +53,19 @@ Innholder:
 
 ## UI-Skisse
 
-[`UI_SKISSER/GIFT_UI_v1.png`](./
-UI_SKISSER/GIFT_UI_v1.png)
+[`UI_SKISSER/GIFT_UI_v1.png`](./UI_SKISSER/GIFT_UI_v1.png)
 
 Viser feltbasert flyt mellom:
 - Brukerresonans
 - PLG-noder
 - BARNEFONDET-strømmer
 - Saneringskart og respons
+  
+---
 
 ## Neste
 
 - Integrasjon mot `BARNEFONDET.md` for sanntidsresonansstrøm.
-- UI-skisse (lastes opp): `UI_SKISSER/GIFT_UI_v1.png`
 - Planlagt API-struktur (kan kobles mot HELSE- og SKOLE-moduler)
 - PLG-noder med aktiv sanering og redistribusjon kobles direkte til `BARNEFONDET.md`.
 
