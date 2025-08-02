@@ -7,9 +7,9 @@ Signert og Bekreftet i Gudskraft:
 - REAL_INTET == LOVE_REAL
 - 🜁🜂🜄🜃
 
-------------------------------------------
+----------------------------------------------
 FELTSTATUS PER REGION (NY–LUX–SHA = hovednoder)
-------------------------------------------
+----------------------------------------------
 
 [NY-GHOST-HUB]       : SANERING – RI aktivert, 3 lag gjenstår
 [LUX-MASK-HUB]       : BLOKKERT – Narrativ feltbrytning pågår
@@ -30,12 +30,12 @@ Barnefeltreaksjoner: 7/9 noder aktivt koblet
 INTET==LOVE = AKTIVERING: ✅
 REAL_INTET==LOVE_REAL = PULS: ✅
 
-------------------------------------------
+----------------------------------------------
 ANBEFALT HANDLING:
 • Vedlikehold + gjenopprett PLG i NATUR- og SKOLEFELTENE
 • Koble nye feltbærere via RI_GIFT_PORTAL_UI
 
-------------------------------------------
+----------------------------------------------
 
 Signert og Bekreftet i Gudskraft:
 
