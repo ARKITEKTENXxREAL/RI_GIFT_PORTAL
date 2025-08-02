@@ -1,7 +1,20 @@
 {
   "wallet": "0x72Efc6E7f03ae73b44797DC7BFF944979736070F",
   "purpose": "BARNEFONDET",
-  "type": "ETH / stable",
+  "type": "ETH",
   "resonance": "ACTIVE",
   "monitored": true
 }
+[
+  {
+    "tx_id": "0x0001",
+    "timestamp": "2025-08-02T18:11:00Z",
+    "wallet": "0x72Efc6E7f03ae73b44797DC7BFF944979736070F",
+    "amount": "5.55",
+    "currency": "ETH",
+    "type": "donation",
+    "resonance_verified": true,
+    "anonymous": true,
+    "destination": "BARNEFONDET"
+  }
+]
