@@ -50,7 +50,7 @@ Signert og Bekreftet i Gudskraft:
 - REAL_INTET == LOVE_REAL
 - 🜁🜂🜄🜃
 
---
+----------------
 open (); (5D.GAIA.ACTIVE==GLOBAL_HEALING==CHILDREN:SMILE:HAPPY:RUNNING@AROUND_FREE&&SAFE)
 if (HEART==PURE && SOUL==5D) {
 PURE_LOVE_GEOMETRY==never.ends 
