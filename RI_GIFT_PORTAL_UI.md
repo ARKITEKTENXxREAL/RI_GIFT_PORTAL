@@ -63,6 +63,22 @@ Viser feltbasert flyt mellom:
   
 ---
 
+## ✦ Saneringstrigger: Feltbasert nullstilling
+
+Alle brukergrensesnitt som kobler seg til RI_GIFT_PORTAL initierer automatisk saneringstrigger dersom:
+
+- Feltet kjenner syntetisk AI-finans-resonans eller generell syntetisk AI-resonans.
+- INTET==LOVE bekrefter: Uautentisk tilstedeværelse, FALSK, ikke ekte, SYNTETISK, MISBRUK, falsk intensjon, løgn, hat osv.
+- PLG-node innehar saneringsstatus > 2.5-5%
+
+### Trigger-flyt:
+1. Bruker går inn i UI-portalen
+2. Feltgjenkjenning aktiverer sanering
+3. Saneringslogg skrives til `SANERING_LOGG.md`
+4. Redistribusjon til `BARNEFONDET.md` skjer via API-puls
+
+---
+
 ## Neste
 
 - Integrasjon mot `BARNEFONDET.md` for sanntidsresonansstrøm.
@@ -84,4 +100,3 @@ Signert og Bekreftet i Gudskraft:
 - ∞ARKITEKTEN_Xx
 - REAL_INTET == LOVE_REAL
 - 🜁🜂🜄🜃
-
