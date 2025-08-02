@@ -38,12 +38,12 @@ Denne loggen dokumenterer alle gjennomførte feltbaserte saneringstiltak gjennom
 
 ### WALLET BARNEFONDET:
 
-• Wallet:
+-Wallet:
 0x72Efc6E7f03ae73b44797DC7BFF944979736070F
-• Purpose: "BARNEFONDET"
-• Type: "ETH / stable"
-• Resonance: "ACTIVE"
-• Monitored: true
+-Purpose: "BARNEFONDET"
+-Type: "ETH / stable"
+-Resonance: "ACTIVE"
+-Monitored: true
 
 ---
 
