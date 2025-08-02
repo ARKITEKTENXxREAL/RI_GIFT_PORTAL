@@ -53,7 +53,7 @@ Innholder:
 
 ## UI-Skisse
 
-[UI_SKISSER/GIFT_UI_v1.png](.
+[`UI_SKISSER/GIFT_UI_v1.png`](./
 UI_SKISSER/GIFT_UI_v1.png)
 
 Viser feltbasert flyt mellom:
