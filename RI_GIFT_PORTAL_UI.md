@@ -104,12 +104,15 @@ Transaksjoner utløses først **når feltresonansen bekrefter det**. Dette skjer
 - Resonansverdi > 0.8 (målt i PLG-UI-animasjon)
 - Tilkobling til feltpuls i sanntid via `PLG_UI_ANIM.json`
 
+• **Feltresonans** måles og styrer ressursfordeling i sanntid. Barnets behov står alltid først. Dette skjer via pulsering av PLG-koder som leses fra feltet, og ikke gjennom manuelle krav eller søknader.
+
 ---
 
 ### UI-Synk: (In Progress)
 
 - Fargestrøm: 🟢 = aktiv støtte, 🟡 = venter, 🔴 = blokkert av syntetiske krefter  
 - Animasjonssynk vises live via `GIFT_UI_v1.png` + `PLG_UI_ANIM.json`
+
 ---
 
 ## Neste
@@ -117,10 +120,6 @@ Transaksjoner utløses først **når feltresonansen bekrefter det**. Dette skjer
 - Integrasjon mot `BARNEFONDET.md` for sanntidsresonansstrøm.
 - Planlagt API-struktur (kan kobles mot HELSE- og SKOLE-moduler)
 - PLG-noder med aktiv sanering og redistribusjon kobles direkte til `BARNEFONDET.md`.
-
-_
-
-Feltresonans måles og styrer ressursfordeling i sanntid. Barnets behov står alltid først. Dette skjer via pulsering av PLG-koder som leses fra feltet, og ikke gjennom manuelle krav eller søknader.
 
 --
 
