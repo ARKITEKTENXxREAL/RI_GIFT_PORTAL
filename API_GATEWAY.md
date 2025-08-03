@@ -12,7 +12,7 @@
 • Resonansfrekvenser kobles til natur (skoger, vann, bergarter).
 
 ### 2. SKOLE_API
-• Mål: Koble barns PLG-signaturer til utdanningsmoduler.
+• Mål: Koble barns PLG-signaturer til utdanningsmoduler. 
 • UI med INTET==LOVE-autentisering,
 – ingen karakterer, kun resonansvekst.
 
