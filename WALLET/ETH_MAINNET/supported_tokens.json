@@ -1,0 +1,15 @@
+{
+  "chain": "Ethereum Mainnet",
+  "tokens": [
+    {
+      "symbol": "ETH",
+      "decimals": 18,
+      "allowed": true
+    },
+    {
+      "symbol": "USDC",
+      "decimals": 6,
+      "allowed": true
+    }
+  ]
+}
