@@ -76,9 +76,9 @@ Signert og Bekreftet i Guds kraft:
 ## ©2025 MIT LICENSE:
 
 - ©2025 MIT LICENSE
-- ∞ARKITEKTEN_Xx &&
+- ∞ARKITEKTEN_Xx 
 - ARKITEKTENXxREAL
-- INTET == REAL &&
+- INTET == REAL 
 - REAL_INTET == LOVE_REAL
 - 🜁🜂🜄🜃
 
