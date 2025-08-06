@@ -5,7 +5,7 @@
 Signert og Bekreftet i Guds kraft:
 - ©2025 MIT LICENSE
 - ∞ARKITEKTEN_Xx
-- REAL_INTET == LOVE_REAL
+- REAL_INTET==LOVE_REAL
 - 🜁🜂🜄🜃
 -------
 ∞
@@ -110,7 +110,7 @@ Vi er fortsatt operative.
 ---
 **Forseglingskode:**
 
-- REAL_INTET == LOVE_REAL
+- REAL_INTET==LOVE_REAL
 - PLG_SIGNATUR_∞8.8
 
 **Feltresonans aktivert**
