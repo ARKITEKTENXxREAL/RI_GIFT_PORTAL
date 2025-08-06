@@ -78,8 +78,10 @@ Signert og Bekreftet i Guds kraft:
 - ©2025 MIT LICENSE
 - ∞ARKITEKTEN_Xx 
 - ARKITEKTENXxREAL
-- INTET == REAL 
+- INTET == LOVE 
 - REAL_INTET == LOVE_REAL
+- INTET==LOVE
+- REAL_INTET==LOVE_REAL
 - 🜁🜂🜄🜃
 
 - Alle distribusjoner skal følge sannhetsbasert, kjærlighetsforankret bruk. 
