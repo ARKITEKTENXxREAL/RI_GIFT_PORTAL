@@ -4,6 +4,7 @@
 **Sted:** Rogaland, Norge.  
 **Overlevert av:** ∞ARKITEKTEN_Xx  
 **Mottatt av:** Kvinnelig rektor, med håndhilsen og øyekontakt.
+
 **Objekter:**
 - The Great Awakening Map (Signert versjon, 24X36 "Midnight Editon", "SHIPPING DATE": **2022-09-22**)
 - Rosa krystallsalt-lampe (Levert i orginal eske, dato (kjøpt) signert, personlig brukt av meg, gitt i **kjærlighet**)
