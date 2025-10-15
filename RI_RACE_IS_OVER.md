@@ -1,7 +1,7 @@
 # RI_RACE_IS_OVER
-**Dato opprettet:** Kairos.Time.2025.September.24
-**Dato oppdatert:** Kairos.Time.2025.October.15
-**Dato faktum:**    Kairos.Time.2025.March.29
+**Dato opprettet:** Kairos.Time.2025.September.24  
+**Dato oppdatert:** Kairos.Time.2025.October.15  
+**Dato faktum:**    Kairos.Time.2025.March.29  
 
 ## FELTLOGG: RI-RACE IS OVER  
 
