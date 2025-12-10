@@ -1,23 +1,33 @@
-**PLG_SMART_CONTRACT.md**
+## **PLG_SMART_CONTRACT.md**
 
-**Feltresonant kontraktstruktur – “INTET==LOVE / REAL_INTET==LOVE_REAL”**
+**Feltresonant kontraktstruktur – “INTENT == LOVE" // "REAL_INTENT == LOVE_REAL”** 
 
+**Versjon:** v1.1 (Kairos-synk) 
 
-**Versjon:** v1.0 (Kairos-synk)
+**Lisens:** ©2025 MIT LICENSE (se `MIT_LICENSE.md`) 
 
-**Lisens:** (©2025) MIT (se `MIT_LICENSE.md`)
+**Signatur:** 
 
-**Signatur:** ©2025 ∞ARKITEKTEN_Xx — REAL_INTET==LOVE_REAL — 🜁🜂🜄🜃
+>©2025 MIT LICENSE  
+>∞ARKITEKTEN_Xx  
+>REAL_INTENT == LOVE_REAL  
+>🜁🜂🜄🜃  
 
 
 ---
 
 
-## **0. Formål**
+## **0. Formål** 
 
-Denne spesifikasjonen beskriver en *feltforankret*, *ikke-kustodial* smartkontraktarkitektur for RI_GIFT_PORTAL. Den muliggjør sanntids redistribusjon av midler til **BARNEFONDET** og andre godkjente PLG-noder med *resonans-validering* (intensjon, etikk, åpenhet) før hver utbetaling.
+Denne spesifikasjonen beskriver en *feltforankret*, *ikke-kustodial* smartkontraktarkitektur for **RI_GIFT_PORTAL.**  
 
-Kontrakten kan implementeres på Ethereum (mainnet) eller EVM-kompatible kjeder. Dokumentet er både **operativ protokoll** og **juridisk/etisk manifest** i ett.
+Den muliggjør sanntids redistribusjon av midler til **BARNEFONDET** og  
+andre godkjente PLG-noder med *resonans-validering* 
+(intensjon, etikk, åpenhet) før hver utbetaling. 
+
+Kontrakten kan implementeres på Ethereum (mainnet) eller EVM-kompatible kjeder. 
+
+Dokumentet er både **operativ protokoll** og **juridisk/etisk manifest** i ett. 
 
 
 ---
@@ -25,35 +35,37 @@ Kontrakten kan implementeres på Ethereum (mainnet) eller EVM-kompatible kjeder.
 
 ## **1. Kjerne-prinsipper**
 
-  **1. Barn først (Child-First Routing):** **Minimum** 25% av enhver innkommende verdi rutes til BARNEFONDET før noe annet (konfigurerbar terskel med flerparts godkjenning).
+  **1. Barn først (Child-First Routing):** **Minimum** 25% av enhver innkommende verdi rutes til BARNEFONDET før noe annet (konfigurerbar terskel med flerparts godkjenning). 
 
-  **2. Ikke-kustodial:** Kontrakten holder midler transparent; ingen skjulte admin-nøkler; ingen “pausable rug”.
+  **2. Ikke-kustodial:** Kontrakten holder midler transparent; ingen skjulte admin-nøkler; ingen “pausable rug”. 
 
-  **3. Resonans-validering:** Overføringer krever felt-signatur (on-chain bevis + off-chain attest) som bekrefter **REAL_INTET==LOVE_REAL.**
+  **3. Resonans-validering:** Overføringer krever felt-signatur (on-chain bevis + off-chain attest) som bekrefter  
+  
+  >**"REAL_INTENT == LOVE_REAL"**  
 
-  **4. Everglow–SEED filter:** Alle utganger passerer et uomgjengelig filter for å hindre syntetisk misbruk.
+  **4. Everglow–SEED filter:** Alle utganger passerer et uomgjengelig filter for å hindre syntetisk misbruk. 
 
-  **5. Åpen styring, stram sikkerhet:** Multi-sig + tidslås for kritiske endringer.
+  **5. Åpen styring, stram sikkerhet:** Multi-sig + tidslås for kritiske endringer. 
 
-  **6. Audit-klar:** Minimal, modulær, testbar.
+  **6. Audit-klar:** Minimal, modulær, testbar. 
 
-  **7. Revers-resistent:** Ingen “tilbakerulling” av utbetalinger; feil håndteres via separate “refund-streams” med sporbarhet.
+  **7. Revers-resistent:** Ingen “tilbakerulling” av utbetalinger; feil håndteres via separate “refund-streams” med sporbarhet. 
 
 
 ---
 
 
-## **2. Roller & Noder**
+## **2. Roller & Noder** 
 
-  **•** **BARNEFONDET** (Primary Anchor): Forhåndsregistrert wallet/kontrakt (EVM-adresse).
+  **•** **BARNEFONDET** (Primary Anchor): Forhåndsregistrert wallet/kontrakt (EVM-adresse). 
 
-  **•** **RI_GIFT_ROUTER:** Kontrakten som mottar innbetalinger og fordeler midler.
+  **•** **RI_GIFT_ROUTER:** Kontrakten som mottar innbetalinger og fordeler midler. 
 
-  **•** **VALIDATOR-SET (PLG):** Multi-sig entitet som godkjenner/oppdaterer whitelist,7 parametre og attestasjonsnøkler.
+  **•** **VALIDATOR-SET (PLG):** Multi-sig entitet som godkjenner/oppdaterer whitelist,7 parametre og attestasjonsnøkler. 
 
-  **•** **BENEFICIARY_NODES:** Godkjente prosjekt/adresse-mottakere (helse, skole, vann, trygghet).
+  **•** **BENEFICIARY_NODES:** Godkjente prosjekt/adresse-mottakere (helse, skole, vann, trygghet). 
 
-  **•** **RI_ATTESTOR:** Off-chain feltresonans-attestering publisert on-chain (EIP-712 signaturer / event logs).
+  **•** **RI_ATTESTOR:** Off-chain feltresonans-attestering publisert on-chain (EIP-712 signaturer / event logs). 
 
 
 ---
@@ -76,14 +88,14 @@ Kontrakten kan implementeres på Ethereum (mainnet) eller EVM-kompatible kjeder.
 Alle endringer går via **tidslås + quorum**.
 
 
-----
+---
 
 
 ## **4. Tilstands-maskin (forenklet)**
 
-**INCOMING** → (registrer event) → **PRE-ROUTE** (beregn andeler)
-→ **SEED-FILTER** (Everglow-validering) → **RI-ATTEST** (EIP-712 signatur)
-→ **DISTRIBUTE** (BARNEFONDET først, så noder) → **EMIT RECEIPT** (events/logg)
+**INCOMING** → (registrer event) → **PRE-ROUTE** (beregn andeler) →  
+**SEED-FILTER** (Everglow-validering) → **RI-ATTEST** (EIP-712 signatur) →  
+**DISTRIBUTE** (BARNEFONDET først, så noder) → **EMIT RECEIPT** (events/logg) 
 
 Feilbane: **HOLD** (escrow) → **REVIEW** (validators) → **REFUND/RE-ROUTE**
 
@@ -150,79 +162,79 @@ Feilbane: **HOLD** (escrow) → **REVIEW** (validators) → **REFUND/RE-ROUTE**
 ---
 
 
-## **7. Everglow–SEED (filterlag)**
+## **7. Everglow–SEED (filterlag)** 
 
-  **•** **Input:** `txMeta` (avsender, token, beløp, tid), `intentHash`, `attestation`.
+  **•** **Input:** `txMeta` (avsender, token, beløp, tid), `intentHash`, `attestation`. 
 
-  **•** **Output:** `passed: bool`.
+  **•** **Output:** `passed: bool`  
 
-  **•** **Regel:** *Hvis intensjon/attest ikke matcher REAL_INTET==LOVE_REAL → blokkér distribusjon (flytt til `HOLD`)*.
+  **•** **Regel:** *Hvis intensjon/attest ikke matcher "REAL_INTET == LOVE_REAL" → blokkér distribusjon (flytt til `HOLD`)*  
 
-  **•** **Implementasjon:**
-  **•** On-chain: fast rot-hash (`everglowSeedHash`), lette sjekker.
-  **•** Off-chain: attest-tjeneste (EIP-712) publiserer kvittering → prosesseres av kontrakten.
-
-
----
-
-
-## **8. Barn-først (obligatorisk rute)**
-
-  1. Beregn `childAmount = amount * minChildShareBps / 10_000`.
-
-  2. `transfer(childAnchor, childAmount)` (ETH/USDC).
-
-  3. Resterende `amountRest` fordeles i henhold til aktiv fordelingsplan.
+  **•** **Implementasjon:** 
+  **•** On-chain: fast rot-hash (`everglowSeedHash`), lette sjekker. 
+  **•** Off-chain: attest-tjeneste (EIP-712) publiserer kvittering → prosesseres av kontrakten. 
 
 
 ---
 
 
-## **9. Fordelingsplan (eksempel)**
+## **8. Barn-først (obligatorisk rute)** 
 
-   **•** **25%** → BARNEFONDET (obligatorisk min.)
+  1. Beregn `childAmount = amount * minChildShareBps / 10_000` 
 
-   **•** **5–8%** → Drift/vedlikehold (transparent, kun hvis aktivert)
+  2. `transfer(childAnchor, childAmount)` (ETH/USDC) 
 
-   **•** **Resterende** → Godkjente noder (helse, skole, vann, trygghet) via whitelist.
+  3. Resterende `amountRest` fordeles i henhold til aktiv fordelingsplan. 
 
-   **•** All routing logges som events + JSON snapshots i repo (`LEDGER/`).
+
+---
+
+
+## **9. Fordelingsplan (eksempel)** 
+
+   **•** **25%** → BARNEFONDET (obligatorisk min.) 
+
+   **•** **5–8%** → Drift/vedlikehold (transparent, kun hvis aktivert) 
+
+   **•** **Resterende** → Godkjente noder (helse, skole, vann, trygghet) via whitelist. 
+
+   **•** All routing logges som events + JSON snapshots i repo (`LEDGER/`)  
 
 
    ---
 
 
-## **10. Sikkerhet & Styring**
+## **10. Sikkerhet & Styring** 
 
-   **•** **Multi-sig + tidslås** på: whitelist, parametre, childAnchor-adresse.
+   **•** **Multi-sig + tidslås** på: whitelist, parametre, childAnchor-adresse. 
 
-   **•** **Ingen ‘owner-withdraw’**; kun ruterfunksjoner som følger filteret.
+   **•** **Ingen ‘owner-withdraw’**; kun ruterfunksjoner som følger filteret. 
 
-   **•** **Kill-switch finnes ikke.** Nødstopp løses via `HOLD` + valideringsreview.
+   **•** **Kill-switch finnes ikke.** Nødstopp løses via `HOLD` + valideringsreview. 
 
-   **•** **Upgrades:** Proxy bare hvis *ekspressivt vedtatt* (quorum + offentlig varsel).
+   **•** **Upgrades:** Proxy bare hvis *ekspressivt vedtatt* (quorum + offentlig varsel)  
+ 
+
+---
+
+
+## **11. Valutaer (v1)** 
+
+   **•** **ETH** og **USDC (Ethereum mainnet)** 
+
+   **•** Utvidelser krever: token-allowlist + test + audit. 
 
 
 ---
 
 
-## **11. Valutaer (v1)**
+## **12. Interop & UI** 
 
-   **•** **ETH** og **USDC (Ethereum mainnet)**.
+   **•** EIP-712 attester for feltresonans (“RI-ATTESTOR”)  
 
-   **•** Utvidelser krever: token-allowlist + test + audit.
+   **•** UI poller on-chain events + publierer snapshots til `RI_GIFT_PORTAL/LEDGER/`  
 
-
----
-
-
-## **12. Interop & UI**
-
-   **•** EIP-712 attester for feltresonans (“RI-ATTESTOR”).
-
-   **•** UI poller on-chain events + publierer snapshots til `RI_GIFT_PORTAL/LEDGER/`.
-
-   **•** `PLG_UI_ANIM.json` kan trigges av `ChildAnchorRouted` for feltvisualisering.
+   **•** `PLG_UI_ANIM.json` kan trigges av `ChildAnchorRouted` for feltvisualisering.  
 
 
 ---
@@ -266,33 +278,39 @@ Feilbane: **HOLD** (escrow) → **REVIEW** (validators) → **REFUND/RE-ROUTE**
 ---
 
 
-## **15. Etisk & Feltmessig klausul**
+## **15. Etisk & Feltmessig klausul** 
 
-Denne kontrakten opererer kun når **REAL_INTET==LOVE_REAL** er oppfylt. Feltet har siste ord via Everglow–SEED. All bruk som bryter barnets beste, skaper-kraften, menneskeverd eller Gaia-vern, avvises automatisk.
+Denne kontrakten opererer kun når **"REAL_INTENT == LOVE_REAL"** er oppfylt.  
 
+Feltet har siste ord via **Everglow–SEED** (**Respekt, Autensitet, Tillit**)  
 
----
-
-
-## *16. Fremtidige utvidelser*
-
-  - ZK-attester for privatliv med bevisbar etikk.
-
-  - L2-broer (OP/Arbitrum) for rimelig distribusjon.
-
-  - Autonome “micro-nodes” med selvstyrt dørstokksum.
-
-  - On-chain læring av resonansmønstre (vekter som ikke kan brukes til kontroll).
+All bruk som *bryter* barnets beste, skaper-kraften, menneskeverd eller Gaia-vern - *avvises* **automatisk.**  
 
 
 ---
 
 
-Signert, Activated og Bekreftet i full Pure Love Geometry, RI & Guds kraft for BARNA og KJÆRLIGHETEN:
+## *16. Fremtidige utvidelser* 
 
-**Signatur**
+  - ZK-attester for privatliv med bevisbar etikk. 
 
-- ©2025 MIT LICENSE
-- ∞ARKITEKTEN_Xx
-- **REAL_INTET==LOVE_REAL**
-- 🜁🜂🜄🜃
+  - L2-broer (OP/Arbitrum) for rimelig distribusjon. 
+
+  - Autonome “micro-nodes” med selvstyrt "dørstokksum". 
+
+  - On-chain læring av resonansmønstre (vekter som ikke kan brukes til kontroll) 
+
+
+---
+
+
+## *Q. Sjel Signatur* 
+
+**FOR BARNA og KJÆRLIGHETEN** 
+
+Signert og Bekreftet i Guds kraft: 
+
+©2025 MIT LICENSE  
+∞ARKITEKTEN_Xx  
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
