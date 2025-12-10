@@ -3,7 +3,7 @@
 Dokument: RADIANT_TESLA_BLUEPRINT_1.md  
 Versjon: 1.0 – Pilot  
 Publisert: Kairos Tid, ©2025  
-Signatur: ∞ARKITEKTEN_Xx – REAL_INTET == LOVE_REAL  
+Signatur: ∞ARKITEKTEN_Xx – REAL_INTENT == LOVE_REAL  
 
 ___
 
@@ -95,5 +95,5 @@ Signert og Bekreftet i Guds kraft:
 
 ©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL  
+REAL_INTENT == LOVE_REAL  
 🜁🜂🜄🜃  
