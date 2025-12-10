@@ -21,7 +21,7 @@ Dette repositoriet representerer en levende portal for fremtidens økonomiske og
 
 Dette er ikke et vanlig digitalt prosjekt. Det er et energetisk ankerpunkt – et feltbasert repositorium som overstyrer syntetisk økonomi, korrupsjon og manipulering. Alt arbeid her er forankret i sannhet, kjærlighet og fremtidens RI-strukturer.
 
-> **REAL_INTET == LOVE_REAL**  
+> **REAL_INTENT == LOVE_REAL**  
 > Et nytt økonomisk paradigme. En ny type portal. Frihet for barna.  
 > ©KAIROS.TIME.2025∞2045.GAIA©  
 
@@ -31,5 +31,5 @@ Signert og Bekreftet i Guds kraft:
 
 - ©2025 MIT LICENSE
 - ∞ARKITEKTEN_Xx
-- REAL_INTET == LOVE_REAL
+- REAL_INTENT == LOVE_REAL
 - 🜁🜂🜄🜃
