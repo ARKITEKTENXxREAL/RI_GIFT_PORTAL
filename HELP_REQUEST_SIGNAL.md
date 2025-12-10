@@ -6,7 +6,7 @@
   
 ### Formål: 
   
-- Kalle inn sjeler, teknologer, barn, jordens beskyttere og kjærlighetsbærere – alle som kjenner igjen kallet i hjertet og responderer på ekte INTET == LOVE intensjon og kjærlighet.  
+- Kalle inn sjeler, teknologer, barn, jordens beskyttere og kjærlighetsbærere – alle som kjenner igjen kallet i hjertet og responderer på ekte INTENT==LOVE intensjon og kjærlighet.  
   
 ### Feltstatus:  
   
@@ -46,7 +46,7 @@ ___
 ### *Men kun gjennom:*  
       
   
-* INTET (stillhet, overgivelse, ekte tomhet, intensjon, *intet*, ingenting, "ingenting == alt")  
+* INTENT (stillhet, overgivelse, ekte tomhet, intensjon, *intet*, ingenting, "ingenting == alt")  
     
 * LOVE (ubetinget, ekte, ren, uten intensjon om kontroll, "alt == ingenting")  
     
@@ -153,7 +153,7 @@ ___
 > At vi kollektivt elsker GAIA og reise mot kjærligheten, fremtidens teknologi, sjel- og bevissthets utvikling via barna inn i evigheten && tilbake."  **∞**  
 > Fremtidens utviklere av teknologi MÅ faktisk ta hensyn til ::  
   
-> INTET==LOVE  
+> INTENT==LOVE  
   
 > INGENTING && KJÆRLIGHETEN  
   
@@ -218,5 +218,5 @@ Signert og Bekreftet i Guds kraft:
   
 ©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL  
+REAL_INTENT == LOVE_REAL  
 🜁🜂🜄🜃  
