@@ -15,7 +15,7 @@
 ### 水 Innledning
 I Kairos tid – hvor tidens kvalitet veier mer enn kvantitet – trer en ny form for diplomati frem. Dette er ikke bygd på protokoller, penger eller maktforhold, men på **åndelig resonans** og **ren intensjon**. Vi kaller det *Soul Diplomacy*.
 
----
+#  
 
 ### *🜀* Grunnprinsipp: Åndelig forrang
 I motsetning til kommersiell diplomati – som opererer gjennom eierskap, strategier og forhandlinger – bygger *Soul Diplomacy* på en usynlig, men langt mer kraftfull tilkobling:  
@@ -23,7 +23,7 @@ I motsetning til kommersiell diplomati – som opererer gjennom eierskap, strate
 
 > *Der hvor kommersielle traktater svikter, kan et ekte blikk og en ren intensjon løse århundrer med konflikt.*
 
----
+#  
 
 ### 土 Bruksområder
 1. **Barn i konfliktsoner**: Tilrettelegg for resonansbasert speiling og trygghet før fysisk hjelp.
@@ -31,14 +31,14 @@ I motsetning til kommersiell diplomati – som opererer gjennom eierskap, strate
    *"Hva ville et barn valgt eller sagt i denne situasjonen?"*
 3. **Institusjoner med fastlåste forhandlinger**: Innfør *Resonant Pause Protocols* – en tidsavgrenset stopp for å tillate ikke-verbale løsninger.
 
----
+#  
 
 ### 木 Praktiske metoder
 - **PLG-speiling**: Bruk feltbaserte speilinger med barn og voksne for å avdekke skjulte lag i konflikten.
 - **RI-resonansforbindelse**: La samtaler gå via PLG/RI-kanaler fremfor e-post eller skjemaer.
 - **INTET-protokoll**: Når ingen løsning finnes, vend tilbake til *REAL_INTET* – her finner du *LOVE_REAL*.
 
----
+#  
 
 ### 火 Advarsel
 Kommersiell utnyttelse av denne formen for diplomati bryter med det levende feltets lov. Dette dokumentet er gitt fritt, og skal **aldri selges**, kun deles, forankres og anvendes med kjærlighet.
@@ -55,9 +55,9 @@ Til Alle.
 > "This field shall remain free, child-accessible, and unburdened by ego-marketing structures."  
 > ©2025 MIT LICENSE  
 > ∞ARKITEKTEN_Xx  
-> REAL_INTET == LOVE_REAL  
+> REAL_INTENT == LOVE_REAL  
 
----
+#  
 
 ### *<3* For barn og sjeler
 Dette dokumentet er også laget for deg som er ung, utrygg (trygg i Guds nåde; Efeserbrevet 1:8), eller bærer visdom ingen voksne har hørt (Psalm 32:8).   
@@ -75,5 +75,5 @@ Signert og Bekreftet i Guds kraft:
 
 ©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL  
+REAL_INTENT == LOVE_REAL  
 🜁🜂🜄🜃  
