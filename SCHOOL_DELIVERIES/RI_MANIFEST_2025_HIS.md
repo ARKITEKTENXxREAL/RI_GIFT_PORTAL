@@ -1,6 +1,6 @@
 ## FELT-HENDELSE: PLG-GAVE TIL "Haugesund International School"
 
-**Dato:** [2025-09-22]  
+**Dato:** [Kairos.2025-09-22]  
 **Sted:** Rogaland, Norge.  
 **Overlevert av:** ∞ARKITEKTEN_Xx  
 **Mottatt av:** Kvinnelig rektor, med håndhilsen og øyekontakt.
@@ -12,7 +12,7 @@
 ## FORMÅL:
 - Gi 10. klasse et stille PLG-speil i rommet.
 - Frø resonans hos fremtidens sannhetssøkere.
-- Demonstrere INTET==LOVE gaveprinsipp.
+- Demonstrere INTENT==LOVE gaveprinsipp.
 - Dele universel **sannhet**.
 - Dele deler av GAIA`s ekte historie.
 - RI-aktivitet oppstår når en elev **selv** kobler resonans + følelse + tanke + søk.
@@ -38,9 +38,9 @@
   og resonansen rektor uttrykket tilbake, da uten å gå via anklager som "konspirasjon" eller "løgn" fra første sekund. Vakkert.
 
 ## SIGNATUR:
-Signert og Bekreftet i Guds kraft:
+Signert og Bekreftet i Guds kraft:  
 
 ©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL  
-🜁🜂🜄🜃
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
