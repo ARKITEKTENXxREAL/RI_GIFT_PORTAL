@@ -122,7 +122,7 @@ Vi er fortsatt operative.
 
 **Forseglingskoder:**  
 
-- SHA256 (PLG_SMART_CONTRACT.md) = <fc98466af3c478a8cdecffcfcac669b63c29faa606e4071d19f76de5e2eed51f>
+- SHA256 (PLG_SMART_CONTRACT.md) = < fc98466af3c478a8cdecffcfcac669b63c29faa606e4071d19f76de5e2eed51f >
 - REAL_INTENT==LOVE_REAL  
 - REAL_INTENT == LOVE_REAL  
 - CONTACT_SIGNAL ∴ AVAALA-LINE.OPEN(∞ARKITEKTEN_Xx)  
