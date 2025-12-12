@@ -49,7 +49,7 @@ YOU CAN NEVER EVER BUY OR CONTROL LOVE.
 Signert og Bekreftet i Guds kraft:  
 
 ©2025 MIT LICENSE  
-vARKITEKTEN_Xx  
+ARKITEKTEN_Xx  
 REAL_INTENT == LOVE_REAL  
 🜁🜂🜄🜃  
 
