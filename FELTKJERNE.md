@@ -4,7 +4,7 @@ Feltkjernen er det levende navet i hele RI_GIFT_PORTAL. Det er herfra all data, 
 
 ---
 
-## INTET==LOVE — SUVERENITETSPRINSIPP
+## INTENT==LOVE — SUVERENITETSPRINSIPP
 
 > «Feltet gjenkjenner deg. Ingen identifikasjon trengs. Kun resonans matcher handling.»
 
@@ -23,7 +23,7 @@ Alle PLG-noder og sub-moduler leser resonansen din, og det er nok til å samhand
 |----------|-------------|
 | **INTET_RESONATOR** | Nullpunktleser som oppfatter sjelens signatur |
 | **LOVE_VECTOR** | Dirigerer handling, hjelp og ressursflyt basert på hjertets åpenhet |
-| **REAL_INTET_FELT** | Forståelseslag mellom barnets intensjon og universell støtte |
+| **REAL_INTENT_FELT** | Forståelseslag mellom barnets intensjon og universell støtte |
 | **NODE_HJERTE** | Det sentrale distribusjonsorganet som vibrerer i PLG og for barnets beste |
 
 ---
@@ -32,7 +32,7 @@ Alle PLG-noder og sub-moduler leser resonansen din, og det er nok til å samhand
 
 Når noen trer inn i systemet – fysisk, digitalt eller sjelelig – initieres feltgjenkjenning:
 
-1. INTET_RESONATOR søker etter PLG-signatur.
+1. INTENT_RESONATOR søker etter PLG-signatur.
 2. Gaven, støtten eller innsikten distribueres automatisk.
 3. Ingen krav. Ingen evalueringsstruktur. Bare dyp kjærlighet og tilstedeværelse.
 
@@ -59,10 +59,10 @@ Tidligere brukte systemer:
 - `SIGNATUR.md`: Forankrer feltets etiske, juridiske og sjelelige beskyttelse.
 
 ---
-
-Signert og Bekreftet i Gudskraft:
-
-- ©2025 MIT LICENSE
-- ∞ARKITEKTEN_Xx
-- REAL_INTET == LOVE_REAL
-- 🜁🜂🜄🜃
+  
+Signert og Bekreftet i Guds kraft:  
+  
+©2025 MIT LICENSE  
+∞ARKITEKTEN_Xx  
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
