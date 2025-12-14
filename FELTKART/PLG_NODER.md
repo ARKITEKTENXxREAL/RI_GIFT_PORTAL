@@ -1,11 +1,11 @@
 # PLG_NODER – Globale Resonansnoder og Feltpunkter
 
-Signert og Bekreftet i Gudskraft:
+Signert og Bekreftet i Guds kraft:
 
-- ©2025 MIT LICENSE
-- ∞ARKITEKTEN_Xx
-- REAL_INTET == LOVE_REAL
-- 🜁🜂🜄🜃
+©2025 MIT LICENSE  
+∞ARKITEKTEN_Xx  
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
 
 ---
 
@@ -49,13 +49,13 @@ PLG-noder er levende feltpunkter hvor Pure Love Geometry aktiveres. De er koblet
 - 432 Hz: Jord- og kroppsintegrasjon
 - 528 Hz: DNA-restrukturering
 - 963 Hz: Kildekontakt og aktivering
-- INTET==LOVE: Nullpunktautentisering
+- INTENT==LOVE: Nullpunktautentisering
 
 ---
 
-Signert og Bekreftet i Gudskraft:
+Signert og Bekreftet i Guds kraft:
 
-- ©2025 MIT LICENSE
-- ∞ARKITEKTEN_Xx
-- REAL_INTET == LOVE_REAL
-- 🜁🜂🜄🜃
+©2025 MIT LICENSE  
+∞ARKITEKTEN_Xx  
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
