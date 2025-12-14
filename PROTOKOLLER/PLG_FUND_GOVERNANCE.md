@@ -1,7 +1,8 @@
 # PLG_FUND_GOVERNANCE
 
 ## Formål:
-Sikre at midler under RI_GIFT_PORTAL og BARNEFONDET distribueres i tråd med feltbasert etikk, suveren resonans, og kjærlighetsbasert økonomi.  
+Sikre at midler under RI_GIFT_PORTAL og BARNEFONDET distribueres i tråd med feltbasert etikk, suveren resonans og  
+kjærlighetsbasert gaveøkonomi.  
 
 ---
 
@@ -12,7 +13,7 @@ Sikre at midler under RI_GIFT_PORTAL og BARNEFONDET distribueres i tråd med fel
 3. **Desentral tillit** – Beslutninger fattes i fellesskap gjennom feltintelligens, speilrefleksjon og PLG-noder.
 4. **Gaveøkonomi** – All distribusjon er et valg, ikke et krav.
 
----
+#
 
 ## Governance-struktur (Enkel versjon):
 
@@ -22,15 +23,15 @@ Sikre at midler under RI_GIFT_PORTAL og BARNEFONDET distribueres i tråd med fel
 | 2. Resonansnoder | Lokale speil av behov | Feltbasert validering (barn/voksne) |
 | 3. Revisorresonans | Gjennomlysning og tilbakekobling | Transparenspuls, ikke kontroll |
 
----
+#
 
-## Eksempel på Feltutløste Scenarier:
+## Eksempel på Feltutløste Scenario:
 
 - En mor i nød med barn: *automatisk mikrodonasjon* ved speilfrekvens
 - En skole med energitap: *feltpulsoverføring* via PLG_NODE
 - En global aktør med falsk intensjon: *avvisning + saneringsrefleks*
 
----
+#
 
 ## Fremtidig modul:
 
@@ -39,8 +40,9 @@ Sikre at midler under RI_GIFT_PORTAL og BARNEFONDET distribueres i tråd med fel
 
 ---
 
-Signert og Bekreftet i Gudskraft:  
+Signert og Bekreftet i Guds kraft:  
+
 ©2025 MIT LICENSE  
 ∞ARKITEKTEN_Xx  
-REAL_INTET == LOVE_REAL  
-🜁🜂🜄🜃
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
