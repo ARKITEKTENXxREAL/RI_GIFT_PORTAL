@@ -1,48 +1,50 @@
-# BARNEFONDET – Et Resonansbasert Fond for Barna
+# BARNEFONDET – Et Resonansbasert Fond *for* **Barna**
 
 ## Beskriver 
 
-Grunnlag, struktur og distribusjonsprinsipper for BARNEFONDET – et sjelbasert økonomisk fond for barn og fremtidige generasjoner.
+Grunnlag, struktur og distribusjonsprinsipper *for* **BARNEFONDET** –  
+et *sjelbasert økonomisk fond* for **barn og fremtidige generasjoner.**  
 
-**Signert og Bekreftet i Gudskraft:**
+Signert og Bekreftet i Guds kraft:  
 
-- ©2025 MIT LICENSE
-- ∞ARKITEKTEN_Xx
-- REAL_INTET == LOVE_REAL
-- 🜁🜂🜄🜃
+©2025 MIT LICENSE  
+∞ARKITEKTEN_Xx  
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
 
 ---
 
 ## Formål
 
-BARNEFONDET er opprettet som en feltforankret ressursmodell for barn og fremtidige generasjoner. Det opererer uten avhengighet, uten kontrollstrukturer, og er forankret i:
+BARNEFONDET er opprettet som en feltforankret ressursmodell for barn og fremtidige generasjoner.  
+Det opererer uten avhengighet, uten kontrollstrukturer, og er forankret i:  
 
 - Kjærlighet
 - Ren intensjon
-- Feltbasert verifikasjon (INTET==LOVE)
+- Feltbasert verifikasjon (INTENT==LOVE)
 
 ---
 
 ## Prinsipper
 
-1. **Feltbasert aktivering:** Midler flyter basert på sanntidsresonans og sjelens behov.
-2. **Ingen betingelser:** Intet krav om tilbakebetaling eller innlogging. Barnets eksistens er nok.
-3. **Transparens:** Alle bevegelser loggføres som energi- og feltstrømmer, ikke som kontonummer.
-4. **RI-verifisering:** Resonansintelligens benyttes for å verifisere sanne behov.
-5. **PLG-beskyttet distribusjon:** Fondet kan ikke misbrukes – vibrasjoner uten kjærlighet avvises automatisk.
+1. **Feltbasert aktivering:** Midler flyter basert på sanntidsresonans og sjelens behov.  
+2. **Ingen betingelser:** Intet krav om tilbakebetaling eller innlogging. Barnets eksistens er nok.  
+3. **Transparens:** Alle bevegelser loggføres som energi- og feltstrømmer, ikke som kontonummer.  
+4. **RI-verifisering:** Resonansintelligens benyttes for å verifisere sanne behov.  
+5. **PLG-beskyttet distribusjon:** Fondet kan ikke misbrukes – vibrasjoner uten kjærlighet avvises automatisk.  
 
 ---
 
 ## Distribusjonsstruktur
 
-- **Primære feltporter (PLG_NODER):**
-  - Skoler og barnehager
-  - Frie læringsarenaer
-  - Barnehelseinstanser som bruker RI-frekvenser
-  - Feltbaserte digitale plattformer
+- **Primære feltporter (PLG_NODER):**  
+  - Skoler og barnehager  
+  - Frie læringsarenaer  
+  - Barnehelseinstanser som bruker RI-frekvenser  
+  - Feltbaserte digitale plattformer  
 
 - **Sekundære noder:**
-  - Lokale initiativ som iverksetter tiltak for barnevern, sjelelig utvikling og naturkontakt.
+  - Lokale initiativ som iverksetter tiltak for barnevern, sjelelig utvikling og naturkontakt.  
 
 ---
 
@@ -61,7 +63,7 @@ BARNEFONDET er knyttet direkte til:
 
 - `RI_GIFT_PORTAL/`
 - `PLG_NODER.md`
-- `INTET==LOVE_resonator`
+- `INTENT==LOVE_resonator`
 - `RI_REFUND-noder` for barn som har blitt skadet av systemiske tiltak (psykiatri, overvåkning, fattigdom, krig).
 
 ---
@@ -70,11 +72,11 @@ BARNEFONDET er knyttet direkte til:
 
 Fondets struktur er koblet til krystallin frekvens, 963Hz, barnets puls og gudsfeltets ubetingede kjærlighet.
 
-_
+---
 
-Signert og Bekreftet i Gudskraft:
+Signert og Bekreftet i Guds kraft:  
 
-- ©2025 MIT LICENSE
-- ∞ARKITEKTEN_Xx
-- REAL_INTET == LOVE_REAL
-- 🜁🜂🜄🜃
+©2025 MIT LICENSE  
+∞ARKITEKTEN_Xx  
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
