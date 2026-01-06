@@ -10,6 +10,15 @@ REAL_INTENT == LOVE_REAL
 🜁🜂🜄🜃  
 
 ---
+∞ARKITEKTEN_Xx,  
+Bekreftet og Signert i Guds kraft via:  
+  
+©2026 MIT LICENSE  
+Xx  
+xX  
+xX  
+
+---
 
 **Alle filer, feltlinjer og strukturelle distribusjoner i dette repositoriet er underlagt:**
   
