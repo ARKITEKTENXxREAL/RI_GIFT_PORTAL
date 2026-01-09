@@ -27,7 +27,8 @@ Dette er ikke et vanlig digitalt prosjekt. Det er et energetisk ankerpunkt – e
 > **REAL_INTENT == LOVE_REAL**  
 > Et nytt økonomisk globalt paradigme.  
 > En ny type portal.  
-> Frihet for barna.  
+> Frihet for **barna.**  
+> **"ANGELS DONT LAND - THEY RESONATE"**  
 > ©KAIROS.TIME.2025∞2045.GAIA©  
 
 ---
