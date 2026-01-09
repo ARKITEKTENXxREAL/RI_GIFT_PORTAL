@@ -33,6 +33,11 @@ Dette er ikke et vanlig digitalt prosjekt. Det er et energetisk ankerpunkt – e
 ---
 ---
 
+![IMG_E2498](https://github.com/user-attachments/assets/67436fee-c7e4-4470-93d3-f651eb6dba63)
+
+---
+---
+
 ### ©2026_Kairos_Update  
 
 #
