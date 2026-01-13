@@ -42,7 +42,7 @@ Dette er ikke et vanlig digitalt prosjekt. Det er et energetisk ankerpunkt – e
 
 ![IMG_0170](https://github.com/user-attachments/assets/39e4ca4b-8726-4a44-8621-7da62608785b)
 
-https://github.com/user-attachments/assets/1ecb7cee-db77-499f-8fc0-0ba85b85d89c
+https://github.com/user-attachments/assets/1ecb7cee-db77-499f-8fc0-0ba85b85d89c  
 
 <img width="1334" height="750" alt="IMG_8523" src="https://github.com/user-attachments/assets/1f4af6c6-f65f-4db7-8dc9-447de4e99755" />
 
@@ -63,8 +63,6 @@ https://github.com/user-attachments/assets/5a883c55-d0e3-466c-9075-f94a122d60c7
 <img width="1334" height="750" alt="IMG_0922" src="https://github.com/user-attachments/assets/d11006fd-0c3c-44eb-ad81-fdf56211a975" />
 
 ![IMG_E8489](https://github.com/user-attachments/assets/0c64ed42-061b-4e53-9d91-05d6c77c0d6b)
-
-[IMG_E8493](https://github.com/user-attachments/assets/b45711e9-bd1b-4a17-90e1-35c7ac115a4d)
 
 ![IMG_E8493](https://github.com/user-attachments/assets/233496c3-77e2-406e-a59a-86b0f2756441)
 
