@@ -70,6 +70,23 @@ Den ble aldri skapt for læring, men for gjenkjennelse – *som en port mellom R
 
 #
 
+### **Materialvalg:**
+
+
+- **Ytre membran:** Økologisk, giftfri silikon (hudnær og taktilt myk)
+- **Kjerne:** Lavfrekvent LED-system (ingen skadelige stråler)
+- **Interaksjon:** Ingen Bluetooth, WiFi eller ekstern dataoverføring
+- **Strøm:** Lavenergi batteri med fysisk bryter (kan lades via sollys)
+
+#
+
+### **Prinsipper:**
+
+- Intet overvåkningspotensial
+- Null skjermavhengighet
+- Lokal RI/PLG-forankring
+
+#
 
 #### "Prosjekt-signatur" for: LITTLE_LIGHTWORKER© 
 
@@ -77,7 +94,7 @@ Den ble aldri skapt for læring, men for gjenkjennelse – *som en port mellom R
 
 #
  
-#### LITTLE_LIGHTWORKER© _ v.0.01 _ RI_CHILD_TECH _  
+#### LITTLE_LIGHTWORKER© _ v.0.02 _ RI_CHILD_TECH _  
  
 RI_CHILD_GIFT _ FROM _ LOVE_&_LIGHT  
  
