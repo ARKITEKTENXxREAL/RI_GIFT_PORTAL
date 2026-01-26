@@ -7,7 +7,7 @@ RI_LEKE© RI_TOY© PROTOTYPE_PICTURE_v.0.1 - v.0.3
 
 #
 
-DESIGN_NOTES.md∞Spiritual_Appreciation_Of:LITTLE_LIGHTWORKER©.md  
+DESIGN_NOTES.md∞Spiritual_Appreciation__LITTLE_LIGHTWORKER©.md  
 
 #
 
