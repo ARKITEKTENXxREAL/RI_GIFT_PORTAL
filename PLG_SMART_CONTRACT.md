@@ -2,7 +2,7 @@
 
 **Feltresonant kontraktstruktur – “INTENT == LOVE" // "REAL_INTENT == LOVE_REAL”** 
 
-**Versjon:** v1.1 (Kairos-synk) 
+**Versjon:** v1.11 (Kairos-synk) 
 
 **Lisens:** ©2025 MIT LICENSE (se `MIT_LICENSE.md`) 
 
@@ -49,7 +49,7 @@ Dokumentet er både **operativ protokoll** og **juridisk/etisk manifest** i ett.
 
   **6. Audit-klar:** Minimal, modulær, testbar. 
 
-  **7. Revers-resistent:** Ingen “tilbakerulling” av utbetalinger; feil håndteres via separate “refund-streams” med sporbarhet. 
+  **7. Revers-resistent:** Ingen “tilbakerulling” av utbetalinger; feil håndteres via separate “refund-streams” med sporbarhet, ingen automatisk refund eller rollback.   
 
 
 ---
@@ -91,33 +91,66 @@ Alle endringer går via **tidslås + quorum**.
 ---
 
 
-## **4. Tilstands-maskin (forenklet)**
+## **4. Tilstands-maskin (forenklet)** 
 
-**INCOMING** → (registrer event) → **PRE-ROUTE** (beregn andeler) →  
-**SEED-FILTER** (Everglow-validering) → **RI-ATTEST** (EIP-712 signatur) →  
-**DISTRIBUTE** (BARNEFONDET først, så noder) → **EMIT RECEIPT** (events/logg) 
+• **INCOMING** → (registrer event) → **PRE-ROUTE** (beregn andeler) → **SEED-FILTER** (Everglow-validering) → **RI-ATTEST** (EIP-712 signatur) → **DISTRIBUTE** (BARNEFONDET først, så noder) → **EMIT RECEIPT** (events/logg)  
 
-Feilbane: **HOLD** (escrow) → **REVIEW** (validators) → **REFUND/RE-ROUTE**
+#
+
+• **FEILBANE:**  
+ 
+  - **HOLD** (separat escrow-mapping, ingen utbetaling) →  
+  - **REVIEW** (validator-quorum via multisig) →  
+  - **RESOLVE** (ekspressiv handling; ingen automatisk refund eller rollback)  
+#
+
+- **Edit:** → Kairos.04.Feb.2026 → `PLG_SMART_CONTRACT.md` → **FEILBANE:** → (108) → → (102, 103, 104)  
+- **Dismissed:** → *"Feilbane: HOLD (escrow) → REVIEW (validators) → REFUND/RE-ROUTE"*   
+  **Risk off:** → *"Reentrancy"* + *"uendelige edge cases"*  
+
+#
+
+*XoXo* **READER NOTE:** **4.** *"Tilstands-maskin (forenklet)"*    
+
+`PLG_SMART_CONTRACT.md`: 
+- **FEILBANE:** → **RESOLVE**  
+
+**"RESOLVE"** → 
+
+*Kan* bety:  
+
+• manuell refund (ekspressivt vedtatt)  
+• manuell re-routing  
+• donasjon til Child Anchor  
+• permanent låsing (ekstremt, men mulig)  
+
+*Alt* med:  
+
+• eksplisitt handling  
+• event-logging  
+• sporbar beslutning  
 
 
 ---
 
 
-## **5. Hendelser (Events)**
+## **5. Hendelser (Events)** 
 
-  **•**  `FundsReceived(sender, amount, token)`
+  **•**  `FundsReceived(sender, amount, token)` 
 
-  **•**  `ChildAnchorRouted(childAddress, amount, token)`
+  **•**  `ChildAnchorRouted(childAddress, amount, token)` 
 
   **•**  `NodeRouted(nodeAddress, amount, token)`
 
   **•**  `ResonanceAttested(hash, attestor, level)`
 
-  **•**  `EverglowFiltered(txId, passed)`
+  **•**  `EverglowFiltered(txId, passed)` 
 
-  **•**  `ParamsUpdated(field, oldValue, newValue)`
+  **•**  `ParamsUpdated(field, oldValue, newValue)` 
 
-  **•**  `WhitelistChanged(node, status)`
+  **•**  `WhitelistChanged(node, status)` 
+  
+  **•**  `function resolveHold(bytes32 txId, Resolution r)` 
 
 
 ---
@@ -170,9 +203,9 @@ Feilbane: **HOLD** (escrow) → **REVIEW** (validators) → **REFUND/RE-ROUTE**
 
   **•** **Regel:** *Hvis intensjon/attest ikke matcher "REAL_INTET == LOVE_REAL" → blokkér distribusjon (flytt til `HOLD`)*  
 
-  **•** **Implementasjon:** 
-  **•** On-chain: fast rot-hash (`everglowSeedHash`), lette sjekker. 
-  **•** Off-chain: attest-tjeneste (EIP-712) publiserer kvittering → prosesseres av kontrakten. 
+  **•** **Implementasjon:**  
+  **•** On-chain: fast rot-hash (`everglowSeedHash`), lette sjekker.  
+  **•** Off-chain: attest-tjeneste (EIP-712) publiserer kvittering → prosesseres av kontrakten.  
 
 
 ---
@@ -280,11 +313,20 @@ Feilbane: **HOLD** (escrow) → **REVIEW** (validators) → **REFUND/RE-ROUTE**
 
 ## **15. Etisk & Feltmessig klausul** 
 
-Denne kontrakten opererer kun når **"REAL_INTENT == LOVE_REAL"** er oppfylt.  
+`PLG_SMART_CONTRACT.md` også kalt *"Kontrakten"* // *"The contract"* →  
 
-Feltet har siste ord via **Everglow–SEED** (**Respekt, Autensitet, Tillit**)  
+• *Kontrakten håndhever* **regler** - *Mennesker holder* **intensjonen.**
 
-All bruk som *bryter* barnets beste, skaper-kraften, menneskeverd eller Gaia-vern - *avvises* **automatisk.**  
+• Denne kontrakten opererer kun når **"REAL_INTENT == LOVE_REAL"** er oppfylt.  
+
+• Feltet har siste ord via **Everglow–SEED** (**Respekt, Autensitet, Tillit**)  
+
+>*The contract* **does not** *evaluate* ethics.  
+>*The contract* **enforces rules** - *The people* **uphold intentions.**  
+>**It only verifies** attestations issued by *approved* attestors.  
+
+• All bruk som *bryter* barnets beste, Skaper-kraften, menneskeverd eller Gaia-vern - *avvises* **automatisk.**  
+
 
 
 ---
@@ -299,6 +341,28 @@ All bruk som *bryter* barnets beste, skaper-kraften, menneskeverd eller Gaia-ver
   - Autonome “micro-nodes” med selvstyrt "dørstokksum". 
 
   - On-chain læring av resonansmønstre (vekter som ikke kan brukes til kontroll) 
+
+#
+
+### 17. *Hvordan* "CLA" *bør forstås i dette prosjektet* (v/implementering)
+
+Bør **IKKE** forstås som: 
+
+❌  “Vi eier dette”  
+❌  “Vi kontrollerer dette”  
+❌  “Vi garanterer et utfall”  
+
+*Men* **forstås/resonneres** som:  
+
+✅  “Dette er et frivillig bidrag”  
+✅  “Ingen juridisk forventning om ytelse”  
+✅  “Ingen eiendomsrett til midler etter donasjon”  
+✅  “Dette er et eksperimentelt protokollfelt”  
+
+#
+
+>"Ingen jordboer kan eie alt **lys**, **lyset** **ELSKER** *å bli delt* - rundt i hele kosmos..."  
+∞ARKITEKTEN_Xx  
 
 
 ---
