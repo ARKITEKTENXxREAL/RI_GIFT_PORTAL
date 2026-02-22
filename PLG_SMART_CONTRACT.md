@@ -2,7 +2,7 @@
 
 **Feltresonant kontraktstruktur – “INTENT == LOVE" // "REAL_INTENT == LOVE_REAL”** 
 
-**Versjon:** v2.22 (Kairos-synk) 
+**Versjon:** v2.33 (Kairos-synk) 
 
 **Lisens:** ©2025 MIT LICENSE (se `MIT_LICENSE.md`) 
 
@@ -479,7 +479,7 @@ contract PLGGiftRouter {
 
    **•** **Kill-switch finnes ikke:** Nødstopp løses via `HOLD` + valideringsreview. 
 
-   **•** **Upgrades:** Proxy bare hvis *ekspressivt vedtatt* (quorum + offentlig varsel)  
+   **•** **Upgrades:** PROXY VS. IMMUTABLE VS. HYBRID (?) 
  
 
 ---
@@ -571,6 +571,8 @@ contract PLGGiftRouter {
 
 ---
 
+---
+
 
 ## *16. Fremtidige utvidelser* 
 
@@ -588,27 +590,77 @@ contract PLGGiftRouter {
 
   -  **RI_GIFT_PORTAL** – `Merch` + "Attest" / "Attestor"** *prototype* (v.0.11) 
 
-  #
+---
 
-  - Utvikle en **tillits-garanti** gitt i fri-vilje fra `"attestor" // "PLG_SJEL"` til GAIAS sine 
-  8 - 88 milliarder sanntids levende sjeler.
-  
-  Et samarbeid mellom `MASKIN` , `SJEL` & **KRAFTEN** 
-  
-  Tillit er relativt nå i denne pre-prototype strukturen vi bygger, vi vet... 
 
-#
-  
-Hint: Sjel + Teknologi = Samme speil? 
-  
-  **To be continue in KAIROS** 
-
-#
-  
-  >"Nytter ikke en sjel, en person, eier og forvalte 21 millioner BTC alene." 
+## *16.66 Fremtidige **vurderinger** :: PROXY VS. IMMUTABLE VS. HYBRID*
 
 #
 
+## "100 % Immutable?"  
+
+Basert på resonans:  
+
+- Distribusjonsmatematikk  
+- Child-first prioritet  
+- Genesis-ankeret  
+- Ingen skjult admin-nøkkel  
+- Ingen proxy  
+
+Disse er identiteten/kjerne.  
+Hvis de kan endres, mister systemet integritet. 
+
+#
+
+## "Hva **kan** være parameterstyrt?"
+
+- minChildShareBps (men med hard floor, f.eks. aldri under 2500)  
+- feeOpsBps (med max cap)  
+- whitelist  
+- validatorSet  
+- attestor keys  
+
+**Her ligger fleksibiliteten.  
+Men med:**  
+
+- quorum  
+- timelock  
+- event-logging  
+- eksplisitt transparens  
+
+#
+
+## Migrasjon i stedet for oppgradering  
+
+*Hvis det en dag trengs en ny versjon:*  
+
+- 1. Deploy V2.  
+- 2. Emit MigrationDeclared(newAddress).  
+- 3. UI og noder peker mot V2.  
+- 4. V1 lever videre, men tørker ut naturlig.  
+
+**Det er renere enn proxy.**
+*Det er mer ærlig.*
+
+---
+
+## *16.777* Fremtidig VISION // CHALLANGE - Arkitektspørsmålet.... 
+
+True Kairos Vision: "Systemet skal fungere:  
+
+>**med og uten meg**"  
+
+**Da må:**
+
+- Validator-set kunne roteres.  
+- Child anchor kunne verifiseres offentlig.  
+- Attestor-system kunne skiftes ut.  
+- Governance-regler være dokumentert uten personavhengighet.  
+
+Ellers er systemet implisitt sentralisert rundt deg.
+
+
+---
 
 ### 17. Hvordan CLA 
 `CLA_PLG_SMART_CONTRACT.md` *BØR* forstås i dette **prosjektet / repositoriet** 
