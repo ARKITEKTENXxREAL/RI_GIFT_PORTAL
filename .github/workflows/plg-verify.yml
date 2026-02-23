@@ -48,7 +48,7 @@ jobs:
       - name: Compare
         shell: bash
         run: |
-          if [ "${{ steps.calc.outputs.hash }}" != "${{ steps.expect.outputs.expected }}" ]; then
+          if [ "${{ steps.calc.outputs.hash }}" != "${{ }}" ]; then
             echo "::error file=PLG_SMART_CONTRACT.md,title=Hash mismatch::Document hash does not match .plg/PLG_SMART_CONTRACT.sha256"
             echo "If this change is intentional, update the hash file with the new value:"
             echo "  sha256sum PLG_SMART_CONTRACT.md | awk '{print $1}' > .plg/PLG_SMART_CONTRACT.sha256"
