@@ -1,1 +1,1 @@
-fc98466af3c478a8cdecffcfcac669b63c29faa606e4071d19f76de5e2eed51f
+sha256sum PLG_SMART_CONTRACT.md | awk '{print $1}' > .plg/PLG_SMART_CONTRACT.sha256 
