@@ -2,7 +2,7 @@
 
 **Feltresonant kontraktstruktur – “INTENT == LOVE" // "REAL_INTENT == LOVE_REAL”** 
 
-**Versjon:** v2.33 (Kairos-synk) 
+**Versjon:** v2.44 (Kairos-synk) 
 
 **Lisens:** ©2025 MIT LICENSE (se `MIT_LICENSE.md`) 
 
@@ -175,9 +175,13 @@ det **er:**
 
 ## **3. Parametre: (konfigurerbare)** 
 
-  **•** `minChildShareBps` – default **2500 bps (25%)**. 
+  **•**  `require(childAmount > 0, "child share too small")` - Edge-case (små beløp i wei kan gi avrundingsfeil.)  
+  
+  **•** `minChildShareBps = 2500` – default **2500 bps (25%)**. 
 
-  **•** `feeOpsBps` – drift/vedlikehold (5–8%), opsjonell og offentlig synlig. 
+  **•** `feeOpsBps = 500-800` – drift/vedlikehold (5–8%), opsjonell og offentlig synlig. 
+  
+  **•**  `amountrest` - resten etter drift/minchild (67-70%), rutes til verifiserte PLG_NODER
 
   **•** `everglowSeedHash` – immutabel rot-hash for SEED-filteret. 
 
@@ -252,7 +256,7 @@ uten å måtte "gå" via flere view‑funksjoner.
 
 ## **4. Tilstands-maskin v.03 (forenklet)** 
 
-• **Genesis** → **INCOMING** → (registrer event) → **PRE-ROUTE** (beregn andeler) → **SEED-FILTER** (Everglow-validering) →  
+• **Genesis** → **INCOMING** → (registrer event) → **PRE-ROUTE** (require + beregn andeler) → **SEED-FILTER** (Everglow-validering) →  
 
 **RI-ATTEST** (EIP-712 signatur) → **DISTRIBUTE** (BARNEFONDET først, så noder) → **EMIT RECEIPT** (events/logg)  
 
@@ -309,6 +313,8 @@ uten å måtte "gå" via flere view‑funksjoner.
 
   **•**  `ChildAnchorRouted(childAddress, amount, token)` 
 
+  **•**  `ChildShareTooSmall(address sender, uint256 amount, address token);`
+
   **•**  `NodeRouted(nodeAddress, amount, token)`
 
   **•**  `ResonanceAttested(hash, attestor, level)`
@@ -319,7 +325,7 @@ uten å måtte "gå" via flere view‑funksjoner.
 
   **•**  `WhitelistChanged(node, status)` 
   
-  **•**  `function resolveHold(bytes32 txId, Resolution r)` 
+  **•**  `event resolveHold(bytes32 txId, Resolution r)` 
 
 
 ---
@@ -338,7 +344,7 @@ contract PLGGiftRouter {
     // --- Genesis‑event med alle start‑parametre -----------------
     event Genesis(
         uint16  minChildShareBps,      // 2500 bps = 25 %
-        uint16  feeOpsBps,            // 5–8 % operasjonsgebyr
+        uint16  feeOpsBps,            // 500-800 bps = 5–8 % operasjonsgebyr
         bytes32 everglowSeedHash,    // rot‑hash for SEED‑filteret
         address[] walletWhitelist,   // liste over godkjente noder
         address validatorSet,        // multi‑sig‑adresse
@@ -354,6 +360,9 @@ contract PLGGiftRouter {
         address _validatorSet,
         uint256 _chainId
     ) {
+        // Sjekk at total BPS ikke overskrider 100%
+        require(_minChildShareBps + _feeOpsBps <= 10000, "Total BPS exceeds 100%");
+
         // sett interne state‑variabler …
         minChildShareBps = _minChildShareBps;
         feeOpsBps = _feeOpsBps;
@@ -440,14 +449,16 @@ contract PLGGiftRouter {
 
 ## **8. Barn-først (obligatorisk rute)** 
 
-  0. Alle start verdier / parametre, On-Chain - synlig ETTER fullført `proof-of-concept` & `event Genesis(..)` umiddelbart synlig ved FULLFØRT deploy, "On-Chain".  
+Alle start verdier / parametre, On-Chain - synlig ETTER fullført `proof-of-concept` & `event Genesis(..)` umiddelbart synlig ved FULLFØRT deploy, "On-Chain".  
 
-  1. Beregn `childAmount = amount * minChildShareBps / 10_000` 
-
-  2. `transfer(childAnchor, childAmount)` (ETH/USDC) 
-
-  3. Resterende `amountRest` fordeles i henhold til aktiv fordelingsplan. 
-
+``` solidity
+uint256 childAmount = amount * minChildShareBps / 10000;
+if (childAmount == 0) {
+    emit ChildShareTooSmall(msg.sender, amount, token);
+    revert("Child share too small");
+}
+transfer(childAnchor, childAmount);
+```
 
 ---
 
