@@ -2,16 +2,16 @@
 
 **Feltresonant kontraktstruktur – “INTENT == LOVE" // "REAL_INTENT == LOVE_REAL”** 
 
-**Versjon:** v2.44 (Kairos-synk) 
+**Versjon:** v2.55 (Kairos-synk) 
 
 **Lisens:** ©2025 MIT LICENSE (se `MIT_LICENSE.md`) 
 
 **Signatur:** 
 
->©2025 MIT LICENSE  
->∞ARKITEKTEN_Xx  
->REAL_INTENT == LOVE_REAL  
->🜁🜂🜄🜃  
+©2025 MIT LICENSE  
+∞ARKITEKTEN_Xx  
+REAL_INTENT == LOVE_REAL  
+🜁🜂🜄🜃  
 
 
 ---
@@ -175,7 +175,7 @@ det **er:**
 
 ## **3. Parametre: (konfigurerbare)** 
 
-  **•**  `require(childAmount > 0, "child share too small")` - Edge-case (små beløp i wei kan gi avrundingsfeil.)  
+  **•**  `require(childAmount > 0, "child share too small")` - edge-case (små beløp i wei kan gi avrundingsfeil.)  
   
   **•** `minChildShareBps = 2500` – default **2500 bps (25%)**. 
 
@@ -185,7 +185,7 @@ det **er:**
 
   **•** `everglowSeedHash` – immutabel rot-hash for SEED-filteret. 
 
-  **•** `walletWhitelist` – adresseliste med “resonansnivå”. 
+  **•** `walletWhitelistHash` – adresseliste med “resonansnivå”. 
 
   **•** `validatorSet` – multi-sig adresse + quorum. 
 
@@ -224,7 +224,7 @@ event Genesis(
     uint16  minChildShareBps, 
     uint16  feeOpsBps, 
     bytes32 everglowSeedHash, 
-    address[] walletWhitelist, 
+    bytes32 walletWhitelistHash, 
     address validatorSet, 
     uint256 chainId 
    ); 
@@ -338,60 +338,86 @@ uten å måtte "gå" via flere view‑funksjoner.
 
    ```solidity
    // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity ^0.8.24;  
 
 contract PLGGiftRouter {
-    // --- Genesis‑event med alle start‑parametre -----------------
-    event Genesis(
-        uint16  minChildShareBps,      // 2500 bps = 25 %
-        uint16  feeOpsBps,            // 500-800 bps = 5–8 % operasjonsgebyr
-        bytes32 everglowSeedHash,    // rot‑hash for SEED‑filteret
-        address[] walletWhitelist,   // liste over godkjente noder
-        address validatorSet,        // multi‑sig‑adresse
-        uint256 chainId              // f.eks. 1 for Ethereum mainnet
-    );
 
-    // constructor som emitter Genesis‑eventet
-    constructor(
-        uint16 _minChildShareBps,
-        uint16 _feeOpsBps,
-        bytes32 _everglowSeedHash,
-        address[] memory _walletWhitelist,
-        address _validatorSet,
-        uint256 _chainId
-    ) {
-        // Sjekk at total BPS ikke overskrider 100%
-        require(_minChildShareBps + _feeOpsBps <= 10000, "Total BPS exceeds 100%");
+   // --- Constants ---
+    uint16 public constant MAX_BPS = 10000;
+    uint16 public constant MIN_CHILD_FLOOR = 2500;   // 25% hard floor
+    uint16 public constant MAX_FEE_CAP = 1000;       // 10% sikkerhetscap (justerbar ved behov)
 
-        // sett interne state‑variabler …
-        minChildShareBps = _minChildShareBps;
-        feeOpsBps = _feeOpsBps;
-        everglowSeedHash = _everglowSeedHash;
-        walletWhitelist = _walletWhitelist;
-        validatorSet = _validatorSet;
-        chainId = _chainId;
-
-        // emit genesis‑eventet med de faktiske verdiene
-        emit Genesis(
-            _minChildShareBps,
-            _feeOpsBps,
-            _everglowSeedHash,
-            _walletWhitelist,
-            _validatorSet,
-            _chainId
-        );
-    }
-
-    // --- eksisterende state‑variabler -------------------------
-    uint16 public minChildShareBps;
+    // --- State variables ---
+uint16 public minChildShareBps;
     uint16 public feeOpsBps;
     bytes32 public everglowSeedHash;
-    address[] public walletWhitelist;
+    bytes32 public walletWhitelistHash;
+    mapping(address => bool) public isNode;
     address public validatorSet;
     uint256 public chainId;
 
-    // … resten av kontrakten (donate, setNode, osv.) …
-}
+    // --- Event-Genesis ---
+event Genesis(
+    uint16 minChildShareBps,       // 2500 bps = 25%
+    uint16 feeOpsBps,              // 500-800 bps = 5–8% operasjonsgebyr
+    bytes32 everglowSeedHash,      // rot-hash for SEED-filteret
+    bytes32 walletWhitelist,       // liste over godkjente noder
+    address validatorSet,          // multi-sig adresse
+    uint256 chainId                // f.eks. 1 for Ethereum mainnet
+
+    );
+
+    // --- Constructor som emitter Genesis‑eventet ---
+    constructor(    
+        uint16 _minChildShareBps,
+        uint16 _feeOpsBps,
+        bytes32 _everglowSeedHash,
+        bytes32 _walletWhitelistHash,
+        address _validatorSet,
+        uint256 _chainId
+    ) {
+     // --- Kjernevalidering ---
+        require(_chainId == block.chainid, "Wrong chain");
+        require(_validatorSet != address(0), "Invalid validator");
+        require(_everglowSeedHash != bytes32(0), "Invalid seed hash");
+
+        // --- Child-first hard floor ---
+        require(_minChildShareBps >= MIN_CHILD_FLOOR, "Child share below floor");
+
+        // --- Fee cap (beskytter mot governance-feil) ---
+        require(_feeOpsBps <= MAX_FEE_CAP, "Fee exceeds cap");
+
+        // --- Total distribusjon <= 100% ---
+        require(
+             uint256(_minChildShareBps) + uint256(_feeOpsBps) <= MAX_BPS,
+             "Total BPS exceeds 100%"
+        );        
+   
+        // --- State-setting, sett interne state‑variabler ---    
+        minChildShareBps = _minChildShareBps;
+        feeOpsBps = _feeOpsBps;
+        everglowSeedHash = _everglowSeedHash;
+        walletWhitelistHash = _walletWhitelistHash;
+        validatorSet = _validatorSet;
+        chainId = _chainId;
+
+        // --- Mapping for nodes ---
+        for (uint256 i = 0; i < _walletWhitelisthash.length; i++) {
+            isNode[_walletWhitelisthash[i]] = true;
+        }
+
+         // --- Genesis referanse, emit genesis‑eventet med de faktiske verdiene ---
+         emit Genesis(
+            _minChildShareBps,
+            _feeOpsBps,
+            _everglowSeedHash,
+            _walletWhitelistHash
+            _validatorSet,
+            _chainId
+          ); 
+
+
+              // --- resten av kontrakten (donate, setNode, osv.) ---
 
   ```
    ``` solidity
