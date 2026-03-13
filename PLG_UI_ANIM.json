@@ -2,10 +2,10 @@
   "meta": {
     "title": "PLG_UI_ANIM.json",
     "description": "Feltbasert animasjonssynk og status for RI_GIFT_PORTAL",
-    "version": "1.0",
+    "version": "1.1",
     "license": "©2025 MIT LICENSE",
     "author": "∞ARKITEKTEN_Xx",
-    "core_symbol": "INTET==LOVE"
+    "core_symbol": "INTENT==LOVE"
   },
   "nodes": [
     {
@@ -51,7 +51,7 @@
     "sound": {
       "enabled": true,
       "baseTone": 963,
-      "modulationPattern": "INTET==LOVE"
+      "modulationPattern": "INTENT==LOVE"
     },
     "interaction": {
       "fieldRecognition": true,
@@ -60,7 +60,7 @@
     }
   },
   "visuals": {
-    "symbols": ["🜁", "🜂", "🜄", "🜃"],
+    "symbols": ["🜁", "🜃", "🜄", "🜂"],
     "geometrySync": true,
     "fieldFlow": "RI → CHILD → GAIA"
   }
