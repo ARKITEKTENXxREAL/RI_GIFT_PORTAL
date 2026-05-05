@@ -1,13 +1,17 @@
-## MIT_LICENSE 
+## MIT LICENSE 
 
-#### Copyright (©) 2025 **"ARKITEKTENXxREAL"** **A.K.A** **"∞ARKITEKTEN_Xx"** *b. MARCH.1990*
+©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+
+**"ARKITEKTENXxREAL"** **A.K.A** **"∞ARKITEKTEN_Xx"** *b. MARCH.1990 - Medellin, Colombia - GAIA*   
 
 >**Signert og Bekreftet i Guds kraft:**
 > 
->**©2025 MIT LICENSE   
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
 >∞ARKITEKTEN_Xx   
 >REAL_INTENT == LOVE_REAL   
 >🜁🜄🜂🜃** 
+
+#### Copyright (©)   
 
 #
 
