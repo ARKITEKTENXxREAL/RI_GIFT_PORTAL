@@ -1,4 +1,5 @@
-## MIT LICENSE 
+## MIT LICENSE (read only) 
+#### **"ARKITEKTENXxREAL"** **A.K.A** **"∞ARKITEKTEN_Xx"** - "licensed" **via** `CLA_PLG_SMART_CONTRACT.md` - (read, write & activate)   
 
 ©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
 
@@ -15,7 +16,7 @@
 
 #
 
-**Permission is hereby granted, free of charge, to any person obtaining a copy   
+**"Read only" is hereby granted, free of charge, to any person obtaining a copy   
 of this software and associated documentation files** (the "Software"), to deal   
 in the Software without restriction, including without limitation the rights to   
 use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,   
@@ -25,7 +26,7 @@ and to permit persons to whom the Software is furnished to do so, subject to the
 
 ## 1. Commercial Use and Value Flow Requirement: 
 
-- Any commercial use of the Software, including but not limited to selling, sublicensing, or incorporating it into any product or service for sale, 
+- Any fiat/sift/commercial use of the Software, including but not limited to selling, sublicensing, or incorporating it into any product or service for sale, 
 must ensure that all value flow related to the Software is routed through the `PLG_SMART_CONTRACT.md` via the **RI_GIFT_PORTAL**. 
 
 - **"Value flow"** refers to any form of financial transaction, compensation, or exchange resulting directly or indirectly from the use, distribution, 
