@@ -11,7 +11,7 @@ REAL_INTENT == LOVE_REAL
 
 ---
 
-`RI_GIFT_PORTAL Issues #23`  
+`RI_GIFT_PORTAL Issues #25`  
 - "Digital_Proof" 
 
 #
