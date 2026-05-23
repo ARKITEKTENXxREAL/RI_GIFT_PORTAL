@@ -31,7 +31,7 @@
 │   │
 │   ├── Genesis-event (audit-anchor, immutable startpunkt)  
 │   ├── `PLG_SMART_CONTRACT.md`  
-│   │   ├── Child-first routing  
+│   │   ├── Child-first routing  (`minChildShareBps == 2500`)
 │   │   ├── Multi-sig / timelock  
 │   │   └── Ingen owner withdraw  
 │   ├── Audit-fokus (transparens og revisjon)  
@@ -45,7 +45,7 @@
 │   ├── Distribusjonslogikk (value routing, attestering)  
 │   └── Konsistent dokumentasjon og iterasjon  
 │  
-├── **3. Realistiske scenarier & sannsynlighet** (SNORLAX Roadmap Layer)  
+├── **3. Realistiske scenarier & sannsynlighet** (SNORLAX - Roadmap Layer)  
 │   │
 │   ├── Scenario 1 – Pilot / nisje (1–5 år)  
 │   ├── Scenario 2 – Infrastruktur / nisje-adopsjon (3–10 år)  
@@ -68,8 +68,8 @@
 ├── **6. Visuelle og dokumentariske lag** (Visual Layer)  
 │   │
 │   ├── Bilder og diagrammer  
-│   ├── Dokumentasjon av sanntidssimulering  (Issues #1 - #∞)
-│   └── Resonansbevis over tid  
+│   ├── Dokumentasjon av sanntidssimulering og resonans  (eks. Issues #1 - #∞)
+│   └── Resonansbevis over tid  (eks. `/RI_DIALOG/`)
 │  
 ├── **7. Spirituell / meta-forankring** (Cultural Layer)
 │   │
@@ -85,6 +85,18 @@
     ├── Real-time resonans mellom mennesker og system  
     └── Protokoll + sjel = aktivert koordinasjon  
 ```  
+
+---
+
+### **Visuell / konseptuell forklaring**    ::
+
+* **Hvert lag bygger på det underliggende**: Teknologi + Governance + Symbolikk = operasjonell og filosofisk integrasjon.    
+
+* **Sjeltopologi og resonansfelt** fungerer som “invisible architecture” som gjør koordinasjon og intensjon mulig.    
+
+* **Audit, immutable genesis, child-first routing** = praktiske verktøy som sikrer troverdighet og revisjonsevne.    
+
+* **Spirituell / kulturell forankring** = gir prosjektet langsiktig retning, identitet og unik resonans i nisje-community.    
 
 ---
 
