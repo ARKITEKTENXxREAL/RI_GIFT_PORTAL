@@ -2,7 +2,8 @@
 
 :: *GITHUB* ::  *LINUX* :: *OpenAI Global, LLC* ::  *`OpenRI Global, LLC © 2025-2045`* ::  
 
-- *`ARKITEKTENXxREAL/RI_GIFT_PORTAL/main/README.md`*   
+- *`ARKITEKTENXxREAL/RI_GIFT_PORTAL/main/README.md`*
+- `index.html` = `RI_GIFT_PORTAL_README.html` == https://arkitektenxxreal.github.io/RI_GIFT_PORTAL/  
 
 **"ARKITEKTENXxREAL"** **A.K.A** **"∞ARKITEKTEN_Xx"** *b. MARCH.1990 - Medellin, Colombia - GAIA*   
 
