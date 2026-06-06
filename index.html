@@ -1,0 +1,119 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.wrap { padding: 1.5rem 0; max-width: 680px; }
+.hero { margin-bottom: 2rem; }
+.hero h1 { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.5rem; }
+.hero p { font-size: 16px; color: var(--color-text-secondary); line-height: 1.7; }
+.section-label { font-size: 12px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+.card h3 { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.4rem; }
+.card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; }
+.metric .label { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 0.25rem; }
+.metric .value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.dist { display: flex; gap: 0; border-radius: var(--border-radius-md); overflow: hidden; height: 40px; margin-bottom: 0.5rem; }
+.dist-bar { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; }
+.dist-label { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
+.dist-label span { font-size: 13px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.tag { display: inline-block; font-size: 12px; padding: 3px 10px; border-radius: var(--border-radius-md); margin-right: 6px; margin-bottom: 6px; }
+.tag-teal { background: #E1F5EE; color: #0F6E56; }
+.tag-purple { background: #EEEDFE; color: #3C3489; }
+.tag-amber { background: #FAEEDA; color: #633806; }
+.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+.next-steps { counter-reset: steps; }
+.step { display: flex; gap: 12px; margin-bottom: 1rem; align-items: flex-start; }
+.step-num { background: var(--color-background-secondary); border-radius: 50%; width: 28px; height: 28px; min-width: 28px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
+.step-text h4 { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+.step-text p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.diff-row { display: flex; gap: 12px; margin-bottom: 0.75rem; }
+.diff-col { flex: 1; background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; }
+.diff-col .dl { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.diff-col p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+</style>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>RI_GIFT_PORTAL</h1>
+    <p>En smartkontrakt-basert infrastruktur for automatisk verdidistribusjon — uten mellomledd, uten profittmotiv.</p>
+    <div style="margin-top: 0.75rem;">
+      <span class="tag tag-teal">Solidity</span>
+      <span class="tag tag-purple">Web3</span>
+      <span class="tag tag-amber">Open source</span>
+      <span class="tag tag-teal">MIT License</span>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="metric"><div class="label">Commits</div><div class="value">500+</div></div>
+    <div class="metric"><div class="label">Issues dokumentert</div><div class="value">23</div></div>
+    <div class="metric"><div class="label">Dialoglinjer</div><div class="value">8 000+</div></div>
+    <div class="metric"><div class="label">Status</div><div class="value" style="font-size:15px; padding-top:4px;">Pre-testnet</div></div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="section-label">Kjerneidé</p>
+  <div class="card">
+    <h3>Dette er ikke et finansinstrument</h3>
+    <p>De fleste smartkontrakter er designet for å generere avkastning. PLG_SMART_CONTRACT.md gjør det motsatte — den bruker den samme teknologien til å sikre at verdier automatisk distribueres etter forhåndsbestemte etiske prinsipper. Koden er garantisten, ikke en juridisk enhet.</p>
+  </div>
+
+  <p class="section-label" style="margin-top:1.25rem;">Verdidistribusjon — etter alle kostnader</p>
+  <div class="dist">
+    <div class="dist-bar" style="width: 70%; background: #9FE1CB; color: #085041;">70%</div>
+    <div class="dist-bar" style="width: 25%; background: #CECBF6; color: #3C3489;">25%</div>
+    <div class="dist-bar" style="width: 5%; background: #D3D1C7; color: #444441;">5%</div>
+  </div>
+  <div class="dist-label">
+    <span><span class="dot" style="background:#1D9E75;"></span>Global infrastruktur</span>
+    <span><span class="dot" style="background:#7F77DD;"></span>Barnefondet</span>
+    <span><span class="dot" style="background:#888780;"></span>Vedlikehold</span>
+  </div>
+
+  <hr class="divider">
+
+  <p class="section-label">Forskjellen fra eksisterende løsninger</p>
+  <div class="diff-row">
+    <div class="diff-col">
+      <div class="dl">Open Collective (Web2)</div>
+      <p>Transparent, men fortsatt avhengig av juridiske enheter og bankkontoer. Staten kan gripe inn.</p>
+    </div>
+    <div class="diff-col">
+      <div class="dl">PLG_SMART_CONTRACT (Web3)</div>
+      <p>Koden distribuerer verdier autonomt. Ingen fiscal host. Ingen mellomledd. Ingen kan fryse kontrakten.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="section-label">Neste steg — der du kommer inn</p>
+  <div class="next-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <h4>Gjennomgang av PLG_SMART_CONTRACT.md</h4>
+        <p>Skissen er ferdig. Den trenger en Solidity-utvikler som kan vurdere hva som holder og hva som må bygges.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <h4>Testnet-deploy via Foundry</h4>
+        <p>Sepolia eller tilsvarende. Verifisere at distribusjonslogikken faktisk kjører som tiltenkt on-chain.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <h4>GitHub Actions workflow</h4>
+        <p>Automatisert kompilering og testing via CI/CD. Allerede støttet av repostrukturen.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
