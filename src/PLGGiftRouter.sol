@@ -8,6 +8,17 @@ interface IERC20 {
     function approve(address spender, uint256 amount) external returns (bool);
 }
 
+// EIP-712 Attestation Struct
+struct ResonanceAttestation {
+    bytes32 txId;
+    address donor;
+    uint256 amount;
+    address token;
+    bytes32 intentHash;
+    uint256 timestamp;
+    uint8 level;
+}
+
 /**
  * @title PLGGiftRouter
  * @notice Feltresonant, non-kustodial smartkontrakt for RI_GIFT_PORTAL
@@ -30,6 +41,13 @@ contract PLGGiftRouter {
     uint16 public constant MIN_CHILD_FLOOR = 2500;   // 25% hard floor (immutable)
     uint16 public constant MAX_FEE_CAP = 1000;       // 10% max fee (immutable safety cap)
 
+    // EIP-712 Type Hash for ResonanceAttestation
+    bytes32 public constant RESONANCE_ATTESTATION_TYPEHASH =
+        keccak256("ResonanceAttestation(bytes32 txId,address donor,uint256 amount,address token,bytes32 intentHash,uint256 timestamp,uint8 level)");
+    
+    bytes32 private DOMAIN_SEPARATOR;
+    string public constant EIP712_VERSION = "1";
+
     // ═══════════════════════════════════════════════════════════════════════════
     // STATE VARIABLES (Governance-controlled via multi-sig + timelock)
     // ═══════════════════════════════════════════════════════════════════════════
@@ -46,6 +64,7 @@ contract PLGGiftRouter {
     mapping(address => bool) public isNode;          // Fast lookup: is node whitelisted?
     mapping(address => bool) public isAttestor;      // Fast lookup: is attestor approved?
     mapping(bytes32 => HeldFunds) public held;       // Escrow for held funds during review
+    mapping(bytes32 => bool) public usedNonces;      // Prevent replay attacks: attestation nonce used?
 
     // ═══════════════════════════════════════════════════════════════════════════
     // STRUCTS
@@ -221,6 +240,9 @@ contract PLGGiftRouter {
         operationsWallet = _operationsWallet;
         chainId = _chainId;
 
+        // ─ Initialize EIP-712 Domain Separator ─
+        DOMAIN_SEPARATOR = _computeDomainSeparator();
+
         // ─ Emit Genesis event (immutable baseline) ─
         emit Genesis(
             _minChildShareBps,
@@ -309,7 +331,14 @@ contract PLGGiftRouter {
         }
 
         // ─ SEED-FILTER: Validate intent ─
-        bool seedPassed = _validateSeedFilter(_intentHash, _attestation);
+        bool seedPassed = _validateSeedFilter(
+            txId,
+            _intentHash,
+            msg.sender,
+            _amount,
+            _token,
+            _attestation
+        );
         if (!seedPassed) {
             _holdFunds(txId, msg.sender, _amount, _token, "SEED filter validation failed");
             emit EverglowFiltered(txId, false, "Intent validation failed");
@@ -329,9 +358,13 @@ contract PLGGiftRouter {
     }
 
     function _validateSeedFilter(
+        bytes32 _txId,
         bytes32 _intentHash,
+        address _donor,
+        uint256 _amount,
+        address _token,
         bytes calldata _attestation
-    ) internal view returns (bool) {
+    ) internal returns (bool) {
         // ─ Check: Intent hash is present ─
         if (_intentHash == bytes32(0)) {
             return false;
@@ -342,11 +375,116 @@ contract PLGGiftRouter {
             return false;
         }
 
-        // ─ Check: Intent hash matches everglowSeedHash or is registered ─
-        // (In production: verify EIP-712 signature + recover attestor address)
-        // For now: simple check that hash is non-zero (attestor would verify)
+        // ─ Check: Attestation is valid EIP-712 signature ─
+        if (_attestation.length != 65) {
+            return false;
+        }
+
+        // ─ Recover attestor address from signature ─
+        address attestor = _recoverAttestor(
+            _txId,
+            _donor,
+            _amount,
+            _token,
+            _intentHash,
+            _attestation
+        );
+
+        // ─ Check: Recovered address is approved attestor ─
+        if (!isAttestor[attestor]) {
+            return false;
+        }
+
+        // ─ Check: Nonce not already used (replay protection) ─
+        if (usedNonces[_txId]) {
+            return false;
+        }
+
+        // ─ Mark nonce as used ─
+        usedNonces[_txId] = true;
 
         return true;
+    }
+
+    function _recoverAttestor(
+        bytes32 _txId,
+        address _donor,
+        uint256 _amount,
+        address _token,
+        bytes32 _intentHash,
+        bytes calldata _signature
+    ) internal view returns (address) {
+        bytes32 digest = _hashResonanceAttestation(
+            _txId,
+            _donor,
+            _amount,
+            _token,
+            _intentHash
+        );
+
+        // ─ Recover signer from signature ─
+        (uint8 v, bytes32 r, bytes32 s) = _splitSignature(_signature);
+        return ecrecover(digest, v, r, s);
+    }
+
+    function _hashResonanceAttestation(
+        bytes32 _txId,
+        address _donor,
+        uint256 _amount,
+        address _token,
+        bytes32 _intentHash
+    ) internal view returns (bytes32) {
+        bytes32 structHash = keccak256(abi.encode(
+            RESONANCE_ATTESTATION_TYPEHASH,
+            _txId,
+            _donor,
+            _amount,
+            _token,
+            _intentHash,
+            block.timestamp,
+            uint8(1)  // level: 1 for verified
+        ));
+
+        return keccak256(abi.encodePacked(
+            "\x19\x01",
+            DOMAIN_SEPARATOR,
+            structHash
+        ));
+    }
+
+    function _splitSignature(bytes calldata _signature)
+        internal
+        pure
+        returns (uint8 v, bytes32 r, bytes32 s)
+    {
+        require(_signature.length == 65, "Invalid signature length");
+
+        assembly {
+            let offset := _signature.offset
+            r := calldataload(offset)
+            s := calldataload(add(offset, 32))
+            v := byte(0, calldataload(add(offset, 64)))
+        }
+
+        if (v < 27) {
+            v += 27;
+        }
+
+        require(v == 27 || v == 28, "Invalid signature v value");
+    }
+
+    function _computeDomainSeparator() internal view returns (bytes32) {
+        bytes32 typeHash = keccak256(
+            "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
+        );
+
+        return keccak256(abi.encode(
+            typeHash,
+            keccak256(bytes("PLGGiftRouter")),
+            keccak256(bytes(EIP712_VERSION)),
+            block.chainid,
+            address(this)
+        ));
     }
 
     function _distribute(

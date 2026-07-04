@@ -34,8 +34,10 @@ contract PLGGiftRouterTest is Test {
         childAnchor = makeAddr("childAnchor");
         operationsWallet = makeAddr("operationsWallet");
         donor = makeAddr("donor");
-        attestor = makeAddr("attestor");
         node1 = makeAddr("node1");
+        
+        // Use a specific private key for attestor (1 in this case)
+        attestor = vm.addr(1);
 
         genesisHash = keccak256(abi.encodePacked("genesis_intent"));
         intentHash = keccak256(abi.encodePacked("donation_intent"));
@@ -183,9 +185,13 @@ contract PLGGiftRouterTest is Test {
 
     function test_donateERC20_distributes_correctly() public {
         uint256 donationAmount = 100e6;  // 100 USDC
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+
+        // Create valid EIP-712 signature
+        bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
 
         vm.prank(donor);
-        router.donateERC20(address(usdc), donationAmount, intentHash, abi.encode(attestor));
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
 
         // Expected distribution:
         // 25% (25e6) → childAnchor
@@ -231,12 +237,16 @@ contract PLGGiftRouterTest is Test {
 
     function test_donateETH_distributes_correctly() public {
         uint256 donationAmount = 1 ether;
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(0), block.timestamp, block.number));
         
         uint256 childBalanceBefore = childAnchor.balance;
         uint256 opsBalanceBefore = operationsWallet.balance;
 
+        // Create valid EIP-712 signature
+        bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(0), intentHash);
+
         vm.prank(donor);
-        router.donateETH{value: donationAmount}(intentHash, abi.encode(attestor));
+        router.donateETH{value: donationAmount}(intentHash, attestation);
 
         // Expected distribution:
         // 25% (0.25 ether) → childAnchor
@@ -425,17 +435,27 @@ contract PLGGiftRouterTest is Test {
     function test_multiple_donations_accumulate_correctly() public {
         uint256 amount1 = 100e6;
         uint256 amount2 = 50e6;
+        
+        // First donation - compute txId exactly as contract does
+        bytes32 txId1 = keccak256(abi.encodePacked(donor, amount1, address(usdc), block.timestamp, block.number));
+        bytes memory attestation1 = _createAttestation(txId1, donor, amount1, address(usdc), intentHash);
 
         vm.prank(donor);
-        router.donateERC20(address(usdc), amount1, intentHash, abi.encode(attestor));
+        router.donateERC20(address(usdc), amount1, intentHash, attestation1);
 
         // Give donor more USDC for second donation
         usdc.mint(donor, 100e6);
 
-        vm.prank(donor);
-        router.donateERC20(address(usdc), amount2, intentHash, abi.encode(attestor));
+        // Second donation - move forward one block
+        vm.roll(block.number + 1);
+        
+        bytes32 txId2 = keccak256(abi.encodePacked(donor, amount2, address(usdc), block.timestamp, block.number));
+        bytes memory attestation2 = _createAttestation(txId2, donor, amount2, address(usdc), intentHash);
 
-        // Total distributed: (100+50) * 0.95 = 142.5e6 to childAnchor, 7.5e6 to ops
+        vm.prank(donor);
+        router.donateERC20(address(usdc), amount2, intentHash, attestation2);
+
+        // Total distributed: 95 from first + 47.5 from second = 142.5e6 to childAnchor, 5 + 2.5 = 7.5e6 to ops
         assertEq(usdc.balanceOf(childAnchor), 142.5e6);
         assertEq(usdc.balanceOf(operationsWallet), 7.5e6);
     }
@@ -462,5 +482,177 @@ contract PLGGiftRouterTest is Test {
         assertEq(router.minChildShareBps(), 2500);
         assertEq(router.feeOpsBps(), 500);
         assertEq(router.chainId(), block.chainid);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // EIP-712 ATTESTATION TESTS
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    function test_valid_eip712_attestation_passes() public {
+        uint256 donationAmount = 100e6;
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+
+        // Mint tokens to donor
+        usdc.mint(donor, donationAmount);
+        vm.prank(donor);
+        usdc.approve(address(router), type(uint256).max);
+
+        // Create valid EIP-712 signature from attestor
+        bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
+
+        // Donate with valid attestation
+        uint256 childBalanceBefore = childAnchor.balance;
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
+
+        // Funds should be distributed (not held)
+        assertEq(usdc.balanceOf(address(router)), 0);
+        assertEq(usdc.balanceOf(childAnchor), donationAmount * 2500 / 10000 + donationAmount * 7000 / 10000);
+    }
+
+    function test_invalid_signature_holds_funds() public {
+        uint256 donationAmount = 100e6;
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+
+        // Mint tokens to donor
+        usdc.mint(donor, donationAmount);
+        vm.prank(donor);
+        usdc.approve(address(router), type(uint256).max);
+
+        // Create invalid signature (from non-approved address)
+        address notAttestor = makeAddr("notAttestor");
+        bytes memory invalidAttestation = _createAttestationFrom(txId, donor, donationAmount, address(usdc), intentHash, notAttestor);
+
+        // Donate with invalid attestation
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, invalidAttestation);
+
+        // Funds should be held (not distributed)
+        assertEq(usdc.balanceOf(address(router)), donationAmount);
+        assertEq(usdc.balanceOf(childAnchor), 0);
+    }
+
+    function test_replay_attack_prevented() public {
+        uint256 donationAmount = 100e6;
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+
+        // Mint tokens to donor
+        usdc.mint(donor, donationAmount * 2);
+        vm.prank(donor);
+        usdc.approve(address(router), type(uint256).max);
+
+        // Create valid signature
+        bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
+
+        // First donation with this signature should succeed
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
+
+        // Second donation with same signature should be held (replay detected)
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
+
+        // Second donation should be held
+        assertEq(usdc.balanceOf(address(router)), donationAmount);
+    }
+
+    function test_empty_attestation_holds_funds() public {
+        uint256 donationAmount = 100e6;
+
+        // Mint tokens to donor
+        usdc.mint(donor, donationAmount);
+        vm.prank(donor);
+        usdc.approve(address(router), type(uint256).max);
+
+        // Donate with empty attestation
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, "");
+
+        // Funds should be held
+        assertEq(usdc.balanceOf(address(router)), donationAmount);
+    }
+
+    function test_unapproved_attestor_signature_fails() public {
+        uint256 donationAmount = 100e6;
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+
+        // Mint tokens to donor
+        usdc.mint(donor, donationAmount);
+        vm.prank(donor);
+        usdc.approve(address(router), type(uint256).max);
+
+        // Create attestation from unapproved address
+        address unapprovedAttestor = makeAddr("unapprovedAttestor");
+        bytes memory attestation = _createAttestationFrom(txId, donor, donationAmount, address(usdc), intentHash, unapprovedAttestor);
+
+        // Donate with unapproved attestor signature
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
+
+        // Funds should be held
+        assertEq(usdc.balanceOf(address(router)), donationAmount);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // EIP-712 HELPER FUNCTIONS
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    function _createAttestation(
+        bytes32 txId,
+        address donor,
+        uint256 amount,
+        address token,
+        bytes32 intentHash
+    ) internal view returns (bytes memory) {
+        return _createAttestationFrom(txId, donor, amount, token, intentHash, attestor);
+    }
+
+    function _createAttestationFrom(
+        bytes32 txId,
+        address donor,
+        uint256 amount,
+        address token,
+        bytes32 intentHash,
+        address signer
+    ) internal view returns (bytes memory) {
+        // Get domain separator (same as contract uses)
+        bytes32 DOMAIN_SEPARATOR = keccak256(abi.encode(
+            keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
+            keccak256(bytes("PLGGiftRouter")),
+            keccak256(bytes("1")),
+            block.chainid,
+            address(router)
+        ));
+
+        // Create struct hash matching ResonanceAttestation
+        bytes32 structHash = keccak256(abi.encode(
+            keccak256("ResonanceAttestation(bytes32 txId,address donor,uint256 amount,address token,bytes32 intentHash,uint256 timestamp,uint8 level)"),
+            txId,
+            donor,
+            amount,
+            token,
+            intentHash,
+            block.timestamp,
+            uint8(1)
+        ));
+
+        // Create digest
+        bytes32 digest = keccak256(abi.encodePacked("\x19\x01", DOMAIN_SEPARATOR, structHash));
+
+        // Determine private key for signer
+        uint256 signerKey;
+        if (signer == attestor) {
+            signerKey = 1;  // Attestor uses private key 1
+        } else {
+            // For other signers, derive from address (deterministic but won't match real keys)
+            signerKey = uint256(keccak256(abi.encodePacked(signer))) % type(uint256).max;
+            if (signerKey == 0) signerKey = 1;
+        }
+
+        // Sign with signer key
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(signerKey, digest);
+
+        // Return packed signature
+        return abi.encodePacked(r, s, v);
     }
 }
