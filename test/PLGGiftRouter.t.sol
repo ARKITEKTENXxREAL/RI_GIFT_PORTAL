@@ -485,6 +485,177 @@ contract PLGGiftRouterTest is Test {
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
+    // NODE DISTRIBUTION TESTS (Phase 2B)
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    function test_set_node_weight_requires_whitelist() public {
+        address newNode = makeAddr("newNode");
+        vm.prank(validator);
+        vm.expectRevert("Node not whitelisted");
+        router.setNodeWeight(newNode, 100);
+    }
+
+    function test_set_node_weight_updates_total_weight() public {
+        address node2 = makeAddr("node2");
+        vm.prank(validator);
+        router.setNode(node2, true);
+
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+        vm.prank(validator);
+        router.setNodeWeight(node2, 200);
+
+        assertEq(router.totalNodeWeight(), 300);
+        assertEq(router.getNodeWeight(node1), 100);
+        assertEq(router.getNodeWeight(node2), 200);
+    }
+
+    function test_set_node_weight_adds_to_active_nodes() public {
+        assertEq(router.getActiveNodeCount(), 0);
+
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+
+        assertEq(router.getActiveNodeCount(), 1);
+        assertEq(router.getActiveNodeAt(0), node1);
+    }
+
+    function test_set_node_weight_to_zero_removes_active_node() public {
+        address node2 = makeAddr("node2");
+        vm.prank(validator);
+        router.setNode(node2, true);
+
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+        vm.prank(validator);
+        router.setNodeWeight(node2, 200);
+
+        assertEq(router.getActiveNodeCount(), 2);
+
+        // Remove node1 by setting weight to 0
+        vm.prank(validator);
+        router.setNodeWeight(node1, 0);
+
+        assertEq(router.getActiveNodeCount(), 1);
+        assertEq(router.totalNodeWeight(), 200);
+    }
+
+    function test_remove_node_resets_weight() public {
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+        assertEq(router.totalNodeWeight(), 100);
+
+        // Removing node from whitelist should reset weight
+        vm.prank(validator);
+        router.setNode(node1, false);
+
+        assertEq(router.totalNodeWeight(), 0);
+        assertEq(router.getNodeWeight(node1), 0);
+    }
+
+    function test_no_active_nodes_sends_remainder_to_child() public {
+        uint256 donationAmount = 100e6;
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
+
+        // No nodes have weights set
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
+
+        // Remainder (70%) should fall back to childAnchor
+        assertEq(usdc.balanceOf(childAnchor), donationAmount * 9500 / 10000);
+        assertEq(usdc.balanceOf(operationsWallet), donationAmount * 500 / 10000);
+    }
+
+    function test_single_node_receives_full_remainder() public {
+        // Set node1 weight
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+
+        uint256 donationAmount = 100e6;
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
+
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
+
+        // node1 should receive 70% remainder
+        assertEq(usdc.balanceOf(node1), 70e6);
+        // childAnchor should only receive its 25%
+        assertEq(usdc.balanceOf(childAnchor), 25e6);
+        assertEq(usdc.balanceOf(operationsWallet), 5e6);
+    }
+
+    function test_two_nodes_split_remainder_proportionally() public {
+        address node2 = makeAddr("node2");
+        vm.prank(validator);
+        router.setNode(node2, true);
+
+        // node1 = 1/3 weight, node2 = 2/3 weight
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+        vm.prank(validator);
+        router.setNodeWeight(node2, 200);
+
+        uint256 donationAmount = 300e6;
+        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+
+        usdc.mint(donor, donationAmount);
+        vm.prank(donor);
+        usdc.approve(address(router), type(uint256).max);
+
+        bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
+
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
+
+        // Remainder = 70% of 300e6 = 210e6
+        // node1 share = 1/3 of 210e6 = 70e6
+        // node2 share = 2/3 of 210e6 = 140e6
+        assertEq(usdc.balanceOf(node1), 70e6);
+        assertEq(usdc.balanceOf(node2), 140e6);
+    }
+
+    function test_node_rewards_accumulate_over_donations() public {
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+
+        uint256 donationAmount = 100e6;
+        bytes32 txId1 = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes memory attestation1 = _createAttestation(txId1, donor, donationAmount, address(usdc), intentHash);
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation1);
+
+        usdc.mint(donor, donationAmount);
+        vm.prank(donor);
+        usdc.approve(address(router), type(uint256).max);
+
+        vm.roll(block.number + 1);
+        bytes32 txId2 = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes memory attestation2 = _createAttestation(txId2, donor, donationAmount, address(usdc), intentHash);
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation2);
+
+        // node1 should have accumulated 70e6 + 70e6 = 140e6 in rewards
+        assertEq(router.getNodeRewards(node1), 140e6);
+    }
+
+    function test_calculate_node_share_view() public {
+        address node2 = makeAddr("node2");
+        vm.prank(validator);
+        router.setNode(node2, true);
+
+        vm.prank(validator);
+        router.setNodeWeight(node1, 300);
+        vm.prank(validator);
+        router.setNodeWeight(node2, 700);
+
+        uint256 remainder = 100e6;
+        assertEq(router.calculateNodeShare(node1, remainder), 30e6);   // 30%
+        assertEq(router.calculateNodeShare(node2, remainder), 70e6);   // 70%
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
     // EIP-712 ATTESTATION TESTS
     // ═══════════════════════════════════════════════════════════════════════════
 

@@ -47,6 +47,13 @@ contract PLGGiftRouter {
     
     bytes32 private DOMAIN_SEPARATOR;
     string public constant EIP712_VERSION = "1";
+    
+    // Node Distribution System
+    uint256 public totalNodeWeight;                  // Sum of all node weights
+    mapping(address => uint256) public nodeWeight;   // Weight for each whitelisted node
+    mapping(address => uint256) public nodeRewards;  // Accumulated rewards per node (in wei for ETH, units for tokens)
+    address[] public activeNodes;                    // List of nodes with weight > 0
+    mapping(address => uint256) public nodeIndex;    // Index in activeNodes array + 1 (0 means not active)
 
     // ═══════════════════════════════════════════════════════════════════════════
     // STATE VARIABLES (Governance-controlled via multi-sig + timelock)
@@ -117,6 +124,19 @@ contract PLGGiftRouter {
         uint256 amount,
         address indexed token,
         bytes32 indexed transactionId
+    );
+
+    event NodeWeightUpdated(
+        address indexed node,
+        uint256 oldWeight,
+        uint256 newWeight,
+        uint256 totalWeight
+    );
+
+    event NodeRewardsAccumulated(
+        address indexed node,
+        uint256 amount,
+        address indexed token
     );
 
     event ResonanceAttested(
@@ -514,10 +534,19 @@ contract PLGGiftRouter {
             emit OperationsFunded(operationsWallet, _feeAmount, _token);
         }
 
-        // ─ Route remaining to whitelisted nodes ─
-        // (In production: distribute proportionally to nodes based on whitelist)
-        // For MVP: send remainder to child anchor as well
+        // ─ Route remaining to whitelisted nodes (proportional by weight) ─
         if (_remainingAmount > 0) {
+            _distributeToNodes(_txId, _remainingAmount, _token);
+        }
+    }
+
+    function _distributeToNodes(
+        bytes32 _txId,
+        uint256 _remainingAmount,
+        address _token
+    ) internal {
+        // If no nodes have weight, send remainder to child anchor (fallback)
+        if (totalNodeWeight == 0) {
             if (_token == address(0)) {
                 (bool success,) = childAnchor.call{value: _remainingAmount}("");
                 require(success, "ETH transfer failed");
@@ -525,7 +554,38 @@ contract PLGGiftRouter {
                 require(IERC20(_token).transfer(childAnchor, _remainingAmount), "Transfer failed");
             }
             emit NodeRouted(childAnchor, _remainingAmount, _token, _txId);
+            return;
         }
+
+        // Distribute proportionally to each whitelisted node by weight
+        address[] memory nodes = _getActiveNodes();
+        for (uint256 i = 0; i < nodes.length; i++) {
+            address node = nodes[i];
+            uint256 weight = nodeWeight[node];
+            
+            if (weight > 0) {
+                uint256 nodeShare = (_remainingAmount * weight) / totalNodeWeight;
+                
+                if (nodeShare > 0) {
+                    if (_token == address(0)) {
+                        (bool success,) = payable(node).call{value: nodeShare}("");
+                        require(success, "ETH transfer to node failed");
+                    } else {
+                        require(IERC20(_token).transfer(node, nodeShare), "Node transfer failed");
+                    }
+                    
+                    // Track rewards for node
+                    nodeRewards[node] += nodeShare;
+                    
+                    emit NodeRouted(node, nodeShare, _token, _txId);
+                    emit NodeRewardsAccumulated(node, nodeShare, _token);
+                }
+            }
+        }
+    }
+
+    function _getActiveNodes() internal view returns (address[] memory) {
+        return activeNodes;
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -642,7 +702,61 @@ contract PLGGiftRouter {
     function setNode(address _node, bool _approved) external onlyValidator {
         require(_node != address(0), "Invalid node address");
         isNode[_node] = _approved;
+        
+        // Reset weight if node is being removed
+        if (!_approved && nodeWeight[_node] > 0) {
+            totalNodeWeight -= nodeWeight[_node];
+            nodeWeight[_node] = 0;
+        }
+        
         emit WhitelistChanged(_node, _approved);
+    }
+
+    function setNodeWeight(address _node, uint256 _weight) external onlyValidator {
+        require(_node != address(0), "Invalid node address");
+        require(isNode[_node], "Node not whitelisted");
+        
+        uint256 oldWeight = nodeWeight[_node];
+        bool wasActive = oldWeight > 0;
+        
+        // Update total weight
+        if (oldWeight > 0) {
+            totalNodeWeight -= oldWeight;
+        }
+        
+        nodeWeight[_node] = _weight;
+        
+        if (_weight > 0) {
+            totalNodeWeight += _weight;
+            
+            // Add to activeNodes if transitioning from inactive to active
+            if (!wasActive) {
+                nodeIndex[_node] = activeNodes.length + 1;
+                activeNodes.push(_node);
+            }
+        } else if (wasActive) {
+            // Remove from activeNodes if transitioning from active to inactive
+            _removeActiveNode(_node);
+        }
+        
+        emit NodeWeightUpdated(_node, oldWeight, _weight, totalNodeWeight);
+    }
+
+    function _removeActiveNode(address _node) internal {
+        uint256 idx = nodeIndex[_node];
+        require(idx > 0, "Node not in active list");
+        
+        idx--;  // Convert back to 0-based index
+        
+        // Move last element to this position
+        if (idx < activeNodes.length - 1) {
+            address lastNode = activeNodes[activeNodes.length - 1];
+            activeNodes[idx] = lastNode;
+            nodeIndex[lastNode] = idx + 1;
+        }
+        
+        activeNodes.pop();
+        nodeIndex[_node] = 0;
     }
 
     function setAttestor(address _attestor, bool _approved) external onlyValidator {
@@ -671,6 +785,34 @@ contract PLGGiftRouter {
         childShare = (_amount * minChildShareBps) / MAX_BPS;
         feeShare = (_amount * feeOpsBps) / MAX_BPS;
         remainingShare = _amount - childShare - feeShare;
+    }
+
+    function getActiveNodeCount() external view returns (uint256) {
+        return activeNodes.length;
+    }
+
+    function getActiveNodeAt(uint256 _index) external view returns (address) {
+        require(_index < activeNodes.length, "Index out of bounds");
+        return activeNodes[_index];
+    }
+
+    function getNodeWeight(address _node) external view returns (uint256) {
+        return nodeWeight[_node];
+    }
+
+    function getNodeRewards(address _node) external view returns (uint256) {
+        return nodeRewards[_node];
+    }
+
+    function calculateNodeShare(address _node, uint256 _remainingAmount)
+        external
+        view
+        returns (uint256)
+    {
+        if (totalNodeWeight == 0 || nodeWeight[_node] == 0) {
+            return 0;
+        }
+        return (_remainingAmount * nodeWeight[_node]) / totalNodeWeight;
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
