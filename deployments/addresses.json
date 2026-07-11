@@ -1,0 +1,34 @@
+{
+  "_readme": "PLG deployment address registry. Update after each deployment.",
+  "_format": "chain -> contract -> address",
+  "ethereum": {
+    "chainId": 1,
+    "status": "pending",
+    "PLGVotingToken": "",
+    "PLGTimelock": "",
+    "PLGGovernor": "",
+    "PLGGiftRouter": "",
+    "deployedAt": "",
+    "deployTxHash": ""
+  },
+  "optimism": {
+    "chainId": 10,
+    "status": "pending",
+    "PLGVotingToken": "",
+    "PLGTimelock": "",
+    "PLGGovernor": "",
+    "PLGGiftRouter": "",
+    "deployedAt": "",
+    "deployTxHash": ""
+  },
+  "arbitrum": {
+    "chainId": 42161,
+    "status": "pending",
+    "PLGVotingToken": "",
+    "PLGTimelock": "",
+    "PLGGovernor": "",
+    "PLGGiftRouter": "",
+    "deployedAt": "",
+    "deployTxHash": ""
+  }
+}
