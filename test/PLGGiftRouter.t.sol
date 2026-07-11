@@ -185,7 +185,7 @@ contract PLGGiftRouterTest is Test {
 
     function test_donateERC20_distributes_correctly() public {
         uint256 donationAmount = 100e6;  // 100 USDC
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         // Create valid EIP-712 signature
         bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
@@ -237,7 +237,7 @@ contract PLGGiftRouterTest is Test {
 
     function test_donateETH_distributes_correctly() public {
         uint256 donationAmount = 1 ether;
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(0), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(0), 0);
         
         uint256 childBalanceBefore = childAnchor.balance;
         uint256 opsBalanceBefore = operationsWallet.balance;
@@ -366,7 +366,7 @@ contract PLGGiftRouterTest is Test {
         router.donateERC20(address(usdc), donationAmount, bytes32(0), "");
 
         // Get the transaction ID (in real code, would be emitted)
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         // Validator initiates review
         vm.prank(validator);
@@ -387,7 +387,7 @@ contract PLGGiftRouterTest is Test {
         vm.prank(donor);
         router.donateERC20(address(usdc), donationAmount, bytes32(0), "");
 
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         // Validator resolves with DONATE_TO_CHILD
         vm.prank(validator);
@@ -404,7 +404,7 @@ contract PLGGiftRouterTest is Test {
         vm.prank(donor);
         router.donateERC20(address(usdc), donationAmount, bytes32(0), "");
 
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         vm.prank(validator);
         router.resolveHold(txId, "REROUTE", reroute_target);
@@ -418,14 +418,20 @@ contract PLGGiftRouterTest is Test {
         vm.prank(donor);
         router.donateERC20(address(usdc), donationAmount, bytes32(0), "");
 
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         vm.prank(validator);
         router.resolveHold(txId, "LOCK", address(0));
 
-        // Funds remain in contract, not distributed
+        // Funds remain in contract and resolved is still false (LOCK does not finalize)
         assertEq(usdc.balanceOf(address(router)), donationAmount);
-        assertEq(usdc.balanceOf(donor), 900e6);  // Still lost (would need separate refund logic)
+        PLGGiftRouter.HeldFunds memory hf = router.getHeldFunds(txId);
+        assertFalse(hf.resolved, "LOCK must not mark resolved=true");
+
+        // Governance can still resolve after a LOCK
+        vm.prank(validator);
+        router.resolveHold(txId, "REFUND", address(0));
+        assertEq(usdc.balanceOf(donor), 1000e6);
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -437,7 +443,7 @@ contract PLGGiftRouterTest is Test {
         uint256 amount2 = 50e6;
         
         // First donation - compute txId exactly as contract does
-        bytes32 txId1 = keccak256(abi.encodePacked(donor, amount1, address(usdc), block.timestamp, block.number));
+        bytes32 txId1 = _computeTxId(donor, amount1, address(usdc), 0);
         bytes memory attestation1 = _createAttestation(txId1, donor, amount1, address(usdc), intentHash);
 
         vm.prank(donor);
@@ -449,7 +455,7 @@ contract PLGGiftRouterTest is Test {
         // Second donation - move forward one block
         vm.roll(block.number + 1);
         
-        bytes32 txId2 = keccak256(abi.encodePacked(donor, amount2, address(usdc), block.timestamp, block.number));
+        bytes32 txId2 = _computeTxId(donor, amount2, address(usdc), 1);
         bytes memory attestation2 = _createAttestation(txId2, donor, amount2, address(usdc), intentHash);
 
         vm.prank(donor);
@@ -466,7 +472,7 @@ contract PLGGiftRouterTest is Test {
         vm.prank(donor);
         router.donateERC20(address(usdc), donationAmount, bytes32(0), "");
 
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         vm.prank(validator);
         router.resolveHold(txId, "REFUND", address(0));
@@ -544,18 +550,66 @@ contract PLGGiftRouterTest is Test {
         vm.prank(validator);
         router.setNodeWeight(node1, 100);
         assertEq(router.totalNodeWeight(), 100);
+        assertEq(router.getActiveNodeCount(), 1);
 
-        // Removing node from whitelist should reset weight
+        // Removing node from whitelist should reset weight and remove from activeNodes (Alert 6 fix)
         vm.prank(validator);
         router.setNode(node1, false);
 
         assertEq(router.totalNodeWeight(), 0);
         assertEq(router.getNodeWeight(node1), 0);
+        assertEq(router.getActiveNodeCount(), 0, "setNode(false) must remove from activeNodes");
     }
+
+    function test_removed_node_can_be_readded_without_duplicate() public {
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+
+        // Remove node
+        vm.prank(validator);
+        router.setNode(node1, false);
+        assertEq(router.getActiveNodeCount(), 0);
+
+        // Re-add and re-weight
+        vm.prank(validator);
+        router.setNode(node1, true);
+        vm.prank(validator);
+        router.setNodeWeight(node1, 200);
+
+        // Should appear exactly once in activeNodes
+        assertEq(router.getActiveNodeCount(), 1);
+        assertEq(router.getActiveNodeAt(0), node1);
+        assertEq(router.totalNodeWeight(), 200);
+    }
+
+    function test_node_eth_rewards_use_pull_payment() public {
+        vm.prank(validator);
+        router.setNodeWeight(node1, 100);
+
+        uint256 donation = 1 ether;
+        vm.deal(donor, donation);
+        bytes32 txId = _computeTxId(donor, donation, address(0), 0);
+        bytes memory attestation = _createAttestation(txId, donor, donation, address(0), intentHash);
+
+        vm.prank(donor);
+        router.donateETH{value: donation}(intentHash, attestation);
+
+        // Node should have pending withdrawal, not direct ETH balance change
+        uint256 expectedRemainder = donation * (10000 - 2500 - 500) / 10000;
+        assertEq(router.pendingWithdrawals(node1), expectedRemainder);
+
+        // Node withdraws ETH
+        uint256 balBefore = node1.balance;
+        vm.prank(node1);
+        router.withdrawNodeRewards();
+        assertEq(node1.balance - balBefore, expectedRemainder);
+        assertEq(router.pendingWithdrawals(node1), 0);
+    }
+
 
     function test_no_active_nodes_sends_remainder_to_child() public {
         uint256 donationAmount = 100e6;
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
         bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
 
         // No nodes have weights set
@@ -573,7 +627,7 @@ contract PLGGiftRouterTest is Test {
         router.setNodeWeight(node1, 100);
 
         uint256 donationAmount = 100e6;
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
         bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
 
         vm.prank(donor);
@@ -598,7 +652,7 @@ contract PLGGiftRouterTest is Test {
         router.setNodeWeight(node2, 200);
 
         uint256 donationAmount = 300e6;
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         usdc.mint(donor, donationAmount);
         vm.prank(donor);
@@ -621,7 +675,7 @@ contract PLGGiftRouterTest is Test {
         router.setNodeWeight(node1, 100);
 
         uint256 donationAmount = 100e6;
-        bytes32 txId1 = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId1 = _computeTxId(donor, donationAmount, address(usdc), 0);
         bytes memory attestation1 = _createAttestation(txId1, donor, donationAmount, address(usdc), intentHash);
         vm.prank(donor);
         router.donateERC20(address(usdc), donationAmount, intentHash, attestation1);
@@ -631,7 +685,7 @@ contract PLGGiftRouterTest is Test {
         usdc.approve(address(router), type(uint256).max);
 
         vm.roll(block.number + 1);
-        bytes32 txId2 = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId2 = _computeTxId(donor, donationAmount, address(usdc), 1);
         bytes memory attestation2 = _createAttestation(txId2, donor, donationAmount, address(usdc), intentHash);
         vm.prank(donor);
         router.donateERC20(address(usdc), donationAmount, intentHash, attestation2);
@@ -661,7 +715,7 @@ contract PLGGiftRouterTest is Test {
 
     function test_valid_eip712_attestation_passes() public {
         uint256 donationAmount = 100e6;
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         // Mint tokens to donor
         usdc.mint(donor, donationAmount);
@@ -683,7 +737,7 @@ contract PLGGiftRouterTest is Test {
 
     function test_invalid_signature_holds_funds() public {
         uint256 donationAmount = 100e6;
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         // Mint tokens to donor
         usdc.mint(donor, donationAmount);
@@ -705,7 +759,7 @@ contract PLGGiftRouterTest is Test {
 
     function test_replay_attack_prevented() public {
         uint256 donationAmount = 100e6;
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         // Mint tokens to donor
         usdc.mint(donor, donationAmount * 2);
@@ -745,7 +799,7 @@ contract PLGGiftRouterTest is Test {
 
     function test_unapproved_attestor_signature_fails() public {
         uint256 donationAmount = 100e6;
-        bytes32 txId = keccak256(abi.encodePacked(donor, donationAmount, address(usdc), block.timestamp, block.number));
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
 
         // Mint tokens to donor
         usdc.mint(donor, donationAmount);
@@ -823,7 +877,18 @@ contract PLGGiftRouterTest is Test {
         // Sign with signer key
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(signerKey, digest);
 
-        // Return packed signature
-        return abi.encodePacked(r, s, v);
+        // Wrap in abi.encode(timestamp, level, sig) matching new contract format
+        bytes memory sig = abi.encodePacked(r, s, v);
+        return abi.encode(block.timestamp, uint8(1), sig);
+    }
+
+    // Matches contract txId derivation exactly:
+    // keccak256(abi.encodePacked(msg.sender, _amount, _token, block.timestamp, block.number, nonce))
+    function _computeTxId(address sender, uint256 amount, address token, uint256 nonce)
+        internal
+        view
+        returns (bytes32)
+    {
+        return keccak256(abi.encodePacked(sender, amount, token, block.timestamp, block.number, nonce));
     }
 }

@@ -40,6 +40,8 @@ contract PLGGiftRouter {
     uint16 public constant MAX_BPS = 10000;           // 100% in basis points
     uint16 public constant MIN_CHILD_FLOOR = 2500;   // 25% hard floor (immutable)
     uint16 public constant MAX_FEE_CAP = 1000;       // 10% max fee (immutable safety cap)
+    uint256 public constant MAX_NODES_PER_BATCH = 50;     // Gas safety: max active nodes per distribution loop
+    uint256 public constant MAX_REGISTERED_NODES = 1500;  // Max registered PLG-nodes globally (PLG_SMART_CONTRACT.md)
 
     // EIP-712 Type Hash for ResonanceAttestation
     bytes32 public constant RESONANCE_ATTESTATION_TYPEHASH =
@@ -68,10 +70,21 @@ contract PLGGiftRouter {
     uint256 public chainId;                          // Target chain (e.g., 1 for Ethereum)
     address public operationsWallet;                 // Operations fee recipient
 
-    mapping(address => bool) public isNode;          // Fast lookup: is node whitelisted?
-    mapping(address => bool) public isAttestor;      // Fast lookup: is attestor approved?
-    mapping(bytes32 => HeldFunds) public held;       // Escrow for held funds during review
-    mapping(bytes32 => bool) public usedNonces;      // Prevent replay attacks: attestation nonce used?
+    mapping(address => bool) public isNode;                   // Fast lookup: is node whitelisted?
+    mapping(address => bool) public isAttestor;               // Fast lookup: is attestor approved?
+    mapping(bytes32 => HeldFunds) public held;                // Escrow for held funds during review
+    mapping(bytes32 => bool) public usedNonces;               // Prevent replay attacks: attestation nonce used?
+    mapping(address => uint256) public donorNonce;            // Per-sender nonce prevents txId collision
+    mapping(address => uint256) public pendingWithdrawals;    // Pull-payment ETH balance for nodes
+
+    // Reentrancy guard
+    uint256 private _locked = 1;
+    modifier nonReentrant() {
+        require(_locked == 1, "Reentrant call");
+        _locked = 2;
+        _;
+        _locked = 1;
+    }
 
     // ═══════════════════════════════════════════════════════════════════════════
     // STRUCTS
@@ -191,6 +204,8 @@ contract PLGGiftRouter {
         address indexed token
     );
 
+    event NodeWithdrawal(address indexed node, uint256 amount);
+
     // ═══════════════════════════════════════════════════════════════════════════
     // MODIFIERS
     // ═══════════════════════════════════════════════════════════════════════════
@@ -286,7 +301,7 @@ contract PLGGiftRouter {
     function donateETH(
         bytes32 _intentHash,
         bytes calldata _attestation
-    ) external payable validAmount(msg.value) {
+    ) external payable nonReentrant validAmount(msg.value) {
         _processDonation(
             msg.value,
             address(0),
@@ -307,9 +322,11 @@ contract PLGGiftRouter {
         uint256 _amount,
         bytes32 _intentHash,
         bytes calldata _attestation
-    ) external validAmount(_amount) {
-        // Transfer tokens from donor to this contract
-        IERC20(_token).transferFrom(msg.sender, address(this), _amount);
+    ) external nonReentrant validAmount(_amount) {
+        require(_token != address(0), "Invalid token address");
+        // Check return value of transferFrom
+        bool ok = IERC20(_token).transferFrom(msg.sender, address(this), _amount);
+        require(ok, "Token transfer failed");
 
         _processDonation(
             _amount,
@@ -329,15 +346,21 @@ contract PLGGiftRouter {
         bytes32 _intentHash,
         bytes calldata _attestation
     ) internal {
+        // Include per-sender nonce to prevent txId collision within same block
+        uint256 nonce = donorNonce[msg.sender]++;
         bytes32 txId = keccak256(
             abi.encodePacked(
                 msg.sender,
                 _amount,
                 _token,
                 block.timestamp,
-                block.number
+                block.number,
+                nonce
             )
         );
+
+        // Guard: txId must not already exist (belt-and-suspenders)
+        require(held[txId].amount == 0, "txId collision");
 
         // ─ PRE-ROUTE: Calculate shares ─
         uint256 childAmount = (_amount * minChildShareBps) / MAX_BPS;
@@ -390,28 +413,34 @@ contract PLGGiftRouter {
             return false;
         }
 
-        // ─ Check: Attestation is present (non-empty) ─
+        // ─ Check: Attestation is present ─
+        // Attestation format: abi.encode(uint256 timestamp, uint8 level, bytes sig)
         if (_attestation.length == 0) {
             return false;
         }
 
-        // ─ Check: Attestation is valid EIP-712 signature ─
-        if (_attestation.length != 65) {
+        // ─ Decode attestation payload ─
+        (uint256 attestTimestamp, uint8 attestLevel, bytes memory sig) =
+            abi.decode(_attestation, (uint256, uint8, bytes));
+
+        if (sig.length != 65) {
             return false;
         }
 
-        // ─ Recover attestor address from signature ─
-        address attestor = _recoverAttestor(
+        // ─ Recover attestor address using committed timestamp + level ─
+        address recovered = _recoverAttestor(
             _txId,
             _donor,
             _amount,
             _token,
             _intentHash,
-            _attestation
+            attestTimestamp,
+            attestLevel,
+            sig
         );
 
         // ─ Check: Recovered address is approved attestor ─
-        if (!isAttestor[attestor]) {
+        if (!isAttestor[recovered]) {
             return false;
         }
 
@@ -432,18 +461,21 @@ contract PLGGiftRouter {
         uint256 _amount,
         address _token,
         bytes32 _intentHash,
-        bytes calldata _signature
+        uint256 _timestamp,
+        uint8 _level,
+        bytes memory _signature
     ) internal view returns (address) {
         bytes32 digest = _hashResonanceAttestation(
             _txId,
             _donor,
             _amount,
             _token,
-            _intentHash
+            _intentHash,
+            _timestamp,
+            _level
         );
 
-        // ─ Recover signer from signature ─
-        (uint8 v, bytes32 r, bytes32 s) = _splitSignature(_signature);
+        (uint8 v, bytes32 r, bytes32 s) = _splitSignatureBytes(_signature);
         return ecrecover(digest, v, r, s);
     }
 
@@ -452,7 +484,9 @@ contract PLGGiftRouter {
         address _donor,
         uint256 _amount,
         address _token,
-        bytes32 _intentHash
+        bytes32 _intentHash,
+        uint256 _timestamp,
+        uint8 _level
     ) internal view returns (bytes32) {
         bytes32 structHash = keccak256(abi.encode(
             RESONANCE_ATTESTATION_TYPEHASH,
@@ -461,8 +495,8 @@ contract PLGGiftRouter {
             _amount,
             _token,
             _intentHash,
-            block.timestamp,
-            uint8(1)  // level: 1 for verified
+            _timestamp,
+            _level
         ));
 
         return keccak256(abi.encodePacked(
@@ -472,7 +506,7 @@ contract PLGGiftRouter {
         ));
     }
 
-    function _splitSignature(bytes calldata _signature)
+    function _splitSignatureBytes(bytes memory _signature)
         internal
         pure
         returns (uint8 v, bytes32 r, bytes32 s)
@@ -480,10 +514,9 @@ contract PLGGiftRouter {
         require(_signature.length == 65, "Invalid signature length");
 
         assembly {
-            let offset := _signature.offset
-            r := calldataload(offset)
-            s := calldataload(add(offset, 32))
-            v := byte(0, calldataload(add(offset, 64)))
+            r := mload(add(_signature, 32))
+            s := mload(add(_signature, 64))
+            v := byte(0, mload(add(_signature, 96)))
         }
 
         if (v < 27) {
@@ -557,9 +590,12 @@ contract PLGGiftRouter {
             return;
         }
 
-        // Distribute proportionally to each whitelisted node by weight
+        // Distribute proportionally to each whitelisted node by weight (pull-payment pattern)
         address[] memory nodes = _getActiveNodes();
-        for (uint256 i = 0; i < nodes.length; i++) {
+        uint256 nodeCount = nodes.length;
+        require(nodeCount <= MAX_NODES_PER_BATCH, "Too many nodes: use batch distribution");
+
+        for (uint256 i = 0; i < nodeCount; i++) {
             address node = nodes[i];
             uint256 weight = nodeWeight[node];
             
@@ -568,9 +604,10 @@ contract PLGGiftRouter {
                 
                 if (nodeShare > 0) {
                     if (_token == address(0)) {
-                        (bool success,) = payable(node).call{value: nodeShare}("");
-                        require(success, "ETH transfer to node failed");
+                        // Pull-payment: accumulate ETH, let nodes withdraw
+                        pendingWithdrawals[node] += nodeShare;
                     } else {
+                        // ERC20: direct transfer (non-reentrant, no ETH griefing risk)
                         require(IERC20(_token).transfer(node, nodeShare), "Node transfer failed");
                     }
                     
@@ -620,10 +657,19 @@ contract PLGGiftRouter {
         bytes32 _txId,
         string memory _resolution,
         address _target
-    ) external onlyValidator {
+    ) external nonReentrant onlyValidator {
         HeldFunds storage holdRecord = held[_txId];
         require(holdRecord.amount > 0, "No held funds");
         require(!holdRecord.resolved, "Already resolved");
+
+        bytes32 resHash = keccak256(abi.encodePacked(_resolution));
+        bytes32 lockHash = keccak256(abi.encodePacked("LOCK"));
+
+        // LOCK keeps funds held and does NOT mark resolved -- governance can revisit later
+        if (resHash == lockHash) {
+            emit Resolved(_txId, _resolution, _target);
+            return;
+        }
 
         holdRecord.resolved = true;
 
@@ -653,7 +699,7 @@ contract PLGGiftRouter {
                 require(IERC20(holdRecord.token).transfer(_target, holdRecord.amount), "Transfer failed");
             }
         }
-        // else: LOCK (do nothing, funds remain held)
+        // No else needed — LOCK is handled above with early return
 
         emit Resolved(_txId, _resolution, _target);
     }
@@ -703,10 +749,15 @@ contract PLGGiftRouter {
         require(_node != address(0), "Invalid node address");
         isNode[_node] = _approved;
         
-        // Reset weight if node is being removed
-        if (!_approved && nodeWeight[_node] > 0) {
-            totalNodeWeight -= nodeWeight[_node];
-            nodeWeight[_node] = 0;
+        // When removing a node: reset weight and remove from activeNodes
+        if (!_approved) {
+            if (nodeWeight[_node] > 0) {
+                totalNodeWeight -= nodeWeight[_node];
+                nodeWeight[_node] = 0;
+            }
+            if (nodeIndex[_node] > 0) {
+                _removeActiveNode(_node);
+            }
         }
         
         emit WhitelistChanged(_node, _approved);
@@ -763,6 +814,19 @@ contract PLGGiftRouter {
         require(_attestor != address(0), "Invalid attestor address");
         isAttestor[_attestor] = _approved;
         emit AttestorChanged(_attestor, _approved);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // NODE WITHDRAWAL (Pull-payment for ETH rewards)
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    function withdrawNodeRewards() external nonReentrant {
+        uint256 amount = pendingWithdrawals[msg.sender];
+        require(amount > 0, "No pending withdrawal");
+        pendingWithdrawals[msg.sender] = 0;
+        (bool success,) = msg.sender.call{value: amount}("");
+        require(success, "ETH withdrawal failed");
+        emit NodeWithdrawal(msg.sender, amount);
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
