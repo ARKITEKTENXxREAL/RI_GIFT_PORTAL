@@ -7,6 +7,10 @@ remappings = [
     "forge-std/=lib/forge-std/src/"
 ]
 
+# Optimizer required - PLGGovernor and PLGGiftRouter exceed EIP-170 24576 byte limit without it
+optimizer = true
+optimizer_runs = 200
+
 # ─ Chain RPC profiles ─
 # Set env vars before deploying:
 #   export ETHEREUM_RPC_URL=https://...
