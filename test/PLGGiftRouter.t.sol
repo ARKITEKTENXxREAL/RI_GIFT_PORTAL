@@ -336,6 +336,39 @@ contract PLGGiftRouterTest is Test {
         router.setFeeOpsBps(2000);  // 20% > MAX_FEE_CAP (10%)
     }
 
+    function test_validator_can_set_min_donation_amount() public {
+        vm.prank(validator);
+        router.setMinDonationAmount(10_000e6);  // 10,000 USDC
+
+        assertEq(router.minDonationAmount(), 10_000e6);
+    }
+
+    function test_donation_below_minimum_reverts() public {
+        vm.prank(validator);
+        router.setMinDonationAmount(10_000e6);  // 10,000 USDC minimum
+
+        uint256 smallAmount = 100e6;  // only 100 USDC
+        vm.prank(donor);
+        vm.expectRevert("Amount below minimum donation");
+        router.donateERC20(address(usdc), smallAmount, bytes32(0), "");
+    }
+
+    function test_donation_at_exact_minimum_passes() public {
+        vm.prank(validator);
+        router.setMinDonationAmount(100e6);  // 100 USDC minimum
+
+        uint256 donationAmount = 100e6;
+        bytes32 txId = _computeTxId(donor, donationAmount, address(usdc), 0);
+        bytes memory attestation = _createAttestation(txId, donor, donationAmount, address(usdc), intentHash);
+
+        vm.prank(donor);
+        router.donateERC20(address(usdc), donationAmount, intentHash, attestation);
+
+        // 25% child + 70% remainder (no nodes) = 95e6 to childAnchor, 5% ops
+        assertEq(usdc.balanceOf(childAnchor), 95e6);
+        assertEq(usdc.balanceOf(operationsWallet), 5e6);
+    }
+
     function test_validator_can_whitelist_node() public {
         address newNode = makeAddr("newNode");
 

@@ -69,6 +69,7 @@ contract PLGGiftRouter {
     address public validatorSet;                     // Multi-sig governance entity
     uint256 public chainId;                          // Target chain (e.g., 1 for Ethereum)
     address public operationsWallet;                 // Operations fee recipient
+    uint256 public minDonationAmount;                // Minimum donation amount (governance-controlled)
 
     mapping(address => bool) public isNode;                   // Fast lookup: is node whitelisted?
     mapping(address => bool) public isAttestor;               // Fast lookup: is attestor approved?
@@ -222,6 +223,7 @@ contract PLGGiftRouter {
 
     modifier validAmount(uint256 amount) {
         require(amount > 0, "Amount must be greater than zero");
+        require(amount >= minDonationAmount, "Amount below minimum donation");
         _;
     }
 
@@ -743,6 +745,12 @@ contract PLGGiftRouter {
         uint256 _oldBps = feeOpsBps;
         feeOpsBps = _newBps;
         emit ParamsUpdated("feeOpsBps", _oldBps, _newBps);
+    }
+
+    function setMinDonationAmount(uint256 _newMin) external onlyValidator {
+        uint256 _old = minDonationAmount;
+        minDonationAmount = _newMin;
+        emit ParamsUpdated("minDonationAmount", _old, _newMin);
     }
 
     function setNode(address _node, bool _approved) external onlyValidator {
