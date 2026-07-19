@@ -1,0 +1,49 @@
+# Oppdater denne filen for å endre innhold på GitHub Pages-siden
+
+# Teststatus
+tests_passing: 72
+tests_total: 72
+
+# Faser
+phases:
+  - id: "Phase 1"
+    desc: "Foundation & core implementation"
+    done: true
+  - id: "Phase 2A"
+    desc: "EIP-712 attestation"
+    done: true
+  - id: "Phase 2B"
+    desc: "Node distribution"
+    done: true
+  - id: "Phase 2C"
+    desc: "OpenZeppelin Governor + Timelock integration"
+    done: true
+  - id: "Phase 2D"
+    desc: "Multi-chain deployment scripts"
+    done: true
+  - id: "Phase 2E"
+    desc: "Security audit — all 6 findings resolved"
+    done: true
+
+# Deployment status
+deployments:
+  - chain: "SEPOLIA TESTNET"
+    status: "Pending"
+    live: false
+  - chain: "ETHEREUM MAINNET"
+    status: "Pending"
+    live: false
+  - chain: "OPTIMISM"
+    status: "Pending"
+    live: false
+  - chain: "ARBITRUM"
+    status: "Pending"
+    live: false
+
+# Security audit
+security_findings_total: 6
+security_findings_resolved: 6
+
+# Nåværende fase
+current_phase: "2E"
+current_phase_label: "PHASE 2E COMPLETE"

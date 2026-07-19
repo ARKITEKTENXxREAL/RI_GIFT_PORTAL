@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -330,9 +333,9 @@
   </div>
 
   <div class="hero-badges">
-    <span class="badge green">72 / 72 TESTS PASSING</span>
-    <span class="badge">PHASE 2E COMPLETE</span>
-    <span class="badge">SECURITY AUDIT — 6 / 6 RESOLVED</span>
+    <span class="badge green">{{ site.data.status.tests_passing }} / {{ site.data.status.tests_total }} TESTS PASSING</span>
+    <span class="badge">{{ site.data.status.current_phase_label }}</span>
+    <span class="badge">SECURITY AUDIT — {{ site.data.status.security_findings_resolved }} / {{ site.data.status.security_findings_total }} RESOLVED</span>
     <span class="badge">SEPOLIA PENDING</span>
   </div>
 </div>
@@ -464,22 +467,18 @@
     <div style="margin-top:3rem;">
       <p class="section-eyebrow">DEVELOPMENT PHASES</p>
       <div class="phases">
-        <div class="phase-row"><span class="phase-name">Phase 1</span><span class="phase-desc">Foundation & core implementation</span><span class="phase-done">COMPLETE</span></div>
-        <div class="phase-row"><span class="phase-name">Phase 2A</span><span class="phase-desc">EIP-712 attestation</span><span class="phase-done">COMPLETE</span></div>
-        <div class="phase-row"><span class="phase-name">Phase 2B</span><span class="phase-desc">Node distribution</span><span class="phase-done">COMPLETE</span></div>
-        <div class="phase-row"><span class="phase-name">Phase 2C</span><span class="phase-desc">OpenZeppelin Governor + Timelock integration</span><span class="phase-done">COMPLETE</span></div>
-        <div class="phase-row"><span class="phase-name">Phase 2D</span><span class="phase-desc">Multi-chain deployment scripts</span><span class="phase-done">COMPLETE</span></div>
-        <div class="phase-row"><span class="phase-name">Phase 2E</span><span class="phase-desc">Security audit — all 6 findings resolved</span><span class="phase-done">COMPLETE</span></div>
+        {% for phase in site.data.status.phases %}
+        <div class="phase-row"><span class="phase-name">{{ phase.id }}</span><span class="phase-desc">{{ phase.desc }}</span><span class="phase-done">{% if phase.done %}COMPLETE{% else %}PENDING{% endif %}</span></div>
+        {% endfor %}
       </div>
     </div>
 
     <div style="margin-top:3rem;">
       <p class="section-eyebrow">DEPLOYMENT STATUS</p>
       <div class="deploy-grid">
-        <div class="deploy-cell"><div class="deploy-chain">SEPOLIA TESTNET</div><div class="deploy-status pending">Pending</div></div>
-        <div class="deploy-cell"><div class="deploy-chain">ETHEREUM MAINNET</div><div class="deploy-status pending">Pending</div></div>
-        <div class="deploy-cell"><div class="deploy-chain">OPTIMISM</div><div class="deploy-status pending">Pending</div></div>
-        <div class="deploy-cell"><div class="deploy-chain">ARBITRUM</div><div class="deploy-status pending">Pending</div></div>
+        {% for deployment in site.data.status.deployments %}
+        <div class="deploy-cell"><div class="deploy-chain">{{ deployment.chain }}</div><div class="deploy-status {% if deployment.live %}live{% else %}pending{% endif %}">{{ deployment.status }}</div></div>
+        {% endfor %}
       </div>
     </div>
   </div>
