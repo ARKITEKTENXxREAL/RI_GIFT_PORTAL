@@ -1,118 +1,675 @@
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); }
-.wrap { padding: 1.5rem 0; max-width: 680px; }
-.hero { margin-bottom: 2rem; }
-.hero h1 { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.5rem; }
-.hero p { font-size: 16px; color: var(--color-text-secondary); line-height: 1.7; }
-.section-label { font-size: 12px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
-.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
-.card h3 { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.4rem; }
-.card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
-.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
-.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; }
-.metric .label { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 0.25rem; }
-.metric .value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
-.dist { display: flex; gap: 0; border-radius: var(--border-radius-md); overflow: hidden; height: 40px; margin-bottom: 0.5rem; }
-.dist-bar { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; }
-.dist-label { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
-.dist-label span { font-size: 13px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.tag { display: inline-block; font-size: 12px; padding: 3px 10px; border-radius: var(--border-radius-md); margin-right: 6px; margin-bottom: 6px; }
-.tag-teal { background: #E1F5EE; color: #0F6E56; }
-.tag-purple { background: #EEEDFE; color: #3C3489; }
-.tag-amber { background: #FAEEDA; color: #633806; }
-.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
-.next-steps { counter-reset: steps; }
-.step { display: flex; gap: 12px; margin-bottom: 1rem; align-items: flex-start; }
-.step-num { background: var(--color-background-secondary); border-radius: 50%; width: 28px; height: 28px; min-width: 28px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
-.step-text h4 { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
-.step-text p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
-.diff-row { display: flex; gap: 12px; margin-bottom: 0.75rem; }
-.diff-col { flex: 1; background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; }
-.diff-col .dl { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
-.diff-col p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLG_SMART_CONTRACT — Pure Love Geometry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<div class="wrap">
+    :root {
+      --ink:       #0e0e0e;
+      --paper:     #f7f5f0;
+      --child:     #1b6b3a;
+      --child-lt:  #e8f5ee;
+      --infra:     #1a3a6b;
+      --infra-lt:  #e8eef5;
+      --maint:     #6b3a1a;
+      --maint-lt:  #f5ede8;
+      --rule:      #d4d0c8;
+      --mono:      'Space Mono', monospace;
+      --sans:      'Space Grotesk', sans-serif;
+    }
 
-  <div class="hero">
-    <h1>RI_GIFT_PORTAL</h1>
-    <p>En smartkontrakt-basert infrastruktur for automatisk verdidistribusjon — uten mellomledd, uten profittmotiv.</p>
-    <div style="margin-top: 0.75rem;">
-      <span class="tag tag-teal">Solidity</span>
-      <span class="tag tag-purple">Web3</span>
-      <span class="tag tag-amber">Open source</span>
-      <span class="tag tag-teal">MIT License</span>
-    </div>
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 2rem 4rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      opacity: 0.5;
+      margin-bottom: 2rem;
+    }
+    .hero-title {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--child);
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      font-weight: 300;
+      opacity: 0.75;
+      max-width: 560px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    /* FLOOR CONSTANT — signature element */
+    .floor-block {
+      display: inline-block;
+      background: var(--child-lt);
+      border-left: 3px solid var(--child);
+      padding: 1.2rem 1.6rem;
+      margin-bottom: 3rem;
+    }
+    .floor-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--child);
+      opacity: 0.7;
+      margin-bottom: 0.4rem;
+    }
+    .floor-code {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--child);
+      font-weight: 700;
+    }
+    .floor-note {
+      font-size: 13px;
+      color: var(--child);
+      opacity: 0.8;
+      margin-top: 0.4rem;
+    }
+
+    .hero-badges { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--rule);
+      background: white;
+    }
+    .badge.green { border-color: var(--child); color: var(--child); background: var(--child-lt); }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; border-top: 1px solid var(--rule); }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      opacity: 0.45;
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      line-height: 1.15;
+    }
+    .section-body {
+      font-size: 1.05rem;
+      font-weight: 300;
+      opacity: 0.75;
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    /* DISTRIBUTION BARS */
+    .dist-bars { display: flex; flex-direction: column; gap: 1rem; margin: 2.5rem 0; }
+    .dist-row { display: flex; align-items: center; gap: 1rem; }
+    .dist-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      width: 120px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+    .dist-bar-wrap { flex: 1; height: 10px; background: var(--rule); position: relative; }
+    .dist-bar { height: 100%; transition: width 0.6s ease; }
+    .dist-pct {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .dist-note { font-size: 12px; opacity: 0.5; margin-top: 0.25rem; }
+
+    /* CONTRACTS TABLE */
+    .contracts { display: flex; flex-direction: column; gap: 0; margin: 2rem 0; }
+    .contract-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 1.5rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+    .contract-name {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--infra);
+      font-weight: 700;
+    }
+    .contract-desc { font-size: 14px; opacity: 0.7; line-height: 1.5; }
+
+    /* GOVERNANCE VISUALIZER */
+    .gov-wrap { margin-top: 2.5rem; }
+    .gov-controls { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .gov-control-row { display: flex; align-items: center; gap: 1rem; }
+    .gov-control-row label { font-size: 13px; opacity: 0.6; width: 180px; flex-shrink: 0; }
+    .gov-control-row input[type=range] { flex: 1; }
+    .gov-control-row span {
+      font-family: var(--mono);
+      font-size: 13px;
+      width: 60px;
+      text-align: right;
+    }
+    .chapter-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .chapter-tabs button {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--rule);
+      background: white;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chapter-tabs button.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .gov-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+    .gov-metric { background: white; border: 1px solid var(--rule); padding: 1rem; }
+    .gov-metric-label { font-size: 11px; opacity: 0.5; margin-bottom: 4px; font-family: var(--mono); letter-spacing: 0.06em; }
+    .gov-metric-value { font-size: 1.3rem; font-weight: 600; }
+    .status-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.8rem;
+      margin-bottom: 1.25rem;
+    }
+    .s-central { background: #fce8e8; color: #8b1a1a; }
+    .s-partial  { background: #fef3e2; color: #7a4a00; }
+    .s-decent   { background: var(--child-lt); color: var(--child); }
+    .gov-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .gov-table th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; opacity: 0.5; border-bottom: 1px solid var(--rule); padding: 6px 8px; }
+    .gov-table td { padding: 7px 8px; border-bottom: 1px solid var(--rule); }
+    .q-yes { font-family: var(--mono); font-size: 11px; background: #fce8e8; color: #8b1a1a; padding: 2px 7px; }
+    .q-no  { font-family: var(--mono); font-size: 11px; background: var(--child-lt); color: var(--child); padding: 2px 7px; }
+    .q-fund { font-family: var(--mono); font-size: 11px; background: #f0ede6; color: #666; padding: 2px 7px; }
+    .chart-wrap { position: relative; height: 200px; margin-top: 1.5rem; }
+
+    /* PHASES */
+    .phases { display: flex; flex-direction: column; gap: 0; }
+    .phase-row {
+      display: grid;
+      grid-template-columns: 160px 1fr auto;
+      gap: 1.5rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: center;
+    }
+    .phase-name { font-family: var(--mono); font-size: 12px; opacity: 0.6; }
+    .phase-desc { font-size: 14px; opacity: 0.75; }
+    .phase-done {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--child);
+      background: var(--child-lt);
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+
+    /* DEPLOY STATUS */
+    .deploy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--rule); margin: 2rem 0; }
+    .deploy-cell { background: var(--paper); padding: 1.5rem; }
+    .deploy-chain { font-family: var(--mono); font-size: 12px; opacity: 0.5; margin-bottom: 0.5rem; }
+    .deploy-status { font-size: 14px; font-weight: 500; }
+    .deploy-status.pending { opacity: 0.35; }
+    .deploy-status.live { color: var(--child); }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .footer-left { font-family: var(--mono); font-size: 12px; opacity: 0.4; }
+    .footer-intent { font-family: var(--mono); font-size: 13px; color: var(--child); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 13px; opacity: 0.5; text-decoration: none; color: var(--ink); }
+    .footer-links a:hover { opacity: 1; }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+      .contract-row { grid-template-columns: 1fr; gap: 0.25rem; }
+      .phase-row { grid-template-columns: 1fr auto; }
+      .phase-name { display: none; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">PLG_SMART_CONTRACT</a>
+  <div class="nav-links">
+    <a href="#distribution">Distribution</a>
+    <a href="#governance">Governance</a>
+    <a href="#contracts">Contracts</a>
+    <a href="https://github.com/The-Galactic-Federation-Of-Light/PLG_SMART_CONTRACT" target="_blank">GitHub</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">THE GALACTIC FEDERATION OF LIGHT — RI_GIFT_PORTAL</p>
+  <h1 class="hero-title">Transparent giving.<br><em>Child-first.</em><br>Always.</h1>
+  <p class="hero-sub">
+    A multi-chain charitable distribution protocol where the 25% children's allocation is not a policy — it is an immutable constant in code. No governance vote can override it.
+  </p>
+
+  <div class="floor-block">
+    <div class="floor-label">IMMUTABLE CONSTANT — PLGGiftRouter.sol</div>
+    <div class="floor-code">uint16 public constant MIN_CHILD_FLOOR = 2500;</div>
+    <div class="floor-note">25% hard floor. Unvotable. Unalterable. Forever.</div>
   </div>
 
-  <div class="grid2">
-    <div class="metric"><div class="label">Commits</div><div class="value">500+</div></div>
-    <div class="metric"><div class="label">Issues dokumentert</div><div class="value">23</div></div>
-    <div class="metric"><div class="label">Dialoglinjer</div><div class="value">8 000+</div></div>
-    <div class="metric"><div class="label">Status</div><div class="value" style="font-size:15px; padding-top:4px;">Pre-testnet</div></div>
+  <div class="hero-badges">
+    <span class="badge green">72 / 72 TESTS PASSING</span>
+    <span class="badge">PHASE 2E COMPLETE</span>
+    <span class="badge">SECURITY AUDIT — 6 / 6 RESOLVED</span>
+    <span class="badge">SEPOLIA PENDING</span>
   </div>
-
-  <hr class="divider">
-
-  <p class="section-label">Kjerneidé</p>
-  <div class="card">
-    <h3>Dette er ikke et finansinstrument</h3>
-    <p>De fleste smartkontrakter er designet for å generere avkastning. PLG_SMART_CONTRACT.md gjør det motsatte — den bruker den samme teknologien til å sikre at verdier automatisk distribueres etter forhåndsbestemte etiske prinsipper. Koden er garantisten, ikke en juridisk enhet.</p>
-  </div>
-
-  <p class="section-label" style="margin-top:1.25rem;">Verdidistribusjon — etter alle kostnader</p>
-  <div class="dist">
-    <div class="dist-bar" style="width: 70%; background: #9FE1CB; color: #085041;">70%</div>
-    <div class="dist-bar" style="width: 25%; background: #CECBF6; color: #3C3489;">25%</div>
-    <div class="dist-bar" style="width: 5%; background: #D3D1C7; color: #444441;">5%</div>
-  </div>
-  <div class="dist-label">
-    <span><span class="dot" style="background:#1D9E75;"></span>Global infrastruktur</span>
-    <span><span class="dot" style="background:#7F77DD;"></span>Barnefondet</span>
-    <span><span class="dot" style="background:#888780;"></span>Vedlikehold</span>
-  </div>
-
-  <hr class="divider">
-
-  <p class="section-label">Forskjellen fra eksisterende løsninger</p>
-  <div class="diff-row">
-    <div class="diff-col">
-      <div class="dl">Open Collective (Web2)</div>
-      <p>Transparent, men fortsatt avhengig av juridiske enheter og bankkontoer. Staten kan gripe inn.</p>
-    </div>
-    <div class="diff-col">
-      <div class="dl">PLG_SMART_CONTRACT (Web3)</div>
-      <p>Koden distribuerer verdier autonomt. Ingen fiscal host. Ingen mellomledd. Ingen kan fryse kontrakten.</p>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <p class="section-label">Neste steg — der du kommer inn</p>
-  <div class="next-steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text">
-        <h4>Gjennomgang av PLG_SMART_CONTRACT.md</h4>
-        <p>Skissen er ferdig. Den trenger en Solidity-utvikler som kan vurdere hva som holder og hva som må bygges.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text">
-        <h4>Testnet-deploy via Foundry</h4>
-        <p>Sepolia eller tilsvarende. Verifisere at distribusjonslogikken faktisk kjører som tiltenkt on-chain.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text">
-        <h4>GitHub Actions workflow</h4>
-        <p>Automatisert kompilering og testing via CI/CD. Allerede støttet av repostrukturen.</p>
-      </div>
-    </div>
-  </div>
-
 </div>
+
+<!-- DISTRIBUTION -->
+<section id="distribution">
+  <div class="section-inner">
+    <p class="section-eyebrow">PROTOCOL RULES</p>
+    <h2 class="section-title">Every donation.<br>Same distribution.</h2>
+    <p class="section-body">
+      Three allocations. Fixed in code. No exceptions, no overrides, no discretion.
+      The floor for children is a mathematical constant — not a goal, not a target, not a promise.
+    </p>
+
+    <div class="dist-bars">
+      <div>
+        <div class="dist-row">
+          <span class="dist-label">BARNEFONDET</span>
+          <div class="dist-bar-wrap"><div class="dist-bar" style="width:25%; background:var(--child);"></div></div>
+          <span class="dist-pct" style="color:var(--child);">25%</span>
+        </div>
+        <div class="dist-note" style="padding-left:136px;">Children's welfare fund — immutable floor</div>
+      </div>
+      <div>
+        <div class="dist-row">
+          <span class="dist-label">INFRASTRUCTURE</span>
+          <div class="dist-bar-wrap"><div class="dist-bar" style="width:70%; background:var(--infra);"></div></div>
+          <span class="dist-pct" style="color:var(--infra);">70%</span>
+        </div>
+        <div class="dist-note" style="padding-left:136px;">Global projects — governed by token holders</div>
+      </div>
+      <div>
+        <div class="dist-row">
+          <span class="dist-label">MAINTENANCE</span>
+          <div class="dist-bar-wrap"><div class="dist-bar" style="width:5%; background:var(--maint);"></div></div>
+          <span class="dist-pct" style="color:var(--maint);">5%</span>
+        </div>
+        <div class="dist-note" style="padding-left:136px;">Protocol sustainability — funds continued development</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; opacity:0.5; margin-top:1rem;">
+      Minimum donation: 10,000 USDC — guaranteeing at minimum 2,500 USDC per transaction to BARNEFONDET from day one.
+    </p>
+  </div>
+</section>
+
+<!-- GOVERNANCE -->
+<section id="governance">
+  <div class="section-inner">
+    <p class="section-eyebrow">TOKEN GOVERNANCE</p>
+    <h2 class="section-title">Power that distributes<br>itself by design.</h2>
+    <p class="section-body">
+      1,000,000 PLGVotingTokens. A four-chapter decentralization roadmap built into the protocol from genesis.
+      No single actor can hold control forever — the math does not allow it.
+    </p>
+
+    <div class="gov-wrap">
+      <div class="chapter-tabs">
+        <button class="active" onclick="showChapter(0)">Ch. 1 — 12 participants</button>
+        <button onclick="showChapter(1)">Ch. 2 — 15 participants</button>
+        <button onclick="showChapter(2)">Ch. 3 — 16 participants</button>
+        <button onclick="showChapter(3)">Ch. 4 — 20 participants</button>
+      </div>
+      <div id="gov-content"></div>
+    </div>
+
+    <div style="margin-top:4rem; padding-top:3rem; border-top:1px solid var(--rule);">
+      <p class="section-eyebrow">EXPLORE THE MODEL</p>
+      <h3 style="font-size:1.3rem; font-weight:600; letter-spacing:-0.01em; margin-bottom:0.75rem;">Adjust the variables yourself.</h3>
+      <p style="font-size:0.95rem; font-weight:300; opacity:0.65; margin-bottom:2rem; max-width:520px; line-height:1.7;">
+        Move the sliders to see how participant count and fund reserve affect decentralization in real time.
+        The red line marks the 40,000 token quorum threshold.
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem;">
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <label style="font-family:var(--mono); font-size:11px; letter-spacing:0.08em; opacity:0.55; width:200px; flex-shrink:0;">PARTICIPANTS</label>
+          <input type="range" min="1" max="25" value="12" id="slider-p" style="flex:1;" oninput="updateSlider()"/>
+          <span id="slider-p-out" style="font-family:var(--mono); font-size:13px; font-weight:700; width:30px; text-align:right;">12</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <label style="font-family:var(--mono); font-size:11px; letter-spacing:0.08em; opacity:0.55; width:200px; flex-shrink:0;">RESERVED FUND (%)</label>
+          <input type="range" min="0" max="50" value="36" id="slider-r" style="flex:1;" oninput="updateSlider()"/>
+          <span id="slider-r-out" style="font-family:var(--mono); font-size:13px; font-weight:700; width:30px; text-align:right;">36%</span>
+        </div>
+      </div>
+
+      <div id="slider-metrics" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:1.5rem;"></div>
+      <div style="overflow-x:auto;">
+        <table class="gov-table" id="slider-table">
+          <thead><tr><th>ROLE</th><th>COUNT</th><th>TOKENS</th><th>%</th><th>QUORUM ALONE</th></tr></thead>
+          <tbody id="slider-tbody"></tbody>
+        </table>
+      </div>
+      <div style="position:relative; height:200px; margin-top:1.5rem;">
+        <canvas id="slider-chart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRACTS -->
+<section id="contracts">
+  <div class="section-inner">
+    <p class="section-eyebrow">ARCHITECTURE</p>
+    <h2 class="section-title">Four contracts.<br>One protocol.</h2>
+    <p class="section-body">Built with Foundry on OpenZeppelin. Deployable to Ethereum, Optimism, and Arbitrum.</p>
+
+    <div class="contracts">
+      <div class="contract-row">
+        <div class="contract-name">PLGGiftRouter.sol</div>
+        <div class="contract-desc">Entry point for all donations. Enforces the distribution rules. Holds <code>MIN_CHILD_FLOOR</code> as an immutable constant.</div>
+      </div>
+      <div class="contract-row">
+        <div class="contract-name">PLGVotingToken.sol</div>
+        <div class="contract-desc">ERC20Votes governance token. 1,000,000 total supply. Self-delegation required to activate voting rights.</div>
+      </div>
+      <div class="contract-row">
+        <div class="contract-name">PLGTimelock.sol</div>
+        <div class="contract-desc">Delay layer between governance decisions and execution. Protects against rushed proposals.</div>
+      </div>
+      <div class="contract-row">
+        <div class="contract-name">PLGGovernor.sol</div>
+        <div class="contract-desc">OpenZeppelin Governor. 4% quorum of total supply (40,000 tokens) required for any proposal to pass.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem;">
+      <p class="section-eyebrow">DEVELOPMENT PHASES</p>
+      <div class="phases">
+        <div class="phase-row"><span class="phase-name">Phase 1</span><span class="phase-desc">Foundation & core implementation</span><span class="phase-done">COMPLETE</span></div>
+        <div class="phase-row"><span class="phase-name">Phase 2A</span><span class="phase-desc">EIP-712 attestation</span><span class="phase-done">COMPLETE</span></div>
+        <div class="phase-row"><span class="phase-name">Phase 2B</span><span class="phase-desc">Node distribution</span><span class="phase-done">COMPLETE</span></div>
+        <div class="phase-row"><span class="phase-name">Phase 2C</span><span class="phase-desc">OpenZeppelin Governor + Timelock integration</span><span class="phase-done">COMPLETE</span></div>
+        <div class="phase-row"><span class="phase-name">Phase 2D</span><span class="phase-desc">Multi-chain deployment scripts</span><span class="phase-done">COMPLETE</span></div>
+        <div class="phase-row"><span class="phase-name">Phase 2E</span><span class="phase-desc">Security audit — all 6 findings resolved</span><span class="phase-done">COMPLETE</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem;">
+      <p class="section-eyebrow">DEPLOYMENT STATUS</p>
+      <div class="deploy-grid">
+        <div class="deploy-cell"><div class="deploy-chain">SEPOLIA TESTNET</div><div class="deploy-status pending">Pending</div></div>
+        <div class="deploy-cell"><div class="deploy-chain">ETHEREUM MAINNET</div><div class="deploy-status pending">Pending</div></div>
+        <div class="deploy-cell"><div class="deploy-chain">OPTIMISM</div><div class="deploy-status pending">Pending</div></div>
+        <div class="deploy-cell"><div class="deploy-chain">ARBITRUM</div><div class="deploy-status pending">Pending</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-left">The Galactic Federation Of Light — RI_GIFT_PORTAL</div>
+    <div class="footer-links" style="margin-top:0.5rem;">
+      <a href="https://github.com/The-Galactic-Federation-Of-Light/PLG_SMART_CONTRACT" target="_blank">GitHub</a>
+      <a href="https://github.com/ARKITEKTENXxREAL/RI_GIFT_PORTAL" target="_blank">RI_GIFT_PORTAL</a>
+    </div>
+  </div>
+  <div class="footer-intent">∞INTENT==LOVE∞</div>
+</footer>
+
+<script>
+const TOTAL = 1000000, QUORUM = 40000, FOND = 360000, CIRC = TOTAL - FOND;
+
+const chapters = [
+  { label:'Centralized', cls:'s-central', persons:12, roles:[
+    {name:'Initiator', count:1, tokens:96000},
+    {name:'Core Actor', count:3, tokens:96000},
+    {name:'Validator', count:8, tokens:Math.round((CIRC-96000-3*96000)/8)},
+    {name:'Fund', count:1, tokens:FOND, fund:true}
+  ]},
+  { label:'Centralized', cls:'s-central', persons:15, roles:[
+    {name:'Initiator', count:1, tokens:48000},
+    {name:'Core Actor', count:3, tokens:60000},
+    {name:'Validator', count:11, tokens:Math.round((CIRC-48000-3*60000)/11)},
+    {name:'Fund', count:1, tokens:FOND, fund:true}
+  ]},
+  { label:'Partially Decentralized', cls:'s-partial', persons:16, roles:[
+    {name:'Initiator', count:1, tokens:32000},
+    {name:'Core Actor', count:3, tokens:50000},
+    {name:'Validator', count:12, tokens:38000},
+    {name:'Fund', count:1, tokens:FOND, fund:true}
+  ]},
+  { label:'Fully Decentralized', cls:'s-decent', persons:20, roles:[
+    {name:'Initiator', count:1, tokens:32000},
+    {name:'Core Actor', count:3, tokens:39719},
+    {name:'Validator', count:16, tokens:30553},
+    {name:'Fund', count:1, tokens:FOND, fund:true}
+  ]}
+];
+
+const colorMap = {Initiator:'#1a3a6b','Core Actor':'#1b6b3a',Validator:'#6b3a1a',Fund:'#b0ac9e'};
+let chart;
+
+function showChapter(idx) {
+  document.querySelectorAll('.chapter-tabs button').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  const ch = chapters[idx];
+  const aloneCount = ch.roles.filter(r=>!r.fund && r.tokens>=QUORUM).reduce((s,r)=>s+r.count,0);
+
+  let html = `<div class="status-badge ${ch.cls}">${ch.label}</div>`;
+  html += `<div class="gov-metrics">
+    <div class="gov-metric"><div class="gov-metric-label">PARTICIPANTS</div><div class="gov-metric-value">${ch.persons}</div></div>
+    <div class="gov-metric"><div class="gov-metric-label">QUORUM</div><div class="gov-metric-value">${QUORUM.toLocaleString()}</div></div>
+    <div class="gov-metric"><div class="gov-metric-label">RESERVED FUND</div><div class="gov-metric-value">${FOND.toLocaleString()}</div></div>
+    <div class="gov-metric"><div class="gov-metric-label">CAN MEET QUORUM ALONE</div><div class="gov-metric-value">${aloneCount}</div></div>
+  </div>`;
+
+  html += `<div style="overflow-x:auto"><table class="gov-table"><thead><tr>
+    <th>ROLE</th><th>COUNT</th><th>TOKENS</th><th>%</th><th>QUORUM ALONE</th>
+  </tr></thead><tbody>`;
+
+  ch.roles.forEach(r=>{
+    if(r.fund){
+      html+=`<tr><td>${r.name}</td><td>—</td><td>${r.tokens.toLocaleString()}</td><td>${(r.tokens/TOTAL*100).toFixed(1)}%</td><td><span class="q-fund">LOCKED</span></td></tr>`;
+    } else {
+      const alone = r.tokens>=QUORUM;
+      html+=`<tr><td>${r.name}</td><td>${r.count}</td><td>${r.tokens.toLocaleString()}</td><td>${(r.tokens/TOTAL*100).toFixed(1)}%</td><td><span class="${alone?'q-yes':'q-no'}">${alone?'YES':'NO'}</span></td></tr>`;
+    }
+  });
+  html+=`</tbody></table></div><div class="chart-wrap"><canvas id="gov-chart"></canvas></div>`;
+
+  document.getElementById('gov-content').innerHTML = html;
+  if(chart){chart.destroy();chart=null;}
+
+  const labels=[], data=[], colors=[];
+  ch.roles.forEach(r=>{
+    if(r.fund){labels.push('Fund');data.push(r.tokens);colors.push('#b0ac9e');}
+    else{for(let i=1;i<=r.count;i++){labels.push(r.count>1?`${r.name} ${i}`:r.name);data.push(r.tokens);colors.push(colorMap[r.name]);}}
+  });
+
+  chart = new Chart(document.getElementById('gov-chart'),{
+    type:'bar',
+    data:{labels,datasets:[{label:'Tokens',data,backgroundColor:colors,borderRadius:2,borderSkipped:false}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.y.toLocaleString()+' tokens'}}},
+      scales:{
+        x:{ticks:{font:{size:10},autoSkip:true,maxRotation:45},grid:{display:false}},
+        y:{ticks:{font:{size:11},callback:v=>(v/1000)+'k'},grid:{color:'#e8e4da'}}
+      }
+    },
+    plugins:[{id:'quorumLine',afterDraw(chart){
+      const{ctx,scales:{y}}=chart;
+      const yPos=y.getPixelForValue(QUORUM);
+      ctx.save();ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+      ctx.beginPath();ctx.moveTo(chart.chartArea.left,yPos);ctx.lineTo(chart.chartArea.right,yPos);ctx.stroke();ctx.restore();
+    }}]
+  });
+}
+
+showChapter(0);
+
+// SLIDER EXPLORER
+let sliderChart;
+
+function sliderDistribute(n, reservePct) {
+  const fond = Math.round(TOTAL * reservePct / 100);
+  const circ = TOTAL - fond;
+  if (n === 1) return [{ name:'Initiator', count:1, tokens:circ }, { name:'Fund', count:1, tokens:fond, fund:true }];
+  const initiatorShare = Math.max(0.04, 0.42 - (n - 2) * 0.022);
+  const initiatorTokens = Math.round(circ * initiatorShare);
+  const remaining = circ - initiatorTokens;
+  const coreCount = Math.min(3, n - 1);
+  const valCount = Math.max(0, n - 1 - coreCount);
+  const coreWeight = 1.3, valWeight = 1.0;
+  const totalWeight = coreCount * coreWeight + valCount * valWeight;
+  const coreTokens = totalWeight > 0 ? Math.round(remaining * coreWeight / totalWeight) : 0;
+  const valTokens = valCount > 0 ? Math.round((remaining - coreCount * coreTokens) / valCount) : 0;
+  const rows = [{ name:'Initiator', count:1, tokens:initiatorTokens }];
+  if (coreCount > 0) rows.push({ name:'Core Actor', count:coreCount, tokens:coreTokens });
+  if (valCount > 0) rows.push({ name:'Validator', count:valCount, tokens:valTokens });
+  rows.push({ name:'Fund', count:1, tokens:fond, fund:true });
+  return rows;
+}
+
+function updateSlider() {
+  const n = parseInt(document.getElementById('slider-p').value);
+  const r = parseInt(document.getElementById('slider-r').value);
+  document.getElementById('slider-p-out').textContent = n;
+  document.getElementById('slider-r-out').textContent = r + '%';
+
+  const rows = sliderDistribute(n, r);
+  const fond = rows.find(x=>x.fund).tokens;
+  const aloneCount = rows.filter(x=>!x.fund && x.tokens>=QUORUM).reduce((s,x)=>s+x.count,0);
+  const initiator = rows[0];
+  const trueDecentral = !rows.some(x=>!x.fund && x.tokens>=QUORUM);
+  const statusLabel = trueDecentral ? 'Fully Decentralized' : (initiator.tokens >= QUORUM ? 'Centralized' : 'Partially Decentralized');
+  const statusCls = trueDecentral ? 's-decent' : (initiator.tokens >= QUORUM ? 's-central' : 's-partial');
+
+  document.getElementById('slider-metrics').innerHTML = `
+    <div class="gov-metric"><div class="gov-metric-label">STATUS</div><div class="gov-metric-value" style="font-size:0.95rem;"><span class="status-badge ${statusCls}">${statusLabel}</span></div></div>
+    <div class="gov-metric"><div class="gov-metric-label">PARTICIPANTS</div><div class="gov-metric-value">${n}</div></div>
+    <div class="gov-metric"><div class="gov-metric-label">RESERVED FUND</div><div class="gov-metric-value">${fond.toLocaleString()}</div></div>
+    <div class="gov-metric"><div class="gov-metric-label">CAN MEET QUORUM ALONE</div><div class="gov-metric-value">${aloneCount}</div></div>
+  `;
+
+  let tbody = '';
+  rows.forEach(r => {
+    if (r.fund) {
+      tbody += `<tr><td>${r.name}</td><td>—</td><td>${r.tokens.toLocaleString()}</td><td>${(r.tokens/TOTAL*100).toFixed(1)}%</td><td><span class="q-fund">LOCKED</span></td></tr>`;
+    } else {
+      const alone = r.tokens >= QUORUM;
+      tbody += `<tr><td>${r.name}</td><td>${r.count}</td><td>${r.tokens.toLocaleString()}</td><td>${(r.tokens/TOTAL*100).toFixed(1)}%</td><td><span class="${alone?'q-yes':'q-no'}">${alone?'YES':'NO'}</span></td></tr>`;
+    }
+  });
+  document.getElementById('slider-tbody').innerHTML = tbody;
+
+  const labels=[], data=[], colors=[];
+  rows.forEach(r => {
+    if (r.fund) { labels.push('Fund'); data.push(r.tokens); colors.push('#b0ac9e'); }
+    else { for(let i=1;i<=r.count;i++){ labels.push(r.count>1?`${r.name} ${i}`:r.name); data.push(r.tokens); colors.push(colorMap[r.name]); } }
+  });
+
+  if (sliderChart) { sliderChart.destroy(); sliderChart = null; }
+  sliderChart = new Chart(document.getElementById('slider-chart'), {
+    type:'bar',
+    data:{labels,datasets:[{label:'Tokens',data,backgroundColor:colors,borderRadius:2,borderSkipped:false}]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.parsed.y.toLocaleString()+' tokens'}}},
+      scales:{
+        x:{ticks:{font:{size:10},autoSkip:true,maxRotation:45},grid:{display:false}},
+        y:{ticks:{font:{size:11},callback:v=>(v/1000)+'k'},grid:{color:'#e8e4da'}}
+      }
+    },
+    plugins:[{id:'quorumLine2',afterDraw(chart){
+      const{ctx,scales:{y}}=chart;
+      const yPos=y.getPixelForValue(QUORUM);
+      ctx.save();ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+      ctx.beginPath();ctx.moveTo(chart.chartArea.left,yPos);ctx.lineTo(chart.chartArea.right,yPos);ctx.stroke();ctx.restore();
+    }}]
+  });
+}
+
+updateSlider();
+</script>
+</body>
+</html>
