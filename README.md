@@ -173,10 +173,10 @@ The protocol consists of four contracts deployed as a family of "multi-chain-sma
 
 | Contract | Role |
 |---|---|
-| `PLGGiftRouter` | Entry point for all donations. Enforces distribution rules. |
-| `PLGVotingToken` | ERC20Votes governance token. 1,000,000 total supply. |
-| `PLGTimelock` | Delay layer between governance decisions and execution. |
-| `PLGGovernor` | OpenZeppelin Governor. 4% quorum of total supply (40,000 tokens) |
+| `PLGGiftRouter.sol` | Entry point for all donations. Enforces distribution rules. |
+| `PLGVotingToken.sol` | ERC20Votes governance token. 1,000,000 total supply. |
+| `PLGTimelock.sol` | Delay layer between governance decisions and execution. |
+| `PLGGovernor.sol` | OpenZeppelin Governor. 4% quorum of total supply (40,000 tokens) |
 
 #### A real `PLG_GOVERNANCE` duties evolved through many people + `ARKITEKTENXxREAL`s repo :: `RI_GIFT_PORTAL` ::  
 
