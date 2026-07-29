@@ -25,11 +25,13 @@ optimizer_runs = 200
 ethereum  = "${ETHEREUM_RPC_URL}"
 optimism  = "${OPTIMISM_RPC_URL}"
 arbitrum  = "${ARBITRUM_RPC_URL}"
+sepolia   = "${SEPOLIA_RPC_URL}"
 localhost = "http://127.0.0.1:8545"
 
 [etherscan]
 ethereum = { key = "${ETHERSCAN_API_KEY}" }
 optimism = { key = "${OPTIMISM_ETHERSCAN_API_KEY}", url = "https://api-optimistic.etherscan.io/api" }
 arbitrum = { key = "${ARBISCAN_API_KEY}", url = "https://api.arbiscan.io/api" }
+sepolia  = { key = "${ETHERSCAN_API_KEY}", url = "https://api-sepolia.etherscan.io/api" }
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

@@ -126,6 +126,34 @@ library DeployConfig {
     }
 
     // ─────────────────────────────────────────────────────────────────
+    // SEPOLIA TESTNET (chainId: 11155111)
+    // ─────────────────────────────────────────────────────────────────
+    function sepolia(
+        address childAnchor,
+        address operationsWallet,
+        address initialTokenHolder,
+        bytes32 everglowSeedHash
+    ) internal pure returns (Config memory) {
+        return Config({
+            chainId:              11155111,
+            chainName:            "sepolia",
+            minChildShareBps:     2500,     // 25% hard floor
+            feeOpsBps:            500,      // 5% ops fee
+            everglowSeedHash:     everglowSeedHash,
+            walletWhitelistHash:  keccak256(abi.encodePacked("PLG_NODE_WHITELIST_V1")),
+            childAnchor:          childAnchor,
+            operationsWallet:     operationsWallet,
+            timelockDelay:        5 minutes,  // Short delay for testnet iteration
+            votingDelay:          10,          // ~2 min at 12s/block - fast for testing
+            votingPeriod:         50,          // ~10 min at 12s/block - fast for testing
+            proposalThreshold:    1e18,        // 1 token to propose on testnet
+            quorumNumerator:      4,           // 4% quorum
+            initialTokenSupply:   1_000_000e18,
+            initialTokenHolder:   initialTokenHolder
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────────
     // LOCALHOST / ANVIL (chainId: 31337) - for testing deploy scripts
     // ─────────────────────────────────────────────────────────────────
     function localhost(

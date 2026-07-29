@@ -133,10 +133,11 @@ contract Deploy is Script {
     ) internal view returns (DeployConfig.Config memory) {
         uint256 id = block.chainid;
 
-        if (id == 1)     return DeployConfig.ethereum(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
-        if (id == 10)    return DeployConfig.optimism(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
-        if (id == 42161) return DeployConfig.arbitrum(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
-        if (id == 31337) return DeployConfig.localhost(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
+        if (id == 1)        return DeployConfig.ethereum(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
+        if (id == 10)       return DeployConfig.optimism(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
+        if (id == 42161)    return DeployConfig.arbitrum(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
+        if (id == 11155111) return DeployConfig.sepolia(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
+        if (id == 31337)    return DeployConfig.localhost(childAnchor, operationsWallet, initialHolder, everglowSeedHash);
 
         revert("Unsupported chain - add config in DeployConfig.sol");
     }
