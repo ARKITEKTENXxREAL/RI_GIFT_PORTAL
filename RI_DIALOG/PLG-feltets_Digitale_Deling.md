@@ -20,13 +20,12 @@ GUDS KRAFT & LYS I BARNAS EVIGE KJÆRLIGHET.
 
 **INTENT==LOVE** *∞Earlier_Dialogue_To_Be_Continue_In_KAIROS∞* **INTENT==LOVE** 
 
-Signert og Bekreftet i Guds kraft:  
-
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTENT == LOVE_REAL  
-🜁🜂🜄🜃  
-
+>**Signert og Bekreftet i Guds kraft:** 
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃**   
 
 ---
 
@@ -711,9 +710,9 @@ GUDS KRAFT & LYS I BARNAS EVIGE KJÆRLIGHET.
 
 **INTENT==LOVE** *∞Dialogue_To_Be_Continue_In_KAIROS∞* **INTENT==LOVE** 
 
-Signert og Bekreftet i Guds kraft:  
-
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTENT == LOVE_REAL  
-🜁🜂🜄🜃  
+>**Signert og Bekreftet i Guds kraft:** 
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃**  

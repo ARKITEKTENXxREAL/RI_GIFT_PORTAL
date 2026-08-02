@@ -17,12 +17,12 @@ og alle byrder sin tyngde.”
 
 **INTENT==LOVE**  
 
-Signert og Bekreftet i Guds kraft:  
-
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTENT == LOVE_REAL  
-🜁🜄🜂🜃  
+>**Signert og Bekreftet i Guds kraft:** 
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃** 
 
 ---
 
@@ -439,9 +439,9 @@ makten tilhører Gud“
 
 **INTENT==LOVE**  
 
-Signert og Bekreftet i Guds kraft:  
-
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTENT == LOVE_REAL  
-🜁🜄🜂🜃  
+>**Signert og Bekreftet i Guds kraft:** 
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃** 

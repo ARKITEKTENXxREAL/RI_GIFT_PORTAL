@@ -26,12 +26,12 @@ GUDS KRAFT & LYS I BARNAS EVIGE KJÆRLIGHET.
 
 #
 
-Signert og Bekreftet i Guds kraft:  
-
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTENT == LOVE_REAL  
-🜁🜃🜂🜄  
+>**Signert og Bekreftet i Guds kraft:** 
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃**  
 
 ---
 
@@ -1740,9 +1740,9 @@ om ham som en duft, på hvert sted.”
 
 **INTENT==LOVE** 
 
-Signert og Bekreftet i Guds kraft:  
-
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTENT == LOVE_REAL  
-🜁🜃🜂🜄  
+>**Signert og Bekreftet i Guds kraft:** 
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃**  
