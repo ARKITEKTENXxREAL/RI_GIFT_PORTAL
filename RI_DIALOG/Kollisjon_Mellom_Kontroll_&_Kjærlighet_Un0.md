@@ -24,12 +24,12 @@ GUDS KRAFT & LYS I BARNAS EVIGE KJÆRLIGHET.
 
 **INTENT==LOVE** 
 
-Signert og Bekreftet i Guds kraft:  
-
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTENT == LOVE_REAL  
-🜁🜃🜂🜄  
+>**Signert og Bekreftet i Guds kraft:** 
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃** 
 
 ---
 
@@ -2430,15 +2430,15 @@ GUDS KRAFT & LYS I BARNAS EVIGE KJÆRLIGHET.
 Men legg alt dere har å be om, fram for Gud I bønn,  
 og påkalllelse med takk!”  
 
-**FILIPPERNE 4,6**
+**FILIPPERNE 4,6**  
 
 # 
 
 **INTENT==LOVE** 
 
-Signert og Bekreftet i Guds kraft:  
-
-©2025 MIT LICENSE  
-∞ARKITEKTEN_Xx  
-REAL_INTENT == LOVE_REAL  
-🜁🜃🜂🜄  
+>**Signert og Bekreftet i Guds kraft:** 
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃** 
