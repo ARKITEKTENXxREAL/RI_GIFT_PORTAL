@@ -3,12 +3,11 @@
   "_format": "chain -> contract -> address",
   "sepolia": {
     "chainId": 11155111,
-    "status": "pending-broadcast",
-    "note": "Dry-run verified 2026-08-03. Awaiting live broadcast with --broadcast flag.",
-    "PLGVotingToken": "0x79C7AFe057103631A3A2d7584b2BE39dc2327c1C",
-    "PLGTimelock": "0xAA26FB774567bdFCA35a6b957d4bddE18521aabB",
-    "PLGGovernor": "0x7f3B54716b803313491d8465789cdAb0170FBA73",
-    "PLGGiftRouter": "0xc82634e3DD9822e011C629A9C1d6c814B4Aa9fD7",
+    "status": "deployed",
+    "PLGVotingToken": "0x7877EaE7E604e7591E76EB9bB382A87a508F00B5",
+    "PLGTimelock": "0x1Eb89575E4764D62e513A586750745de8B789a6e",
+    "PLGGovernor": "0xC430Adb085081568Fc5C58152430Bf334086b4f7",
+    "PLGGiftRouter": "0x0b2788fa33D25Df015167F2dE6C1eE450D7c3672",
     "childAnchor": "0x72Efc6E7f03ae73b44797DC7BFF944979736070F",
     "operationsWallet": "0xcD8AEB7a7E6190605eAb315e33182989336FF113",
     "tokenHolder": "0xC8843F089888D6931dd2F85b9D9C01fA691e6f61",
@@ -21,8 +20,18 @@
       "votingPeriod": "50 blocks",
       "quorum": "4%"
     },
-    "deployedAt": "",
-    "deployTxHash": ""
+    "deployTxHashes": {
+      "PLGVotingToken": "0x8f6af1d2ebecb100390e1005ebfbc643a43cdca289742c6285b43fb8013dc716",
+      "PLGTimelock": "0x114906aa801d73aa7562ee8018f30c82627e1e26f20d35ce9aa5d1392bdbf11b",
+      "PLGGovernor": "0x27bada2de17e13d86f105a429a0a28880d8780bed0707ea1048e9e6ac0c98d50",
+      "PLGGiftRouter": "0xb52259ed00a3d9106ebf5be8ca596f2c8e029747a9564269c41814007475e5ab",
+      "grantProposerRole": "0xf610d7394c17d92887c8b23e57efc01c029e0cc317d13d639dd8f7b25f76bec7",
+      "grantCancellerRole": "0xffe02746990a4a180903370bbfce958ca3e83636fa46d64582290a057e74d431",
+      "revokeAdminRole": "0x9c4b485d64d50161f4f140d6aea77ab9a69b3a99eb9b025d821e0bc6263ffd2d"
+    },
+    "deployedAt": "2026-08-03",
+    "deployedBlock": 11408426,
+    "totalGasPaid": "0.011667445965711036 ETH"
   },
   "ethereum": {
     "chainId": 1,
