@@ -1,0 +1,15 @@
+# Foundry build artifacts - ikke commit disse
+out/
+cache/
+
+# Broadcast-logger beholdes - de er den offisielle deploy-historikken
+# broadcast/  <- bevisst ikke ignorert
+
+# Sensitive filer
+.env
+.env.*
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
