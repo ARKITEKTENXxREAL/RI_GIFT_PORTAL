@@ -1,6 +1,29 @@
 {
   "_readme": "PLG deployment address registry. Update after each deployment.",
   "_format": "chain -> contract -> address",
+  "sepolia": {
+    "chainId": 11155111,
+    "status": "pending-broadcast",
+    "note": "Dry-run verified 2026-08-03. Awaiting live broadcast with --broadcast flag.",
+    "PLGVotingToken": "0x79C7AFe057103631A3A2d7584b2BE39dc2327c1C",
+    "PLGTimelock": "0xAA26FB774567bdFCA35a6b957d4bddE18521aabB",
+    "PLGGovernor": "0x7f3B54716b803313491d8465789cdAb0170FBA73",
+    "PLGGiftRouter": "0xc82634e3DD9822e011C629A9C1d6c814B4Aa9fD7",
+    "childAnchor": "0x72Efc6E7f03ae73b44797DC7BFF944979736070F",
+    "operationsWallet": "0xcD8AEB7a7E6190605eAb315e33182989336FF113",
+    "tokenHolder": "0xC8843F089888D6931dd2F85b9D9C01fA691e6f61",
+    "everglowSeedHash": "0xafadaab8189fc869345702f051cde03ed26330da6548eeed506a1d87a96473be",
+    "parameters": {
+      "minChildShareBps": 2500,
+      "feeOpsBps": 500,
+      "timelockDelay": "300 seconds",
+      "votingDelay": "10 blocks",
+      "votingPeriod": "50 blocks",
+      "quorum": "4%"
+    },
+    "deployedAt": "",
+    "deployTxHash": ""
+  },
   "ethereum": {
     "chainId": 1,
     "status": "pending",
