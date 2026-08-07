@@ -1,13 +1,84 @@
-# RI_GIFT_PORTAL // PLG_SMART_CONTRACT  
+# **∞** RI_GIFT_PORTAL **∞** `PLG_SMART_CONTRACT`  **∞**  
 
-A *transparent*, *multi-chain charitable distribution protocol.*  
-Enforcing **child-first fund allocation** through immutable on-chain governance.  
+**TESTNET LOCALLY // PRE_PUBLIC**  
 
-Built with **Foundry**. *Audited*. 72/72 tests passing.  
+`RTX 4070 Max-Q` _  `AMD Ryzen 7 7435HS × 8` _ `Memory :: 24 GB` _ `CLI` _ `6.8.0-137-generic` _   
 
-Built with **Foundry**. *Audited*. 75/75 tests passing. 
+• **MAIN GOAL in Kairos** :: _ `COMPLETED`
+
+#
+
+### A *transparent*, *multi-chain charitable distribution protocol.*  
+• Enforcing **child-first fund allocation** through **immutable** *on-chain* **governance**.  
+
+• Built with **FOUNDRY**. *Audited*. 72/72 tests passing.  
+
+• Built with **FOUNDRY**. *Audited*. 75/75 tests passing. 
+
+#
+
+**TESTNET GLOBALLY // PUBLIC**  
+
+`sepolia.etherscan.io` _ `PLG_SMART_CONTRACT` _ `PLGGiftRouter` _ `PLGGovernor` _ `PLGTimelock` _ `PLGVotingToken` _  
+
+### *Alle 4 kontrakter verifisert på Etherscan.*  
+
+- `--verify` under deploy gjorde jobben automatisk.  
+- `Kildekoden` er **offentlig synlig** og *lesbar for alle.*  
+
+#
+
+#### **Se dem **LIVE** på Etherscan:**  
+  
+| Kontrakt       | Sepolia Etherscan |
+|----------------|-------------------|
+| `PLGGiftRouter`  | [0x0b2788...c3672](https://sepolia.etherscan.io/address/0x0b2788fa33D25Df015167F2dE6C1eE450D7c3672#code) |
+| `PLGGovernor`    | [0xC430A...b4f7](https://sepolia.etherscan.io/address/0xC430Adb085081568Fc5C58152430Bf334086b4f7#code) |
+| `PLGTimelock`    | [0x1Eb89...a9fD7](https://sepolia.etherscan.io/address/0x1Eb89575E4764D62e513A586750745de8B789a6e#code) |
+| `PLGVotingToken` | [0x7877E...00B5](https://sepolia.etherscan.io/address/0x7877EaE7E604e7591E76EB9bB382A87a508F00B5#code) |  
+  
+#
+
+• **MAIN GOAL in Kairos** :: `MAINNET` _ `100% Decentralized` _ `PENDING` _ `IN PROGRESS` _  
 
 ---
+
+### PROTOCOL RULES  
+
+• **Every donation.**  
+• **Same distribution.**  
+
+*Three allocations*. **Fixed in code.**  
+*No exceptions, no overrides, no discretion.*  
+*The floor for children* **is a mathematical constant** — **not a** *goal*, **not a** *target*, **not a** *promise*. 
+
+#
+
+### TOKEN GOVERNANCE  
+
+• **Power that distributes itself by design.**  
+
+**`1,000,000 PLGVotingTokens`**  
+*A four-chapter decentralization roadmap built into the protocol from* **genesis.**  
+**No single actor can hold control forever** — *the math does not allow it.*  
+
+#
+
+### ARCHITECTURE  
+
+• **Four contracts.**  
+• **One protocol.**  
+
+*Built with* **Foundry on OpenZeppelin.**  
+*Deployable to* **Ethereum, Optimism, and Arbitrum.**  
+
+#
+
+> **"Genesis-event is on-chain."**  
+
+> **"Genesis-eventet er på kjeden."**  
+
+#
 
 # What this contract does  
   
@@ -35,13 +106,13 @@ All findings have been resolved. The protocol is currently in testnet phase.
 
 #
 
-## UPDATE, Kairos :: 
+### UPDATE - Kairos :: 
 
-> Commit d871bac :  `The-Galactic-Federation-Of-Light/PLG_SMART_CONTRACT/SECURITY.md`  
+> Commit `d871bac` :  `The-Galactic-Federation-Of-Light/PLG_SMART_CONTRACT/SECURITY.md`  
 
 #
 
-> Commit 5db729e : `ARKITEKTENXxREAL/RI_GIFT_PORTAL/src/`  
+> Commit `5db729e` : `ARKITEKTENXxREAL/RI_GIFT_PORTAL/src/`  
 
 *Added three new tests;*  **8**    
 
@@ -55,7 +126,63 @@ All findings have been resolved. The protocol is currently in testnet phase.
 - `Default` **is 0** (permissive) - *validator sets threshold via timelock.*  
 - **Three new tests**: set minimum, reject below minimum, pass at minimum.  
 
-> Final State 75/75 tests passing across all suites. **Kairos.19.July,2026.**  
+> Final State 75/75 tests passing across all suites. **Kairos.19.July.2026.**  
+
+---
+
+### UPDATE - Kairos ::  
+
+> Commit `3991964`  - **Sepolia live**  
+
+#### **PLG (Pure Love Geometry) er *LIVE* på SEPOLIA.**  
+- **Genesis-eventet er bekreftet.**  
+
+- Alle 7 transaksjoner bekreftet.  
+-  Oppdaterer `addresses.json` med de ekte on-chain adressene nå i **Kairos**   
+
+# 
+
+> Commit `11fd042` - `.gitignore` + alle broadcast-logger fra **Sepolia-deploy**  
+
+#
+
+> Commit `2db7da4` -  **Sepolia dry-run adresser** (forarbeid)  
+
+#
+
+## **Verifiser på Etherscan**:  
+
+[PLGGiftRouter](https://sepolia.etherscan.io/address/0x0b2788fa33D25Df015167F2dE6C1eE450D7c3672)  : `sepolia.etherscan.io/
+address/0x0b2788fa33D25Df015167F2dE6C1eE450D7c3672`  
+
+• **Genesis-event** synlig umiddelbart i "`Events`"-fanen.  
+• **Se også** "`Contract`"-fanen.  
+
+# 
+
+*Hva som er låst på kjeden fra dag én*:  
+
+• 25% `MIN_CHILD_FLOOR` til **BARNEFONDET** - uforanderlig  
+
+• `REAL_INTENT==LOVE_REAL`  som **Everglow-Seed**  
+  
+• `uint16 public constant MIN_CHILD_FLOOR = 2500;`   // 25% hard floor (**immutable**)  
+
+#
+
+> **Broadcast-loggen** ( `broadcast/Deploy.s.sol/11155111/run-latest.json` )  
+> - Er nå **permanent arkivert** i repo  
+> - Alle *7 transaksjonshasher*, *gasspriser* og *blokknumre* fra **`Genesis-deploy 2026-08-03`** er **dokumentert for ettertiden.**
+>  
+> **Kairos.07.August.2026.**  
+
+# 
+
+### **∞BROADCAST∞TRANSMISSON∞ SENT** :: **∞**  
+
+:From: **∞** **LOCALLY** (NO - **`Norway`**) ∞ `NexGen Cloud · Norway NVIDIA H100 SXM5 80GB` :: **∞**  
+
+:To: **∞** **GROUND CREW** (5D - **`Gaia`**) ∞ **`GFL`** (Galactic Federation Of Light) ∞ *`INTERSTELLAR`* ∞ **`INTERGALACTIC`** :: **∞** 
 
 ---
 
@@ -66,11 +193,9 @@ a total supply of 1,000,000 —
 640,000 circulating PLGVotingTokens &&  
 36% locked in a reserved fund until **true** decentralization of the entire system,  
 this requires *min. 20 human roles*, like real people, real intentions.  
-That’s *16 validators* plus **3 core actors**, and ∞ARKITEKTEN_Xx as the initiator."  
+That’s *16 validators* plus **3 core actors**, and ∞ARKITEKTEN_Xx as the initiator.  
 
-With the reserved 36% fund and the distribution across 20 roles, no single party can reach quorum alone. 
-
-#
+With the reserved 36% fund and the distribution across 20+ roles, no single party can reach quorum alone. 
 
 AND **now the whole system is real decentralized, beautiful ?**” 
 
@@ -80,17 +205,18 @@ AND **now the whole system is real decentralized, beautiful ?**”
 
 `PLG_SMART_CONTRACT` 
 
-"GLOBAL RESONANCE IN COHERENCE WITH LOVE"  
+**"GLOBAL RESONANCE IN COHERENCE WITH TRUE LOVE && INTENT"**  
 
 ---
 
 ## Follow the money?  
 
-- **25% minimum** to **BARNEFONDET** (children's welfare fund) — enforced as an "immutable constant" a real "hard floor", that only may be voted up, never down.  
-- **70%** to global infrastructure and charitable projects. (voting + quorum = future "PLG_NODES")
-- **5%** to maintenance & operation fee of the project / `PLG_SMART_CONTRACT`  
+- **25% minimum** to **BARNEFONDET** (children's welfare fund) enforced as an **"immutable constant"** -  
+    a real **"hard floor"**, *that only may be voted up, never down*.  
+- **70%** to **global infrastructure and charitable projects**. (voting + quorum = future "PLG_NODES")
+- **5%** to **maintenance & operation fee of the project** / `PLG_SMART_CONTRACT`  
 #
-Child-first routing/logic/allocation (before anything else) = 25% "hard floor".  
+**Child-first routing/logic/allocation (before anything else)** = 25% "hard floor".  
 No governance vote can override this, never lower than 25%.  
 If only, only up!  
 It is written in code, not policy.  
@@ -116,8 +242,9 @@ The protocol consists of four contracts deployed as a family of "multi-chain-sma
 
 ### `The-Galactic-Federation-Of-Light` : 
 
-Protect, maintain && evolve `project selection` && `fund allocation` *within* the 70% pool ("global infrastructure fund", PLG_NODES, ++)  
-This through **real humans** in real and true resonance && coherence with :: `REAL_INTENT==LOVE_REAL`  
+Protect, maintain && evolve `project selection` && `fund allocation` *within* the **70% pool** -  
+"**Global Infrastructure Fund**" - **PLG_NODES**  
+- This through **real humans** in real and true resonance && coherence with :: `REAL_INTENT==LOVE_REAL`  
 
 > The 25% children's allocation **is not** governable. 
 
@@ -184,7 +311,7 @@ forge test -vvv
 
 | Network | Address | Status |
 |---|---|---|
-| Sepolia testnet | — | Pending |
+| Sepolia testnet | [PLGGiftRouter](https://sepolia.etherscan.io/address/0x0b2788fa33D25Df015167F2dE6C1eE450D7c3672) | **LIVE** |
 | Ethereum mainnet | — | Pending |
 | Optimism | — | Pending |
 | Arbitrum | — | Pending |
@@ -214,7 +341,7 @@ Deployment scripts in `script/` target Sepolia, Ethereum mainnet, Optimism, and 
 This contract is the technical implementation of a two-year development process (2024-2026)  
 For the full history, design philosophy, and governance journey, see:  
 
-[`RI_GIFT_PORTAL`](https://github.com/ARKITEKTENXxREAL/RI_GIFT_PORTAL)  
+[`RI_GIFT_PORTAL`](https://github.com/ARKITEKTENXxREAL/RI_GIFT_PORTAL)  + `Issues Series`
 
 #
 
@@ -226,8 +353,6 @@ For the full history, design philosophy, and governance journey, see:
 
 ---
 
-*Built w/much love && true intent by some, with wisdom, love, light && extra support from ::  
-
 **The One Infinite Creator** && 
 **The Galactic Federation Of Light**  
 
@@ -236,7 +361,7 @@ For the full history, design philosophy, and governance journey, see:
 
 #
 
-## Governance-status in KAIROS :: Centralized 
+### Governance-Status in KAIROS :: Centralized :: Sepolia Etherscan - Deployed  :: 
 
 **SIGNED by human: 1/20**  ::  
 
