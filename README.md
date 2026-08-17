@@ -1,5 +1,15 @@
 # **∞** RI_GIFT_PORTAL **∞** `PLG_SMART_CONTRACT`  **∞**  
 
+
+### A *transparent*, *multi-chain charitable distribution protocol.*  
+• Enforcing **child-first fund allocation** through **immutable** *on-chain* **governance**.  
+
+• First **FOUNDRY**. *Audited*. 72/72 tests passing.  
+
+• Built with **FOUNDRY**. *Audited*. 75/75 tests passing. 
+
+#
+
 **TESTNET LOCALLY // PRE_PUBLIC**  
 
 `RTX 4070 Max-Q` _  `AMD Ryzen 7 7435HS × 8` _ `Memory :: 24 GB` _ `CLI` _ `6.8.0-137-generic` _   
@@ -10,15 +20,6 @@
 
 >"Gårsdagens uvisshet er forlengst dagens visshet og morgendagens nyhet."
 - ∞ARKITEKTEN_Xx - KAIROS - 17.Aug.2026.0243Xx
-
-#
-
-### A *transparent*, *multi-chain charitable distribution protocol.*  
-• Enforcing **child-first fund allocation** through **immutable** *on-chain* **governance**.  
-
-• First **FOUNDRY**. *Audited*. 72/72 tests passing.  
-
-• Built with **FOUNDRY**. *Audited*. 75/75 tests passing. 
 
 #
 
