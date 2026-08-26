@@ -8,18 +8,22 @@
 
 - **Main Inspo** : ARKITEKTENXxREAL / RI_GIFT_PORTAL / `PLG_SMART_CONTRACT.md` *v.2.55*  
 
-## Audit status  
+## Security review status:  
 
-`PLG_SMART_CONTRACT` has completed a third-party security audit prior to testnet deployment.  
-All findings have been resolved. The protocol is currently in testnet phase.  
+ >The protocol `PLG_SMART_CONTRACT` has undergone structured,  
+ AI-assisted security review (Claude and GitHub Copilot CLI) covering all four in-scope contracts.  
+ Six findings were identified and resolved prior to testnet deployment;  
+ each resolution is traceable in `src/` commit history under the `Phase 2E` tag.  
+ **No independent third-party audit firm has reviewed this code.**  
+ A formal audit is planned prior to mainnet deployment.  
 
 **Do not deploy funds to mainnet contracts until mainnet deployment is announced in [DEPLOY-MAINTAIN](https://github.com/The-Galactic-Federation-Of-Light/DEPLOY-MAINTAIN).**  
 
 ---
 
-## `Phase 2E` - Security Audit findings —   
+## `Phase 2E` - Security Review findings —   
 
-Six findings were identified during the audit. All were resolved before proceeding to testnet.  
+Six findings were identified during the review. All were resolved before proceeding to testnet.  
 
 | # | Severity | Fix |
 |---|---|---|
@@ -112,7 +116,7 @@ All three are verifiable by anyone reading `src/PLGGiftRouter.sol`.
 
 ## Scope  
 
-The following contracts are in scope for security review:  
+The following contracts are in scope for security audit:  
 
 - `src/PLGGiftRouter.sol`  
 - `src/PLGVotingToken.sol`  
