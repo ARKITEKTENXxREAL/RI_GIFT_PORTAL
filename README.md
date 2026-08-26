@@ -3,9 +3,7 @@
 ### A *transparent*, *multi-chain charitable distribution protocol.*  
 • Enforcing **child-first fund allocation** through **immutable** *on-chain* **governance**.  
 
-• First **FOUNDRY**. *Audited*. 72/72 tests passing.  
-
-• Built with **FOUNDRY**. *Audited*. 75/75 tests passing. 
+• Built/Tested with **FOUNDRY**. *Security review*. 75/75 tests passing. 
 
 #
 
@@ -159,10 +157,16 @@ non-decreasing/non-overridable at execution level.**
 
 #
 
-## Audit status  
+## Security review status
 
-`PLG_SMART_CONTRACT` has completed a third-party security audit prior to testnet deployment.  
-All findings have been resolved. The protocol is currently in testnet phase.   
+- *Claude Opus 5* **says** && *∞ARKITEKTEN_Xx* **agrees** ::    
+
+>The protocol `PLG_SMART_CONTRACT` has undergone structured,  
+AI-assisted security review (Claude and GitHub Copilot CLI) covering all four in-scope contracts.  
+Six findings were identified and resolved prior to testnet deployment;  
+each resolution is traceable in `src/` commit history under the `Phase 2E` tag.  
+**No independent third-party AUDIT firm has reviewed this code.**  
+Tho a formal audit is planned prior to mainnet deployment.  
 
 #
 
@@ -355,7 +359,7 @@ forge test -vvv
 | Phase 2B | Node distribution | Complete |
 | Phase 2C | OpenZeppelin Governor + Timelock integration | Complete |
 | Phase 2D | Multi-chain deployment scripts | Complete |
-| Phase 2E | Security audit — all 6 findings resolved | Complete |
+| Phase 2E | Security review — all 6 findings resolved | Complete |
 
 #
 
@@ -374,8 +378,10 @@ This table will be updated in "Kairos Time" as deployments are executed and veri
 
 ## Security  
 
-A third-party security audit was completed prior to testnet deployment.  
-Six findings were identified and resolved in Phase 2E.  
+Six findings were identified and resolved prior to testnet deployment;  
+each resolution is traceable in `src/` commit history under the `Phase 2E` tag.  
+**No independent third-party AUDIT firm has reviewed this code.**  
+Tho a formal audit is planned prior to mainnet deployment.  
 
 See [SECURITY.md](./SECURITY.md) for full disclosure of findings and resolutions.  
 
@@ -399,11 +405,13 @@ For the full history, design philosophy, and governance journey, see:
 
 #
 
-## License  
+## License  (In Progress)
 
 (`PLG_SMART_CONTRACT` Evolved from MIT :: 2024 - 2026)  
 
-19.07.2026 :: GPL-3.0 — **derivative works must remain open source.**  
+("19.07.2026 :: GPL-3.0?") — **derivative works must remain open source?**  
+
+**counsel / lawyer** will have a say, prior to mainnet deployment.  
 
 ---
 
