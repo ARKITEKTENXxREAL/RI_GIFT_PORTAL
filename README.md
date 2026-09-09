@@ -157,16 +157,18 @@ non-decreasing/non-overridable at execution level.**
 
 #
 
-## Security review status
 
-- *Claude Opus 5* **says** && *∞ARKITEKTEN_Xx* **agrees** ::    
 
->The protocol `PLG_SMART_CONTRACT` has undergone structured,  
+Security review status:  
+  
+>*The protocol* **PLG_SMART_CONTRACT** has undergone structured,  
 AI-assisted security review (Claude and GitHub Copilot CLI) covering all four in-scope contracts.  
 Six findings were identified and resolved prior to testnet deployment;  
-each resolution is traceable in `src/` commit history under the `Phase 2E` tag.  
-**No independent third-party AUDIT firm has reviewed this code.**  
-Tho a formal audit is planned prior to mainnet deployment.  
+each resolution is traceable in src/ commit history under the Phase 2E tag.  
+No independent third-party audit firm has reviewed this code.  
+A formal audit is planned prior to mainnet deployment.  
+
+- ∞ARKITEKTEN_Xx 
 
 #
 
