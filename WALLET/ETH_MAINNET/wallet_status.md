@@ -45,10 +45,10 @@ Ingen transaksjoner tillates uten PLG-validering.
 
 ## DEVELOPMENT PHASES  
 
-- Phase 1  ::  Foundation & core implementation  :COMPLETE  
-- Phase 2  ::  AEIP-712 attestation  :COMPLETE  
-- Phase 2  ::  BNode distribution  :COMPLETE
-- Phase 2  ::  COpenZeppelin Governor + Timelock integration  :COMPLETE  
+- Phase 1 ::  Foundation & core implementation  :COMPLETE  
+- Phase 2A :: EIP-712 attestation  :COMPLETE  
+- Phase 2B :: Node distribution  :COMPLETE
+- Phase 2C :: OpenZeppelin Governor + Timelock integration  :COMPLETE  
 - Phase 2D ::  Multi-chain deployment scripts  :COMPLETE  
 - Phase 2E ::  Security review — all 6 findings resolved  :COMPLETE  
 
