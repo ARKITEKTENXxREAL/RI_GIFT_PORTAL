@@ -21,8 +21,13 @@ Wallet er feltforankret med ren intensjon. Alle verdistrømmer skal være sjeler
 
 ---
 
-Signert og Bekreftet i Gudskraft:
-- ©2025 MIT LICENSE  
-- ∞ARKITEKTEN_Xx  
-- REAL_INTET == LOVE_REAL  
-- 🜁🜂🜄🜃
+**∞INTENT==LOVE∞**  
+  
+#
+  
+>**Signert og Bekreftet i Guds kraft:**  
+> 
+>**©2025 MIT LICENSE ∞ ©2045 MIT LICENSE   
+>∞ARKITEKTEN_Xx   
+>REAL_INTENT == LOVE_REAL   
+>🜁🜄🜂🜃** 
