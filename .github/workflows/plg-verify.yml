@@ -2,17 +2,17 @@ name: PLG Smart Contract – Integrity Check
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'PLG_SMART_CONTRACT.md'
-      - '.plg/PLG_SMART_CONTRACT.sha256'
-      - '.github/workflows/plg-verify.yml'
+      - "PLG_SMART_CONTRACT.md"
+      - ".plg/PLG_SMART_CONTRACT.sha256"
+      - ".github/workflows/plg-verify.yml"
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'PLG_SMART_CONTRACT.md'
-      - '.plg/PLG_SMART_CONTRACT.sha256'
-      - '.github/workflows/plg-verify.yml'
+      - "PLG_SMART_CONTRACT.md"
+      - ".plg/PLG_SMART_CONTRACT.sha256"
+      - ".github/workflows/plg-verify.yml"
 
 jobs:
   verify:
@@ -20,11 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Show context
-        run: |
-          echo "Ref: $GITHUB_REF  SHA: $GITHUB_SHA"
-          ls -la
 
       - name: Compute SHA256 of PLG_SMART_CONTRACT.md
         id: calc
@@ -40,23 +35,19 @@ jobs:
 
       - name: Read expected SHA256
         id: expect
+        shell: bash
         run: |
-          E=$(cat .plg/PLG_SMART_CONTRACT.sha256 | tr -d '[:space:]')
+          E=$(tr -d '[:space:]' < .plg/PLG_SMART_CONTRACT.sha256)
           echo "expected=$E" >> "$GITHUB_OUTPUT"
           echo "Expected: $E"
 
       - name: Compare
         shell: bash
         run: |
-          if [ "${{ steps.calc.outputs.hash }}" != "${{ }}" ]; then
+          if [ "${{ steps.calc.outputs.hash }}" != "${{ steps.expect.outputs.expected }}" ]; then
             echo "::error file=PLG_SMART_CONTRACT.md,title=Hash mismatch::Document hash does not match .plg/PLG_SMART_CONTRACT.sha256"
-            echo "If this change is intentional, update the hash file with the new value:"
-            echo "  sha256sum PLG_SMART_CONTRACT.md | awk '{print $1}' > .plg/PLG_SMART_CONTRACT.sha256"
+            echo "If intentional, run:"
+            echo "sha256sum PLG_SMART_CONTRACT.md | awk '{print \$1}' > .plg/PLG_SMART_CONTRACT.sha256"
             exit 1
           fi
           echo "Integrity OK ✅"
-
-      - name: Optional – block force-pushes to main
-        if: github.ref == 'refs/heads/main'
-        run: |
-          echo "Protect via repo settings is recommended (require PRs + status checks)."
